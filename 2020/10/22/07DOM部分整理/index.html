@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>爱华学习日记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="07DOM标准​    Level 1,2,3 节点与节点树节点类型 ​    Node类型 ​    Document类型 ​    DocumentType类型 ​    Element类型 ​    Attribute类型 ​    Text类型 ​    Comment类型 ​    DocumentFragment类型  元素​    增删改查接口  节点创建型API  createEl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爱华学习日记">
+<meta property="og:url" content="http://yoursite.com/2020/10/22/07DOM部分整理/index.html">
+<meta property="og:site_name" content="爱华学习日记">
+<meta property="og:description" content="07DOM标准​    Level 1,2,3 节点与节点树节点类型 ​    Node类型 ​    Document类型 ​    DocumentType类型 ​    Element类型 ​    Attribute类型 ​    Text类型 ​    Comment类型 ​    DocumentFragment类型  元素​    增删改查接口  节点创建型API  createEl">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-10-20T06:34:13.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爱华学习日记">
+<meta name="twitter:description" content="07DOM标准​    Level 1,2,3 节点与节点树节点类型 ​    Node类型 ​    Document类型 ​    DocumentType类型 ​    Element类型 ​    Attribute类型 ​    Text类型 ​    Comment类型 ​    DocumentFragment类型  元素​    增删改查接口  节点创建型API  createEl">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="爱华学习日记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">爱华学习日记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-07DOM部分整理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/10/22/07DOM部分整理/" class="article-date">
+  <time datetime="2020-10-22T07:18:40.032Z" itemprop="datePublished">2020-10-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="07DOM"><a href="#07DOM" class="headerlink" title="07DOM"></a>07DOM</h2><h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><p>​    Level 1,2,3</p>
+<h4 id="节点与节点树"><a href="#节点与节点树" class="headerlink" title="节点与节点树"></a>节点与节点树</h4><h5 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h5><ul>
+<li>​    Node类型</li>
+<li>​    Document类型</li>
+<li>​    DocumentType类型</li>
+<li>​    Element类型</li>
+<li>​    Attribute类型</li>
+<li>​    Text类型</li>
+<li>​    Comment类型</li>
+<li>​    DocumentFragment类型</li>
+</ul>
+<h5 id="元素"><a href="#元素" class="headerlink" title="元素"></a>元素</h5><p>​    <strong>增删改查接口</strong></p>
+<ul>
+<li><p>节点创建型API</p>
+<ul>
+<li>createElement</li>
+<li>createTextNode</li>
+<li>cloneNode</li>
+<li>createDocumentFragment</li>
+</ul>
+</li>
+<li><p>页面修改形API（包括删除和添加）（删）（改）</p>
+<ul>
+<li>appendChild(追加为子元素)</li>
+<li>insertBefore(插入前面)</li>
+<li>removeChild(删除子元素)</li>
+<li>replaceChild(替换子元素)</li>
+</ul>
+</li>
+<li><p>节点查询型API(查)</p>
+<ul>
+<li>document.querySelector</li>
+<li>document.querySelectorAll</li>
+<li>document.getElementById</li>
+<li>document.getElementsByTagName</li>
+<li>document.getElementsByName</li>
+<li>document.getElementsByClassName</li>
+<li>elementFromPoint()  //判断(x,y)当前位置是否有元素</li>
+</ul>
+</li>
+<li><p>元素属性型操作（属性节点的操作）</p>
+<ul>
+<li><p>getAttribute()  (获取属性)</p>
+</li>
+<li><p>createAttribute()  (创建属性)</p>
+</li>
+<li><p>setAttribute()  (设置属性)</p>
+</li>
+<li><p>romoveAttribute()  (删除属性)</p>
+</li>
+<li><p>element.attributes（将属性生成数组对象）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="操作样式表"><a href="#操作样式表" class="headerlink" title="操作样式表"></a>操作样式表</h4><h4 id="操作CSS"><a href="#操作CSS" class="headerlink" title="操作CSS"></a>操作CSS</h4><p>dom.style.xxx</p>
+<p>在样式规则上重新定义规则</p>
+<p>图层概念</p>
+<h3 id="XML-DOM"><a href="#XML-DOM" class="headerlink" title="XML DOM"></a>XML DOM</h3><h3 id="SVG-DOM"><a href="#SVG-DOM" class="headerlink" title="SVG DOM"></a>SVG DOM</h3><h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><ul>
+<li>window对象——BOM核心<ul>
+<li>window.alert(‘提示信息’)</li>
+<li>window.confirm(‘确认信息’)</li>
+<li>window.prompt(‘弹出输入框’)</li>
+<li>window.open(‘url地址’, ‘_black或_self’, ‘新窗口大小’)；     // black：新开一个空白的窗口打开链接，self在当前框架中打开链接</li>
+<li>window.close()  // 关闭当前页</li>
+<li>setTimeout(函数， 时间)  // 定时器，只执行一次</li>
+<li>clearTimeout(定时器名称) // 清除计时器</li>
+<li>setInterval(函数，时间)   // 定时器，无限执行</li>
+<li>clearInterval()   // 停止执行 setInterval()</li>
+</ul>
+</li>
+<li>location对象<ul>
+<li>localtion.href = ‘url地址’;      // 跳转到这个url地址</li>
+<li>localtion.hostname     // 返回 web 主机名</li>
+<li>localtion.pathname      // 返回当前页面的路径和文件名</li>
+<li>localtion.port       // 返回 web 主机的端口</li>
+<li>localtion.protocol   // 返回页面使用的web协议，http||https</li>
+</ul>
+</li>
+<li>navigator对象 —— 获取浏览器的所有信息<ul>
+<li>navigator.appCodeName  // 返回浏览器的代码名</li>
+<li>navigator.appMinorVersion   // 返回浏览器的次级版本</li>
+<li>navigator.appName  // 返回浏览器的名称</li>
+<li>navigator.appVersion  // 返回浏览器的平台和版本信息</li>
+<li>navigator.browserLanguage   // 返回当前浏览器的语言</li>
+<li>navigator.userAgent    // 返回由客户机发送服务器的 user-agent 头部的值。</li>
+</ul>
+</li>
+<li>screen对象<ul>
+<li>screen.height   // 获取整个屏幕的高</li>
+<li>screen.width    // 获取整个屏幕的宽</li>
+<li>screen.availiHeight     // 整个屏幕的高减去系统部件的高（可用的屏幕高度）</li>
+<li>screen.availWidth     // 整个屏幕的宽减去系统部件的宽（可用的屏幕宽度）</li>
+</ul>
+</li>
+<li>history对象 包含浏览器的历史<ul>
+<li>history.back();     // 返回上一页</li>
+<li>history.forward()   // 前进下一页</li>
+<li>history.go(‘参数’);   // -1 表示上一页，1表示下一页</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/22/07DOM部分整理/" data-id="ckgkhvfz00008dguk11jz2ijh" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2020/10/22/08DOM事件/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2020/10/22/06正则表达式/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/10/22/webgl/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/emphasisAPI/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/09/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/08DOM事件/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 爱华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+ <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css"> <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>  <script src="/blog/js/script.js"></script> 
+
+
+  </div>
+</body>
+</html>

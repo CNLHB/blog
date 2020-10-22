@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>爱华学习日记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Number&amp;amp;String&amp;amp;Objcet20.10.13 上午  JS基本内置对象概述，分类   String  字符串书写形式  单引号，双引号, 显示示换行表示  ‘a \n b’     代码换行，显示不换行 ‘a \ b’, 字符串模板 转义 表示unicode \xFFFF \uXXXX   表示emoji \u{xxxx}       方法  搜索  返回指定位置字符">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爱华学习日记">
+<meta property="og:url" content="http://yoursite.com/2020/10/22/02Number&String&Object/index.html">
+<meta property="og:site_name" content="爱华学习日记">
+<meta property="og:description" content="Number&amp;amp;String&amp;amp;Objcet20.10.13 上午  JS基本内置对象概述，分类   String  字符串书写形式  单引号，双引号, 显示示换行表示  ‘a \n b’     代码换行，显示不换行 ‘a \ b’, 字符串模板 转义 表示unicode \xFFFF \uXXXX   表示emoji \u{xxxx}       方法  搜索  返回指定位置字符">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-10-20T06:33:59.737Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爱华学习日记">
+<meta name="twitter:description" content="Number&amp;amp;String&amp;amp;Objcet20.10.13 上午  JS基本内置对象概述，分类   String  字符串书写形式  单引号，双引号, 显示示换行表示  ‘a \n b’     代码换行，显示不换行 ‘a \ b’, 字符串模板 转义 表示unicode \xFFFF \uXXXX   表示emoji \u{xxxx}       方法  搜索  返回指定位置字符">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="爱华学习日记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">爱华学习日记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-02Number&amp;String&amp;Object" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/10/22/02Number&String&Object/" class="article-date">
+  <time datetime="2020-10-22T07:18:39.719Z" itemprop="datePublished">2020-10-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Number-amp-String-amp-Objcet"><a href="#Number-amp-String-amp-Objcet" class="headerlink" title="Number&amp;String&amp;Objcet"></a>Number&amp;String&amp;Objcet</h2><p><strong>20.10.13</strong></p>
+<p><strong>上午</strong></p>
+<ul>
+<li>JS基本内置对象概述，分类</li>
+</ul>
+<ul>
+<li><p>String</p>
+<ul>
+<li><p>字符串书写形式</p>
+<ul>
+<li>单引号，双引号, 显示示换行表示  ‘a \n b’     代码换行，显示不换行 ‘a \ b’, 字符串模板</li>
+<li>转义<ul>
+<li>表示unicode<ul>
+<li>\xFFFF</li>
+<li>\uXXXX</li>
+</ul>
+</li>
+<li>表示emoji<ul>
+<li>\u{xxxx}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>方法</p>
+<ul>
+<li><p>搜索</p>
+<ul>
+<li><p>返回指定位置字符</p>
+<ul>
+<li>charAt 返回字符</li>
+<li>charCodeAt 返回unicode字符</li>
+<li>codePointAt  返回uft-16编码</li>
+</ul>
+</li>
+<li><p>判断字符串是否包含子串</p>
+<ul>
+<li>判断一个字符串里是否包含其他字符串。str1.includes(str2)</li>
+<li>判断一个字符串的是否以给定字符串结尾，结果返回布尔值。 str1.endsWith()</li>
+<li>从字符串对象中返回首个被发现的给定值的索引值，如果没有找到则返回-1。str1.indexOf()</li>
+<li>从字符串对象中返回最后一个被发现的给定值的索引值，如果没有找到则返回-1。str1.lastIndexOf()</li>
+</ul>
+</li>
+<li><p>String.prototype.match()</p>
+<p>使用正则表达式与字符串相比较。</p>
+</li>
+<li><p>String.prototype.search()</p>
+<p>对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。</p>
+</li>
+</ul>
+</li>
+<li><p>转换</p>
+<ul>
+<li><p>str.concat(str2) 字符串拼接返回新字符串</p>
+</li>
+<li><p>str.slice  摘取一个字符串区域，返回一个新的字符串     长度</p>
+</li>
+<li><p>str.substr()通过指定字符数返回在指定位置开始的字符串中的字符。  长度</p>
+</li>
+<li><p>str.substring()返回在字符串中指定两个下标之间的字符。 开始下标到截取下标</p>
+</li>
+</ul>
+</li>
+<li><p>替换</p>
+<ul>
+<li>replace()</li>
+</ul>
+</li>
+<li><p>修饰</p>
+<ul>
+<li>格式化</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>trim()</p>
+<ul>
+<li>trimLeft</li>
+</ul>
+</li>
+<li><p>trimRight</p>
+<ul>
+<li><p>系列化成数组</p>
+<ul>
+<li>split(‘’)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Number</p>
+<ul>
+<li>number书写形式<ul>
+<li>字面量10进制表示</li>
+<li>16进制表示</li>
+<li>安全整数</li>
+<li>精度判断</li>
+<li>Number对象常量</li>
+<li>方法<ul>
+<li>判断是否为某个特殊值<ul>
+<li>确定传递的值是否是 NaN。  Number.isNaN</li>
+<li>确定传递的值类型及本身是否是有限数。Number.isFinite</li>
+</ul>
+</li>
+<li>系列化<ul>
+<li>Number.parseInt</li>
+<li>Number.parseFloat</li>
+<li>.toFixed()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>​    <strong>下午</strong></p>
+<ul>
+<li>Object 重点<ul>
+<li>创建对象<ul>
+<li>字面量   let obj = {}</li>
+<li>new关键字  let obj = new Object() </li>
+<li>Object.create(原型链指向) 使用指定的原型对象和属性创建一个新对象。</li>
+<li>Object.assign  方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。</li>
+</ul>
+</li>
+<li>实例方法<ul>
+<li>toString</li>
+<li>valueOf</li>
+<li>hasOwnProperty  判断是否为自身的属性</li>
+</ul>
+</li>
+<li>静态方法<ul>
+<li>添加属性和指定配置<ul>
+<li>添加一个<ul>
+<li>Object.definePerproty</li>
+</ul>
+</li>
+<li>添加多个<ul>
+<li>Object.definePerproties</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>获取可枚举对象的key、value<ul>
+<li>Object.key</li>
+<li>Object.value</li>
+<li>Object.entries</li>
+</ul>
+</li>
+<li>获取对象属性或属性配置<ul>
+<li>返回对象指定的属性配置。Object.getOwnPropertyDescriptor()</li>
+<li>返回一个数组，它包含了指定对象所有的可枚举或不可枚举的属性名。Object.getOwnPropertyNames()</li>
+<li>返回一个数组，它包含了指定对象自身所有的符号属性。Object.getOwnPropertySymbols()</li>
+<li>返回指定对象的原型对象。Object.getPrototypeOf</li>
+</ul>
+</li>
+<li>冻结对象<ul>
+<li>冻结对象：其他代码不能删除或更改任何属性。Object.freeze()</li>
+<li>封闭一个对象，阻止添加新属性并将所有现有属性标记为不可配置。当前属性的值只要原来是可写的就可以改变。Object.seal()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分享几个小题目</li>
+<li>提问解答</li>
+</ul>
+<p>今日记录</p>
+<p>1、重新梳理了Number、String、Object的属性和方法</p>
+<p>2、对属性和方法归类，以便于使用和记忆</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/22/02Number&String&Object/" data-id="ckgkhvfyp0002dgukql5nzb6l" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2020/10/22/03Array & Function/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2020/10/22/01Math对象/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/10/22/webgl/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/emphasisAPI/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/09/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/08DOM事件/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 爱华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+ <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css"> <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>  <script src="/blog/js/script.js"></script> 
+
+
+  </div>
+</body>
+</html>

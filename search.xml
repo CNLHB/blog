@@ -1,9 +1,1243 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title></title>
+    <url>/blog/2020/10/22/01Math%E5%AF%B9%E8%B1%A1/</url>
+    <content><![CDATA[<p><strong>20.10.12</strong></p>
+<p>Math 对象</p>
+<ul>
+<li><p>静态常量</p>
+<ul>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/E" target="_blank" rel="noopener"><code>Math.E</code></a></p>
+<p>欧拉常数，也是自然对数的底数，约等于 <code>2.718</code>。</p>
+</li>
+</ul>
+<ul>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/PI" target="_blank" rel="noopener"><code>Math.PI</code></a></p>
+<p>圆周率，一个圆的周长和直径之比，约等于 <code>3.14159</code>。</p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/SQRT2" target="_blank" rel="noopener"><code>Math.SQRT2</code></a></p>
+<p><code>2</code> 的平方根，约等于 <code>1.414</code>。</p>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>静态方法</p>
+<ul>
+<li><p>三角函数</p>
+<ul>
+<li><code>sin()</code>、<code>cos()</code>、<code>tan()</code>、<code>asin()</code>、<code>acos()</code>、<code>atan()</code> 和 <code>atan2()</code> 返回的值是<em>弧度</em>而非角度。</li>
+</ul>
+</li>
+<li><p>number取整</p>
+<ul>
+<li><p>向上取整</p>
+<ul>
+<li>ceil</li>
+</ul>
+</li>
+<li><p>向下取整</p>
+<ul>
+<li>floor</li>
+</ul>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/Math/round" target="_blank" rel="noopener"><code>Math.round(x)</code></a></p>
+<p>返回四舍五入后的整数。</p>
+</li>
+</ul>
+</li>
+<li><p>随机数</p>
+<ul>
+<li>random</li>
+</ul>
+</li>
+<li><p>平方根</p>
+<ul>
+<li>sprt</li>
+</ul>
+</li>
+<li><p>幂乘积</p>
+<ul>
+<li>pow(x, y)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/blog/2020/10/22/02Number&amp;String&amp;Object/</url>
+    <content><![CDATA[<h2 id="Number-amp-String-amp-Objcet"><a href="#Number-amp-String-amp-Objcet" class="headerlink" title="Number&amp;String&amp;Objcet"></a>Number&amp;String&amp;Objcet</h2><p><strong>20.10.13</strong></p>
+<p><strong>上午</strong></p>
+<ul>
+<li>JS基本内置对象概述，分类</li>
+</ul>
+<ul>
+<li><p>String</p>
+<ul>
+<li><p>字符串书写形式</p>
+<ul>
+<li>单引号，双引号, 显示示换行表示  ‘a \n b’     代码换行，显示不换行 ‘a \ b’, 字符串模板</li>
+<li>转义<ul>
+<li>表示unicode<ul>
+<li>\xFFFF</li>
+<li>\uXXXX</li>
+</ul>
+</li>
+<li>表示emoji<ul>
+<li>\u{xxxx}</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>方法</p>
+<ul>
+<li><p>搜索</p>
+<ul>
+<li><p>返回指定位置字符</p>
+<ul>
+<li>charAt 返回字符</li>
+<li>charCodeAt 返回unicode字符</li>
+<li>codePointAt  返回uft-16编码</li>
+</ul>
+</li>
+<li><p>判断字符串是否包含子串</p>
+<ul>
+<li>判断一个字符串里是否包含其他字符串。str1.includes(str2)</li>
+<li>判断一个字符串的是否以给定字符串结尾，结果返回布尔值。 str1.endsWith()</li>
+<li>从字符串对象中返回首个被发现的给定值的索引值，如果没有找到则返回-1。str1.indexOf()</li>
+<li>从字符串对象中返回最后一个被发现的给定值的索引值，如果没有找到则返回-1。str1.lastIndexOf()</li>
+</ul>
+</li>
+<li><p>String.prototype.match()</p>
+<p>使用正则表达式与字符串相比较。</p>
+</li>
+<li><p>String.prototype.search()</p>
+<p>对正则表达式和指定字符串进行匹配搜索，返回第一个出现的匹配项的下标。</p>
+</li>
+</ul>
+</li>
+<li><p>转换</p>
+<ul>
+<li><p>str.concat(str2) 字符串拼接返回新字符串</p>
+</li>
+<li><p>str.slice  摘取一个字符串区域，返回一个新的字符串     长度</p>
+</li>
+<li><p>str.substr()通过指定字符数返回在指定位置开始的字符串中的字符。  长度</p>
+</li>
+<li><p>str.substring()返回在字符串中指定两个下标之间的字符。 开始下标到截取下标</p>
+</li>
+</ul>
+</li>
+<li><p>替换</p>
+<ul>
+<li>replace()</li>
+</ul>
+</li>
+<li><p>修饰</p>
+<ul>
+<li>格式化</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>trim()</p>
+<ul>
+<li>trimLeft</li>
+</ul>
+</li>
+<li><p>trimRight</p>
+<ul>
+<li><p>系列化成数组</p>
+<ul>
+<li>split(‘’)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>Number</p>
+<ul>
+<li>number书写形式<ul>
+<li>字面量10进制表示</li>
+<li>16进制表示</li>
+<li>安全整数</li>
+<li>精度判断</li>
+<li>Number对象常量</li>
+<li>方法<ul>
+<li>判断是否为某个特殊值<ul>
+<li>确定传递的值是否是 NaN。  Number.isNaN</li>
+<li>确定传递的值类型及本身是否是有限数。Number.isFinite</li>
+</ul>
+</li>
+<li>系列化<ul>
+<li>Number.parseInt</li>
+<li>Number.parseFloat</li>
+<li>.toFixed()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>​    <strong>下午</strong></p>
+<ul>
+<li>Object 重点<ul>
+<li>创建对象<ul>
+<li>字面量   let obj = {}</li>
+<li>new关键字  let obj = new Object() </li>
+<li>Object.create(原型链指向) 使用指定的原型对象和属性创建一个新对象。</li>
+<li>Object.assign  方法用于将所有可枚举属性的值从一个或多个源对象复制到目标对象。它将返回目标对象。</li>
+</ul>
+</li>
+<li>实例方法<ul>
+<li>toString</li>
+<li>valueOf</li>
+<li>hasOwnProperty  判断是否为自身的属性</li>
+</ul>
+</li>
+<li>静态方法<ul>
+<li>添加属性和指定配置<ul>
+<li>添加一个<ul>
+<li>Object.definePerproty</li>
+</ul>
+</li>
+<li>添加多个<ul>
+<li>Object.definePerproties</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>获取可枚举对象的key、value<ul>
+<li>Object.key</li>
+<li>Object.value</li>
+<li>Object.entries</li>
+</ul>
+</li>
+<li>获取对象属性或属性配置<ul>
+<li>返回对象指定的属性配置。Object.getOwnPropertyDescriptor()</li>
+<li>返回一个数组，它包含了指定对象所有的可枚举或不可枚举的属性名。Object.getOwnPropertyNames()</li>
+<li>返回一个数组，它包含了指定对象自身所有的符号属性。Object.getOwnPropertySymbols()</li>
+<li>返回指定对象的原型对象。Object.getPrototypeOf</li>
+</ul>
+</li>
+<li>冻结对象<ul>
+<li>冻结对象：其他代码不能删除或更改任何属性。Object.freeze()</li>
+<li>封闭一个对象，阻止添加新属性并将所有现有属性标记为不可配置。当前属性的值只要原来是可写的就可以改变。Object.seal()</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>分享几个小题目</li>
+<li>提问解答</li>
+</ul>
+<p>今日记录</p>
+<p>1、重新梳理了Number、String、Object的属性和方法</p>
+<p>2、对属性和方法归类，以便于使用和记忆</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/blog/2020/10/22/03Array%20&amp;%20Function/</url>
+    <content><![CDATA[<h2 id="threeday-Array-amp-Function"><a href="#threeday-Array-amp-Function" class="headerlink" title="threeday Array &amp; Function"></a>threeday Array &amp; Function</h2><p><strong>2020-10-14</strong></p>
+<h4 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h4><ul>
+<li><p>上午</p>
+</li>
+<li><ul>
+<li>梳理Array的属性和方法</li>
+</ul>
+</li>
+</ul>
+<p>内容</p>
+<p>Array</p>
+<p>创建</p>
+<ul>
+<li><p>字面量</p>
+</li>
+<li><p>new Array</p>
+</li>
+<li><p>Array.of   与new Array 区别</p>
+</li>
+<li><ul>
+<li><strong>Array.of()</strong> 和 <strong>Array</strong> 构造函数之间的区别在于处理整数参数：<strong>Array.of(7)</strong> 创建一个具有单个元素 <strong>7</strong> 的数组，而 <strong>Array(7)</strong> 创建一个长度为7的空数组（<strong>注意：</strong>这是指一个有7个空位(empty)的数组，而不是由7个undefined组成的数组）。</li>
+</ul>
+</li>
+<li><p>Array.from</p>
+</li>
+<li><ul>
+<li>接受两个参数，第一个参数 数组 or 类数组，第二个参数是函数，接受数组的每一项，处理并返回  </li>
+</ul>
+</li>
+</ul>
+<p>属性</p>
+<ul>
+<li>length</li>
+</ul>
+<p>静态方法</p>
+<ul>
+<li>Array.from()</li>
+<li>Array.isArray()</li>
+<li>Array.of()</li>
+</ul>
+<p>实例方法</p>
+<ul>
+<li><p>遍历</p>
+</li>
+<li><ul>
+<li>Array.prototype.forEach()</li>
+<li>Array.prototype.reduce()</li>
+<li>Array.prototype.reduceRight()</li>
+<li>Array.prototype.some()</li>
+<li>Array.prototype.every()</li>
+</ul>
+</li>
+<li><p>衍生，返回新数组</p>
+</li>
+<li><ul>
+<li>Array.prototype.concat()</li>
+<li>Array.prototype.slice()</li>
+<li>Array.prototype.flat()</li>
+<li>Array.prototype.flatMap()</li>
+<li>Array.prototype.filter()</li>
+<li>Array.prototype.map()</li>
+</ul>
+</li>
+<li><p>查找 </p>
+</li>
+<li><ul>
+<li>Array.prototype.find() 传入一个函数，返回满足条件的第一个值</li>
+<li>Array.prototype.findIndex()  传入一个函数，返回满足条件的第一个值的索引</li>
+<li>Array.prototype.includes()  判断传入的值在数组中是否存在</li>
+<li>Array.prototype.indexOf()</li>
+<li>Array.prototype.lastIndexOf()</li>
+</ul>
+</li>
+<li><p>修改原数组</p>
+</li>
+<li><ul>
+<li>Array.prototype.fill()</li>
+<li>Array.prototype.pop()</li>
+<li>Array.prototype.push()</li>
+<li>Array.prototype.shift()</li>
+<li>Array.prototype.splice()</li>
+<li>Array.prototype.unshift()</li>
+<li>Array.prototype.reverse() </li>
+<li>Array.prototype.sort()</li>
+<li>Array.prototype.copyWithin()</li>
+</ul>
+</li>
+<li><p>转字符串</p>
+</li>
+<li><ul>
+<li>Array.prototype.join()</li>
+</ul>
+</li>
+<li><p>类型数组</p>
+</li>
+<li><ul>
+<li>Int8Array</li>
+<li>Uint8Array</li>
+<li>Uint8ClampedArray  在处理像素时可以使用</li>
+</ul>
+</li>
+<li><p>…类数组</p>
+</li>
+<li><ul>
+<li>HTMLCollectionarguments…</li>
+</ul>
+<p>上述方法不能够处理需求时，可以用自定义函数处理，比如需要在索引80后重新到索引60,(for循环)</p>
+</li>
+<li><p>下午</p>
+</li>
+<li><ul>
+<li>梳理Function的属性和方法</li>
+</ul>
+</li>
+</ul>
+<p>内容</p>
+<p>Function</p>
+<p>创建</p>
+<ul>
+<li><ul>
+<li>函数声明 function(){}  存在函数声明整体提升</li>
+<li>函数表达式 let fn = function(){}</li>
+<li>new  Function(参数…，函数体字符串)</li>
+</ul>
+</li>
+</ul>
+<p>属性</p>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<p>实例属性</p>
+<ul>
+<li><ul>
+<li>Arguments  传入的实参，类数组</li>
+<li>Length 形参个数</li>
+<li>Name 函数名</li>
+<li>displayName 函数的显示名称  可以被定义，返回定义函数名</li>
+</ul>
+</li>
+</ul>
+<p>实例方法</p>
+<ul>
+<li><p>改变函数作用域（this指向）</p>
+</li>
+<li><ul>
+<li>call  调用具有给定this值和参数的函数。</li>
+<li>Apply 调用具有给定this值和参数的函数。参数形式为数组</li>
+<li>Bind 创建一个新函数，该新函数在被调用时将其this关键字设置为所提供的值，并且在调用新函数时所提供的任何参数之前均具有给定的参数序列。</li>
+</ul>
+</li>
+</ul>
+<p>静态方法</p>
+<p>今日总结</p>
+<ol>
+<li>学习笔记梳理</li>
+<li>题目分享</li>
+<li>技术分享</li>
+<li>code验证api</li>
+</ol>
+<p>明日计划</p>
+<ul>
+<li><p>1、梳理Promise与Callback</p>
+</li>
+<li><p>2、Async Fn</p>
+</li>
+<li><p>3、RegExp</p>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/blog/2020/10/22/04Promise&amp;Callback&amp;Async%20Function%20%20/</url>
+    <content><![CDATA[<h1 id="fourday-Promise-与-Callback-与-Async-Function"><a href="#fourday-Promise-与-Callback-与-Async-Function" class="headerlink" title="fourday Promise 与 Callback 与 Async Function"></a>fourday Promise 与 Callback 与 Async Function</h1><p><strong>2020-10-15</strong></p>
+<h3 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h3><ul>
+<li>梳理 Promise 与 Callback 与 Async Function    </li>
+</ul>
+<h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><h5 id="CallBack"><a href="#CallBack" class="headerlink" title="CallBack"></a>CallBack</h5><blockquote>
+<p>回调函数</p>
+</blockquote>
+<ul>
+<li>简洁</li>
+<li>可异步，可同步</li>
+<li>高耦合</li>
+<li>容易出现回调地狱</li>
+<li>不能方便指定多个回调</li>
+<li>不方便任务调度</li>
+</ul>
+<h5 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h5><p>优缺点</p>
+<ul>
+<li>链式写法</li>
+<li>方便多任务方便调度</li>
+<li>状态可查询(vs事件监听)</li>
+</ul>
+<p>​    三种状态，只能从pending变为<em>fulfilled或rejected</em></p>
+<ul>
+<li><em>待定（pending）</em>: 初始状态，既没有被兑现，也没有被拒绝。</li>
+<li><em>已兑现（fulfilled）</em>: 意味着操作成功完成。</li>
+<li><em>已拒绝（rejected）</em>: 意味着操作失败。</li>
+</ul>
+<p>创建</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;...&#125; <span class="comment">/* executor */</span>  );</span><br></pre></td></tr></table></figure>
+
+<p>方法</p>
+<ul>
+<li><ul>
+<li><p>静态方法</p>
+</li>
+<li><ul>
+<li>resolve </li>
+<li>rejected</li>
+<li>race</li>
+<li>all</li>
+<li>allSettled 都执行完</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>any 任意一个成功，就返回resolve</p>
+</li>
+<li><p>实例方法</p>
+<ul>
+<li><ul>
+<li>then</li>
+<li>catch</li>
+<li>Finally</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Async-Fn"><a href="#Async-Fn" class="headerlink" title="Async Fn"></a>Async Fn</h5><h4 id="async-amp-await"><a href="#async-amp-await" class="headerlink" title="async&amp;await"></a>async&amp;await</h4><ul>
+<li>可读性改善</li>
+<li>async函数直接执行时，返回Promise实例</li>
+<li>await后面的表达式可以是Promise也可以是其它</li>
+<li>await返回值是后面表达式的resolve值</li>
+<li>await被reject时，方便trycatch</li>
+</ul>
+<h5 id="今日总结"><a href="#今日总结" class="headerlink" title="今日总结"></a>今日总结</h5><ol>
+<li>code验证API</li>
+<li>进一步理解异步的处理方式</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/blog/2020/10/22/05%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h1 id="five-错误处理方式-amp-错误信息收集"><a href="#five-错误处理方式-amp-错误信息收集" class="headerlink" title="five 错误处理方式&amp;错误信息收集"></a>five 错误处理方式&amp;错误信息收集</h1><p><strong>2020-10-16</strong></p>
+<h5 id="在处理异步代码异常时，try-catch并不能正确处理异常；"><a href="#在处理异步代码异常时，try-catch并不能正确处理异常；" class="headerlink" title="在处理异步代码异常时，try catch并不能正确处理异常；"></a>在处理异步代码异常时，try catch并不能正确处理异常；</h5><p>如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(a)&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png" alt="image-20201020102441046"></p>
+<p><strong>try catch能捕获同步错误，异步错误和语法不能</strong></p>
+<h5 id="用winow-onerror处理异步错误"><a href="#用winow-onerror处理异步错误" class="headerlink" title="用winow.onerror处理异步错误"></a>用winow.onerror处理异步错误</h5><blockquote>
+<p> window.onerror 放在所有脚本之前，这样才能对语法异常和运行异常进行处理。window.onerror捕获不到资源加载错误和promise的reject</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(a)&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;    </span><br><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020103635118.png" alt="image-20201020103635118"></p>
+<p><strong>window.onerror能够捕获到异步错误信息</strong></p>
+<p><strong>用window.addEventListener(‘unhandledrejection’) 捕获未能正确处理的Promise Rejected</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rejectHandle</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'unhandledrejection'</span>,rejectHandle)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020104405445.png" alt="image-20201020104405445"></p>
+<p><strong>window.addEventListener(‘error’) 处理资源加载错误</strong></p>
+<blockquote>
+<p>需要在捕获阶段处理addEventListener第三个参数设置为true</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resouceErrorHandle</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> srcElement = e.target||e.srcElement;</span><br><span class="line">    <span class="keyword">if</span> (srcElement === <span class="built_in">window</span>) &#123;</span><br><span class="line">        <span class="comment">// 全局错误</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"全局错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"message"</span>, e.message);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 元素错误，比如引用资源报错</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"元素错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"tagname"</span>, srcElement.tagName);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"src"</span>, srcElement.src);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"error捕获网络请求错误"</span>); <span class="comment">// 捕获错误</span></span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'error'</span>,resouceErrorHandle,<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020105424203.png" alt="image-20201020105424203"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/blog/2020/10/22/06%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<h1 id="six-正则表达式"><a href="#six-正则表达式" class="headerlink" title="six 正则表达式"></a>six 正则表达式</h1><p><strong>2020-10-17</strong></p>
+<blockquote>
+<p> 正则相关符号</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>\cx</th>
+<th>匹配由x指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 ‘c’ 字符。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\f</td>
+<td>匹配一个换页符。等价于 \x0c 和 \cL。</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>匹配一个换行符。等价于 \x0a 和 \cJ。</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>匹配一个回车符。等价于 \x0d 和 \cM。</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。注意 Unicode 正则表达式会匹配全角空格符。</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个制表符。等价于 \x09 和 \cI。</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>匹配一个垂直制表符。等价于 \x0b 和 \cK。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">特别字符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$</td>
+<td align="left">匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline 属性，则 $ 也匹配 ‘\n’ 或 ‘\r’。要匹配 $ 字符本身，请使用 $。</td>
+</tr>
+<tr>
+<td align="left">( )</td>
+<td align="left">标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 ( 和 )。</td>
+</tr>
+<tr>
+<td align="left">*</td>
+<td align="left">匹配前面的子表达式零次或多次。要匹配 * 字符，请使用 *。</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 +。</td>
+</tr>
+<tr>
+<td align="left">.</td>
+<td align="left">匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 . 。</td>
+</tr>
+<tr>
+<td align="left">[</td>
+<td align="left">标记一个中括号表达式的开始。要匹配 [，请使用 [。</td>
+</tr>
+<tr>
+<td align="left">?</td>
+<td align="left">匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 ?。</td>
+</tr>
+<tr>
+<td align="left">\</td>
+<td align="left">将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， ‘n’ 匹配字符 ‘n’。’\n’ 匹配换行符。序列 ‘\‘ 匹配 “&quot;，而 ‘(‘ 则匹配 “(“。</td>
+</tr>
+<tr>
+<td align="left">^</td>
+<td align="left">匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合。要匹配 ^ 字符本身，请使用 ^。</td>
+</tr>
+<tr>
+<td align="left">{</td>
+<td align="left">标记限定符表达式的开始。要匹配 {，请使用 {。</td>
+</tr>
+<tr>
+<td align="left">|</td>
+<td align="left">指明两项之间的一个选择。要匹配 |，请使用 |。</td>
+</tr>
+</tbody></table>
+<h2 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h2><p>限定符用来指定正则表达式的一个给定组件必须要出现多少次才能满足匹配。有 <strong>*** 或 **+</strong> 或 <strong>?</strong> 或 <strong>{n}</strong> 或 <strong>{n,}</strong> 或 <strong>{n,m}</strong> 共6种。</p>
+<p>正则表达式的限定符有：</p>
+<table>
+<thead>
+<tr>
+<th align="left">字符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">*</td>
+<td align="left">匹配前面的子表达式零次或多次。例如，zo* 能匹配 “z” 以及 “zoo”。* 等价于{0,}。</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
+</tr>
+<tr>
+<td align="left">?</td>
+<td align="left">匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 、 “does” 中的 “does” 、 “doxy” 中的 “do” 。? 等价于 {0,1}。</td>
+</tr>
+<tr>
+<td align="left">{n}</td>
+<td align="left">n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
+</tr>
+<tr>
+<td align="left">{n,}</td>
+<td align="left">n 是一个非负整数。至少匹配n 次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td>
+</tr>
+<tr>
+<td align="left">{n,m}</td>
+<td align="left">m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。</td>
+</tr>
+</tbody></table>
+<p>以下正则表达式匹配一个正整数，<strong>[1-9]</strong>设置第一个数字不是 0，<strong>[0-9]*</strong> 表示任意多个数字：</p>
+<h2 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h2><p>定位符使您能够将正则表达式固定到行首或行尾。它们还使您能够创建这样的正则表达式，这些正则表达式出现在一个单词内、在一个单词的开头或者一个单词的结尾。</p>
+<p>定位符用来描述字符串或单词的边界，<strong>^</strong> 和 <strong>$</strong> 分别指字符串的开始与结束，<strong>\b</strong> 描述单词的前或后边界，<strong>\B</strong> 表示非单词边界。</p>
+<p>正则表达式的定位符有：</p>
+<table>
+<thead>
+<tr>
+<th align="left">字符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">^</td>
+<td align="left">匹配输入字符串开始的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \n 或 \r 之后的位置匹配。</td>
+</tr>
+<tr>
+<td align="left">$</td>
+<td align="left">匹配输入字符串结尾的位置。如果设置了 RegExp 对象的 Multiline 属性，$ 还会与 \n 或 \r 之前的位置匹配。</td>
+</tr>
+<tr>
+<td align="left">\b</td>
+<td align="left">匹配一个单词边界，即字与空格间的位置。</td>
+</tr>
+<tr>
+<td align="left">\B</td>
+<td align="left">非单词边界匹配。</td>
+</tr>
+</tbody></table>
+<h5 id="正向预查"><a href="#正向预查" class="headerlink" title="正向预查"></a>正向预查</h5><table>
+<thead>
+<tr>
+<th align="left">字符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">(?=pattern)</td>
+<td align="left">后面跟着匹配的字符，但不包括</td>
+</tr>
+<tr>
+<td align="left">(?!pattern)</td>
+<td align="left">后面跟着不是匹配的字符</td>
+</tr>
+<tr>
+<td align="left">(?&lt;=pattern)</td>
+<td align="left">前面跟着匹配的字符，但不包括</td>
+</tr>
+<tr>
+<td align="left">(?&lt;!pattern)</td>
+<td align="left">前面跟着不是匹配的字符</td>
+</tr>
+</tbody></table>
+<h5 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h5><blockquote>
+<p> 引用子匹配串匹配的字符</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"Is is the cost of of gasoline going up up"</span>;</span><br><span class="line"><span class="keyword">var</span> patt1 = <span class="regexp">/\b([a-z]+) \1\b/ig</span>;</span><br><span class="line"><span class="built_in">document</span>.write(str.match(patt1));</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建一个正则表达式</strong></p>
+<ul>
+<li>第一种方法：var reg = /pattern/;</li>
+<li>第二种方法：var reg = RegExp(pattern [, flags]) || new RegExp(‘pattern’ [, flags]);</li>
+</ul>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><h5 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h5><ul>
+<li>RegExp.$1-$9</li>
+<li>RegExp.input ($_)</li>
+<li>RegExp.lastMatch ($&amp;)</li>
+<li>RegExp.lastParen ($+)</li>
+<li>。。。</li>
+</ul>
+<h5 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h5><ul>
+<li>exec()方法在一个指定字符串中执行一个搜索匹配。返回一个结果数组或 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null" target="_blank" rel="noopener"><code>null</code></a>。</li>
+<li>test() 方法执行一个检索，用来查看正则表达式与指定的字符串是否匹配。返回 <code>true</code> 或 <code>false</code>。</li>
+<li>[Symbol.match]</li>
+<li>[Symbol.replace]</li>
+<li>[Symbol.search]</li>
+<li>[Symbol.split]</li>
+</ul>
+<p>字符串相关的4个方法</p>
+<ul>
+<li>match          [Symbol.match]</li>
+<li>replace      [Symbol.replace]</li>
+<li>search        [Symbol.search]</li>
+<li>split          [Symbol.split]</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/blog/2020/10/22/09/</url>
+    <content><![CDATA[<p><strong>2020-10-21</strong></p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/blog/2020/10/22/07DOM%E9%83%A8%E5%88%86%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<h2 id="07DOM"><a href="#07DOM" class="headerlink" title="07DOM"></a>07DOM</h2><h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><p>​    Level 1,2,3</p>
+<h4 id="节点与节点树"><a href="#节点与节点树" class="headerlink" title="节点与节点树"></a>节点与节点树</h4><h5 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h5><ul>
+<li>​    Node类型</li>
+<li>​    Document类型</li>
+<li>​    DocumentType类型</li>
+<li>​    Element类型</li>
+<li>​    Attribute类型</li>
+<li>​    Text类型</li>
+<li>​    Comment类型</li>
+<li>​    DocumentFragment类型</li>
+</ul>
+<h5 id="元素"><a href="#元素" class="headerlink" title="元素"></a>元素</h5><p>​    <strong>增删改查接口</strong></p>
+<ul>
+<li><p>节点创建型API</p>
+<ul>
+<li>createElement</li>
+<li>createTextNode</li>
+<li>cloneNode</li>
+<li>createDocumentFragment</li>
+</ul>
+</li>
+<li><p>页面修改形API（包括删除和添加）（删）（改）</p>
+<ul>
+<li>appendChild(追加为子元素)</li>
+<li>insertBefore(插入前面)</li>
+<li>removeChild(删除子元素)</li>
+<li>replaceChild(替换子元素)</li>
+</ul>
+</li>
+<li><p>节点查询型API(查)</p>
+<ul>
+<li>document.querySelector</li>
+<li>document.querySelectorAll</li>
+<li>document.getElementById</li>
+<li>document.getElementsByTagName</li>
+<li>document.getElementsByName</li>
+<li>document.getElementsByClassName</li>
+<li>elementFromPoint()  //判断(x,y)当前位置是否有元素</li>
+</ul>
+</li>
+<li><p>元素属性型操作（属性节点的操作）</p>
+<ul>
+<li><p>getAttribute()  (获取属性)</p>
+</li>
+<li><p>createAttribute()  (创建属性)</p>
+</li>
+<li><p>setAttribute()  (设置属性)</p>
+</li>
+<li><p>romoveAttribute()  (删除属性)</p>
+</li>
+<li><p>element.attributes（将属性生成数组对象）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="操作样式表"><a href="#操作样式表" class="headerlink" title="操作样式表"></a>操作样式表</h4><h4 id="操作CSS"><a href="#操作CSS" class="headerlink" title="操作CSS"></a>操作CSS</h4><p>dom.style.xxx</p>
+<p>在样式规则上重新定义规则</p>
+<p>图层概念</p>
+<h3 id="XML-DOM"><a href="#XML-DOM" class="headerlink" title="XML DOM"></a>XML DOM</h3><h3 id="SVG-DOM"><a href="#SVG-DOM" class="headerlink" title="SVG DOM"></a>SVG DOM</h3><h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><ul>
+<li>window对象——BOM核心<ul>
+<li>window.alert(‘提示信息’)</li>
+<li>window.confirm(‘确认信息’)</li>
+<li>window.prompt(‘弹出输入框’)</li>
+<li>window.open(‘url地址’, ‘_black或_self’, ‘新窗口大小’)；     // black：新开一个空白的窗口打开链接，self在当前框架中打开链接</li>
+<li>window.close()  // 关闭当前页</li>
+<li>setTimeout(函数， 时间)  // 定时器，只执行一次</li>
+<li>clearTimeout(定时器名称) // 清除计时器</li>
+<li>setInterval(函数，时间)   // 定时器，无限执行</li>
+<li>clearInterval()   // 停止执行 setInterval()</li>
+</ul>
+</li>
+<li>location对象<ul>
+<li>localtion.href = ‘url地址’;      // 跳转到这个url地址</li>
+<li>localtion.hostname     // 返回 web 主机名</li>
+<li>localtion.pathname      // 返回当前页面的路径和文件名</li>
+<li>localtion.port       // 返回 web 主机的端口</li>
+<li>localtion.protocol   // 返回页面使用的web协议，http||https</li>
+</ul>
+</li>
+<li>navigator对象 —— 获取浏览器的所有信息<ul>
+<li>navigator.appCodeName  // 返回浏览器的代码名</li>
+<li>navigator.appMinorVersion   // 返回浏览器的次级版本</li>
+<li>navigator.appName  // 返回浏览器的名称</li>
+<li>navigator.appVersion  // 返回浏览器的平台和版本信息</li>
+<li>navigator.browserLanguage   // 返回当前浏览器的语言</li>
+<li>navigator.userAgent    // 返回由客户机发送服务器的 user-agent 头部的值。</li>
+</ul>
+</li>
+<li>screen对象<ul>
+<li>screen.height   // 获取整个屏幕的高</li>
+<li>screen.width    // 获取整个屏幕的宽</li>
+<li>screen.availiHeight     // 整个屏幕的高减去系统部件的高（可用的屏幕高度）</li>
+<li>screen.availWidth     // 整个屏幕的宽减去系统部件的宽（可用的屏幕宽度）</li>
+</ul>
+</li>
+<li>history对象 包含浏览器的历史<ul>
+<li>history.back();     // 返回上一页</li>
+<li>history.forward()   // 前进下一页</li>
+<li>history.go(‘参数’);   // -1 表示上一页，1表示下一页</li>
+</ul>
+</li>
+</ul>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/blog/2020/10/22/08DOM%E4%BA%8B%E4%BB%B6/</url>
+    <content><![CDATA[<p><strong>2020-10-20</strong></p>
+<h3 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h3><ul>
+<li><p>上午</p>
+<ul>
+<li><p>DOM事件</p>
+<ul>
+<li>理解事件流</li>
+<li>使用事件处理程序</li>
+<li>不同的事件类型</li>
+</ul>
+</li>
+<li><p>事件冒泡</p>
+<ul>
+<li><p>事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深</p>
+<p>的那个节点）接收，然后逐级向上传播到较为不具体的节点（文档）</p>
+<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020143939968.png" alt="image-20201020143939968"></p>
+</li>
+</ul>
+</li>
+<li><p>事件捕获</p>
+<ul>
+<li>事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在</li>
+</ul>
+<p>事件到达预定目标之前捕获它。</p>
+<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020143953777.png" alt="image-20201020143953777"></p>
+</li>
+<li><p>整个事件流</p>
+<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020144046011.png" alt="image-20201020144046011"></p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="DOM0-级事件处理程序"><a href="#DOM0-级事件处理程序" class="headerlink" title="DOM0 级事件处理程序"></a>DOM0 级事件处理程序</h4>  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>); </span><br><span class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123; </span><br><span class="line"> alert(<span class="string">"Clicked"</span>); </span><br><span class="line">&#125;;</span><br><span class="line"><span class="comment">//以这种方式添加的事件处理程序会在事件流的冒泡阶段被处理</span></span><br><span class="line"></span><br><span class="line">btn.onclick = <span class="literal">null</span>; <span class="comment">//删除事件处理程序</span></span><br></pre></td></tr></table></figure>
+
+<p>  DOM2 级事件处理程序</p>
+  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>); </span><br><span class="line"><span class="keyword">let</span> fn = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">     alert(<span class="string">"Clicked"</span>); </span><br><span class="line">&#125;</span><br><span class="line">btn.addEventListener(<span class="string">"click"</span>, fn, <span class="literal">false</span>);</span><br><span class="line"><span class="comment">//删除事件处理程序传入的函数要相同</span></span><br><span class="line">btn.removeEventListener(<span class="string">"click"</span>, fn, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h4 id="跨浏览器Event"><a href="#跨浏览器Event" class="headerlink" title="跨浏览器Event"></a>跨浏览器Event</h4>  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> EventUtil = &#123; </span><br><span class="line"> </span><br><span class="line"> addHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>)</span>&#123; </span><br><span class="line"> <span class="keyword">if</span> (element.addEventListener)&#123; </span><br><span class="line"> element.addEventListener(type, handler, <span class="literal">false</span>); </span><br><span class="line"> &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.attachEvent)&#123; </span><br><span class="line"> element.attachEvent(<span class="string">"on"</span> + type, handler); </span><br><span class="line"> &#125; <span class="keyword">else</span> &#123; </span><br><span class="line"> element[<span class="string">"on"</span> + type] = handler; </span><br><span class="line"> &#125; </span><br><span class="line"> &#125;, </span><br><span class="line"> removeHandler: <span class="function"><span class="keyword">function</span>(<span class="params">element, type, handler</span>)</span>&#123; </span><br><span class="line"> <span class="keyword">if</span> (element.removeEventListener)&#123; </span><br><span class="line"> element.removeEventListener(type, handler, <span class="literal">false</span>); </span><br><span class="line"> &#125; <span class="keyword">else</span> <span class="keyword">if</span> (element.detachEvent)&#123; </span><br><span class="line"> element.detachEvent(<span class="string">"on"</span> + type, handler); </span><br><span class="line"> &#125; <span class="keyword">else</span> &#123; </span><br><span class="line"> element[<span class="string">"on"</span> + type] = <span class="literal">null</span>; </span><br><span class="line"> &#125; </span><br><span class="line"> &#125; </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+
+
+<h5 id="DOM中的事件对象"><a href="#DOM中的事件对象" class="headerlink" title="DOM中的事件对象"></a>DOM中的事件对象</h5>  <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> btn = <span class="built_in">document</span>.getElementById(<span class="string">"myBtn"</span>); </span><br><span class="line">btn.onclick = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123; </span><br><span class="line"> alert(event.type); <span class="comment">//"click" </span></span><br><span class="line">&#125;; </span><br><span class="line">btn.addEventListener(<span class="string">"click"</span>, <span class="function"><span class="keyword">function</span>(<span class="params">event</span>)</span>&#123; </span><br><span class="line"> alert(event.type); <span class="comment">//"click" </span></span><br><span class="line">&#125;, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure>
+
+<table>
+<thead>
+<tr>
+<th>属性/方法</th>
+<th>类 型</th>
+<th>读/写</th>
+<th>说 明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>bubbles</td>
+<td>Boolean</td>
+<td>只读</td>
+<td>表明事件是否冒泡</td>
+</tr>
+<tr>
+<td>cancelable</td>
+<td>Boolean</td>
+<td>只读</td>
+<td>表明是否可以取消事件的默认行为</td>
+</tr>
+<tr>
+<td>currentTarget</td>
+<td>Element</td>
+<td>只读</td>
+<td>其事件处理程序当前正在处理事件的那个元素</td>
+</tr>
+<tr>
+<td>defaultPrevented</td>
+<td>Boolean</td>
+<td>只读</td>
+<td>为 true 表示已经调用了 preventDefault()</td>
+</tr>
+<tr>
+<td>detail</td>
+<td>Integer</td>
+<td>只读</td>
+<td>与事件相关的细节信息</td>
+</tr>
+<tr>
+<td>eventPhase</td>
+<td>Integer</td>
+<td>只读</td>
+<td>调用事件处理程序的阶段：1表示捕获阶段，2表示“处于目标”，3表示冒泡阶段</td>
+</tr>
+<tr>
+<td>preventDefault()</td>
+<td>Function</td>
+<td>只读</td>
+<td>取消事件的默认行为。如果cancelable是true，则可以使用这个方法</td>
+</tr>
+<tr>
+<td>stopImmediatePropagation()</td>
+<td>Function</td>
+<td>只读</td>
+<td>取消事件的进一步捕获或冒泡，同时阻止任何事件处理程序被调用（DOM3级事件中新增）</td>
+</tr>
+<tr>
+<td>stopPropagation()</td>
+<td>Function</td>
+<td>只读</td>
+<td>取消事件的进一步捕获或冒泡。如果bubbles为true，则可以使用这个方法</td>
+</tr>
+<tr>
+<td>target</td>
+<td>Element</td>
+<td>只读</td>
+<td>事件的目标</td>
+</tr>
+<tr>
+<td>trusted</td>
+<td>Boolean</td>
+<td>只读</td>
+<td>为true表示事件是浏览器生成的。为false表示事件是由开发人员通过 JavaScript 创建的</td>
+</tr>
+<tr>
+<td>type</td>
+<td>String</td>
+<td>只读</td>
+<td>被触发的事件的类型</td>
+</tr>
+</tbody></table>
+<h4 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h4><ul>
+<li><p>UI事件</p>
+</li>
+<li><p>焦点事件</p>
+</li>
+<li><p>鼠标和滚轮事件</p>
+</li>
+<li><p>键盘和文本事件</p>
+</li>
+<li><p>HTML5 事件</p>
+</li>
+<li><p>设备事件</p>
+</li>
+<li><p>触摸和手势事件</p>
+<h4 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h4></li>
+<li><p>事件是否支持冒泡</p>
+</li>
+<li><p>每个 event 都有一个<code>event.bubbles</code>属性，可以知道它可否冒泡。(ref：<a href="http://www.w3.org/TR/DOM-Level-3-Events#h3_interface-Event" target="_blank" rel="noopener">W3定义的Event Interface</a>)</p>
+<p>当然 W3 DOM Level 3 Events表格：</p>
+<table>
+<thead>
+<tr>
+<th>Event Type</th>
+<th>Bubbling phase</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>abort</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>beforeinput</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>blur</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>click</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>compositionstart</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>compositionupdate</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>compositionend</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>dblclick</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>error</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>focus</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>focusin</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>focusout</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>input</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>keydown</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>keypress</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>keyup</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>load</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>mousedown</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>mouseenter</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>mouseleave</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>mousemove</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>mouseout</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>mouseover</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>mouseup</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>resize</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>scroll</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>select</td>
+<td>✔</td>
+</tr>
+<tr>
+<td>unload</td>
+<td>✗</td>
+</tr>
+<tr>
+<td>wheel</td>
+<td>✔</td>
+</tr>
+</tbody></table>
+<p>H5 还定义了一些新事件：</p>
+<ul>
+<li><a href="https://html.spec.whatwg.org/multipage/embedded-content.html#mediaevents" target="_blank" rel="noopener">media相关事件</a>，都不冒泡</li>
+<li><a href="https://html.spec.whatwg.org/multipage/interaction.html#dndevents" target="_blank" rel="noopener">drag相关事件</a> <code>dragstart</code> 、 <code>drag</code> 、 <code>dragenter</code> 、 <code>dragexit</code> 、 <code>dragleave</code> 、 <code>dragover</code> 、 <code>drop</code> 、 <code>dragend</code>均冒泡</li>
+<li><a href="https://html.spec.whatwg.org/multipage/browsers.html#history-traversal" target="_blank" rel="noopener">History相关事件</a>：<code>popstate</code>，<code>hashchange</code>冒泡（从window开始…），<code>pagetransition</code>不冒泡</li>
+</ul>
+</li>
+</ul>
+<p>练习任务</p>
+<ol>
+<li>实现一个快捷键的库，支持组合键，支持按键序列</li>
+<li>实现一个拖放文件应用，拖放桌面文件到页面，生成DataURL</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/blog/2020/10/22/emphasisAPI/</url>
+    <content><![CDATA[<p> <strong>H5 API（重点）</strong></p>
+<ol>
+<li>​    SVG</li>
+<li>​    Canvas, OffscreenCanvas, WebGL</li>
+<li>​    本地储存</li>
+<li>​    文件怎么存储到本地</li>
+<li>​    离线应用</li>
+<li>​    本地数据库 IndexedDB</li>
+<li>​    Wroker</li>
+<li>​    Web Socket</li>
+<li>​    跨窗口通信<ol>
+<li>通过本地存储</li>
+<li></li>
+</ol>
+</li>
+<li>​    跨域通信<ol>
+<li>jsonp</li>
+<li>document.domain + iframe</li>
+<li>location.hash + iframe</li>
+<li>window.name + iframe跨域</li>
+<li>postMessage跨域</li>
+<li>跨域资源共享（CORS）</li>
+<li>nginx代理跨域</li>
+<li>服务器中间代理跨域</li>
+<li>WebSocket协议跨域</li>
+</ol>
+</li>
+</ol>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/blog/2020/10/22/README/</url>
+    <content><![CDATA[<h2 id="爱华实习日记"><a href="#爱华实习日记" class="headerlink" title="爱华实习日记"></a>爱华实习日记</h2><blockquote>
+<p>记录学习历程~up</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
     <title>firstblog</title>
     <url>/blog/2019/07/10/firstblog/</url>
     <content><![CDATA[<h1 id="Welcome-to-Hexo"><a href="#Welcome-to-Hexo" class="headerlink" title="Welcome to Hexo"></a>Welcome to Hexo</h1><p>##Wel come souhu</p>
+]]></content>
+  </entry>
+  <entry>
+    <title></title>
+    <url>/blog/2020/10/22/webgl/</url>
+    <content><![CDATA[<h1 id="WebGL"><a href="#WebGL" class="headerlink" title="WebGL"></a>WebGL</h1><h3 id="Three四大组件"><a href="#Three四大组件" class="headerlink" title="Three四大组件"></a>Three四大组件</h3><ul>
+<li>场景THREE.Scene</li>
+<li>相机THREE.PerpectiveCamera(45,100/150,1,1000)<ul>
+<li>视角fov</li>
+<li>纵横比aspect</li>
+<li>近平面near</li>
+<li>远平面far</li>
+</ul>
+</li>
+<li>渲染器<ul>
+<li>计算的过程就是渲染</li>
+</ul>
+</li>
+<li>几何体 BoxGeometry</li>
+</ul>
+<h4 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系</h4><p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201021173413747.png" alt="image-20201021173413747"></p>
+<h3 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h3><ul>
+<li>围腰x、y、z轴旋转 </li>
+<li>特定向量旋转</li>
+</ul>
+<h3 id="世界坐标、本地坐标"><a href="#世界坐标、本地坐标" class="headerlink" title="世界坐标、本地坐标"></a>世界坐标、本地坐标</h3><ul>
+<li>AxisHelper 绘制本地坐标</li>
+</ul>
+<h4 id="让场景动起来"><a href="#让场景动起来" class="headerlink" title="让场景动起来"></a>让场景动起来</h4><ul>
+<li>变换物体的位置</li>
+<li>变化相机的位置</li>
+</ul>
+<h3 id="循环"><a href="#循环" class="headerlink" title="循环"></a>循环</h3><ul>
+<li>游戏循环</li>
+<li>帧循环</li>
+<li>渲染循环</li>
+</ul>
+<p>保存状态</p>
+<p>清空画面</p>
+<p>重新绘制新的画面</p>
+<h3 id="相机的工作原理"><a href="#相机的工作原理" class="headerlink" title="相机的工作原理"></a>相机的工作原理</h3><p>CAD</p>
+<ul>
+<li><p>相机</p>
+<ul>
+<li>正投影相机  &gt; 平行光</li>
+<li>透视投影相机</li>
+</ul>
+</li>
+</ul>
 ]]></content>
   </entry>
   <entry>

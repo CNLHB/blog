@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>爱华学习日记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="five 错误处理方式&amp;amp;错误信息收集2020-10-16 在处理异步代码异常时，try catch并不能正确处理异常；如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息 123456try&amp;#123;    setTimeout(()=&amp;gt;&amp;#123;console.log(a)&amp;#125;,100)&amp;#125;catch(err)&amp;#123;    console.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爱华学习日记">
+<meta property="og:url" content="http://yoursite.com/2020/10/22/05错误处理/index.html">
+<meta property="og:site_name" content="爱华学习日记">
+<meta property="og:description" content="five 错误处理方式&amp;amp;错误信息收集2020-10-16 在处理异步代码异常时，try catch并不能正确处理异常；如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息 123456try&amp;#123;    setTimeout(()=&amp;gt;&amp;#123;console.log(a)&amp;#125;,100)&amp;#125;catch(err)&amp;#123;    console.">
+<meta property="og:locale" content="default">
+<meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png">
+<meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020103635118.png">
+<meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020104405445.png">
+<meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020105424203.png">
+<meta property="og:updated_time" content="2020-10-21T03:22:13.866Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爱华学习日记">
+<meta name="twitter:description" content="five 错误处理方式&amp;amp;错误信息收集2020-10-16 在处理异步代码异常时，try catch并不能正确处理异常；如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息 123456try&amp;#123;    setTimeout(()=&amp;gt;&amp;#123;console.log(a)&amp;#125;,100)&amp;#125;catch(err)&amp;#123;    console.">
+<meta name="twitter:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="爱华学习日记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">爱华学习日记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-05错误处理" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/10/22/05错误处理/" class="article-date">
+  <time datetime="2020-10-22T07:18:39.986Z" itemprop="datePublished">2020-10-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="five-错误处理方式-amp-错误信息收集"><a href="#five-错误处理方式-amp-错误信息收集" class="headerlink" title="five 错误处理方式&amp;错误信息收集"></a>five 错误处理方式&amp;错误信息收集</h1><p><strong>2020-10-16</strong></p>
+<h5 id="在处理异步代码异常时，try-catch并不能正确处理异常；"><a href="#在处理异步代码异常时，try-catch并不能正确处理异常；" class="headerlink" title="在处理异步代码异常时，try catch并不能正确处理异常；"></a>在处理异步代码异常时，try catch并不能正确处理异常；</h5><p>如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(a)&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png" alt="image-20201020102441046"></p>
+<p><strong>try catch能捕获同步错误，异步错误和语法不能</strong></p>
+<h5 id="用winow-onerror处理异步错误"><a href="#用winow-onerror处理异步错误" class="headerlink" title="用winow.onerror处理异步错误"></a>用winow.onerror处理异步错误</h5><blockquote>
+<p> window.onerror 放在所有脚本之前，这样才能对语法异常和运行异常进行处理。window.onerror捕获不到资源加载错误和promise的reject</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(a)&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;    </span><br><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020103635118.png" alt="image-20201020103635118"></p>
+<p><strong>window.onerror能够捕获到异步错误信息</strong></p>
+<p><strong>用window.addEventListener(‘unhandledrejection’) 捕获未能正确处理的Promise Rejected</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rejectHandle</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'unhandledrejection'</span>,rejectHandle)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020104405445.png" alt="image-20201020104405445"></p>
+<p><strong>window.addEventListener(‘error’) 处理资源加载错误</strong></p>
+<blockquote>
+<p>需要在捕获阶段处理addEventListener第三个参数设置为true</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resouceErrorHandle</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> srcElement = e.target||e.srcElement;</span><br><span class="line">    <span class="keyword">if</span> (srcElement === <span class="built_in">window</span>) &#123;</span><br><span class="line">        <span class="comment">// 全局错误</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"全局错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"message"</span>, e.message);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 元素错误，比如引用资源报错</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"元素错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"tagname"</span>, srcElement.tagName);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"src"</span>, srcElement.src);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"error捕获网络请求错误"</span>); <span class="comment">// 捕获错误</span></span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'error'</span>,resouceErrorHandle,<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020105424203.png" alt="image-20201020105424203"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/22/05错误处理/" data-id="ckgkhvfyv0005dguki3jidboj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2020/10/22/06正则表达式/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2020/10/22/04Promise&Callback&Async Function  /" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/10/22/webgl/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/emphasisAPI/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/09/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/08DOM事件/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 爱华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+ <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css"> <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>  <script src="/blog/js/script.js"></script> 
+
+
+  </div>
+</body>
+</html>

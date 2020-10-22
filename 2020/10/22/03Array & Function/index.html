@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head><meta name="generator" content="Hexo 3.9.0">
+  <meta charset="utf-8">
+  
+
+  
+  <title>爱华学习日记</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="threeday Array &amp;amp; Function2020-10-14 今日工作 上午   梳理Array的属性和方法    内容 Array 创建  字面量  new Array  Array.of   与new Array 区别   Array.of() 和 Array 构造函数之间的区别在于处理整数参数：Array.of(7) 创建一个具有单个元素 7 的数组，而 Array(7)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="爱华学习日记">
+<meta property="og:url" content="http://yoursite.com/2020/10/22/03Array & Function/index.html">
+<meta property="og:site_name" content="爱华学习日记">
+<meta property="og:description" content="threeday Array &amp;amp; Function2020-10-14 今日工作 上午   梳理Array的属性和方法    内容 Array 创建  字面量  new Array  Array.of   与new Array 区别   Array.of() 和 Array 构造函数之间的区别在于处理整数参数：Array.of(7) 创建一个具有单个元素 7 的数组，而 Array(7)">
+<meta property="og:locale" content="default">
+<meta property="og:updated_time" content="2020-10-20T06:33:36.882Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="爱华学习日记">
+<meta name="twitter:description" content="threeday Array &amp;amp; Function2020-10-14 今日工作 上午   梳理Array的属性和方法    内容 Array 创建  字面量  new Array  Array.of   与new Array 区别   Array.of() 和 Array 构造函数之间的区别在于处理整数参数：Array.of(7) 创建一个具有单个元素 7 的数组，而 Array(7)">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="爱华学习日记" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+</html>
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">爱华学习日记</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">Home</a>
+        
+          <a class="main-nav-link" href="/blog/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-03Array &amp; Function" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2020/10/22/03Array & Function/" class="article-date">
+  <time datetime="2020-10-22T07:18:39.934Z" itemprop="datePublished">2020-10-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="threeday-Array-amp-Function"><a href="#threeday-Array-amp-Function" class="headerlink" title="threeday Array &amp; Function"></a>threeday Array &amp; Function</h2><p><strong>2020-10-14</strong></p>
+<h4 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h4><ul>
+<li><p>上午</p>
+</li>
+<li><ul>
+<li>梳理Array的属性和方法</li>
+</ul>
+</li>
+</ul>
+<p>内容</p>
+<p>Array</p>
+<p>创建</p>
+<ul>
+<li><p>字面量</p>
+</li>
+<li><p>new Array</p>
+</li>
+<li><p>Array.of   与new Array 区别</p>
+</li>
+<li><ul>
+<li><strong>Array.of()</strong> 和 <strong>Array</strong> 构造函数之间的区别在于处理整数参数：<strong>Array.of(7)</strong> 创建一个具有单个元素 <strong>7</strong> 的数组，而 <strong>Array(7)</strong> 创建一个长度为7的空数组（<strong>注意：</strong>这是指一个有7个空位(empty)的数组，而不是由7个undefined组成的数组）。</li>
+</ul>
+</li>
+<li><p>Array.from</p>
+</li>
+<li><ul>
+<li>接受两个参数，第一个参数 数组 or 类数组，第二个参数是函数，接受数组的每一项，处理并返回  </li>
+</ul>
+</li>
+</ul>
+<p>属性</p>
+<ul>
+<li>length</li>
+</ul>
+<p>静态方法</p>
+<ul>
+<li>Array.from()</li>
+<li>Array.isArray()</li>
+<li>Array.of()</li>
+</ul>
+<p>实例方法</p>
+<ul>
+<li><p>遍历</p>
+</li>
+<li><ul>
+<li>Array.prototype.forEach()</li>
+<li>Array.prototype.reduce()</li>
+<li>Array.prototype.reduceRight()</li>
+<li>Array.prototype.some()</li>
+<li>Array.prototype.every()</li>
+</ul>
+</li>
+<li><p>衍生，返回新数组</p>
+</li>
+<li><ul>
+<li>Array.prototype.concat()</li>
+<li>Array.prototype.slice()</li>
+<li>Array.prototype.flat()</li>
+<li>Array.prototype.flatMap()</li>
+<li>Array.prototype.filter()</li>
+<li>Array.prototype.map()</li>
+</ul>
+</li>
+<li><p>查找 </p>
+</li>
+<li><ul>
+<li>Array.prototype.find() 传入一个函数，返回满足条件的第一个值</li>
+<li>Array.prototype.findIndex()  传入一个函数，返回满足条件的第一个值的索引</li>
+<li>Array.prototype.includes()  判断传入的值在数组中是否存在</li>
+<li>Array.prototype.indexOf()</li>
+<li>Array.prototype.lastIndexOf()</li>
+</ul>
+</li>
+<li><p>修改原数组</p>
+</li>
+<li><ul>
+<li>Array.prototype.fill()</li>
+<li>Array.prototype.pop()</li>
+<li>Array.prototype.push()</li>
+<li>Array.prototype.shift()</li>
+<li>Array.prototype.splice()</li>
+<li>Array.prototype.unshift()</li>
+<li>Array.prototype.reverse() </li>
+<li>Array.prototype.sort()</li>
+<li>Array.prototype.copyWithin()</li>
+</ul>
+</li>
+<li><p>转字符串</p>
+</li>
+<li><ul>
+<li>Array.prototype.join()</li>
+</ul>
+</li>
+<li><p>类型数组</p>
+</li>
+<li><ul>
+<li>Int8Array</li>
+<li>Uint8Array</li>
+<li>Uint8ClampedArray  在处理像素时可以使用</li>
+</ul>
+</li>
+<li><p>…类数组</p>
+</li>
+<li><ul>
+<li>HTMLCollectionarguments…</li>
+</ul>
+<p>上述方法不能够处理需求时，可以用自定义函数处理，比如需要在索引80后重新到索引60,(for循环)</p>
+</li>
+<li><p>下午</p>
+</li>
+<li><ul>
+<li>梳理Function的属性和方法</li>
+</ul>
+</li>
+</ul>
+<p>内容</p>
+<p>Function</p>
+<p>创建</p>
+<ul>
+<li><ul>
+<li>函数声明 function(){}  存在函数声明整体提升</li>
+<li>函数表达式 let fn = function(){}</li>
+<li>new  Function(参数…，函数体字符串)</li>
+</ul>
+</li>
+</ul>
+<p>属性</p>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<p>实例属性</p>
+<ul>
+<li><ul>
+<li>Arguments  传入的实参，类数组</li>
+<li>Length 形参个数</li>
+<li>Name 函数名</li>
+<li>displayName 函数的显示名称  可以被定义，返回定义函数名</li>
+</ul>
+</li>
+</ul>
+<p>实例方法</p>
+<ul>
+<li><p>改变函数作用域（this指向）</p>
+</li>
+<li><ul>
+<li>call  调用具有给定this值和参数的函数。</li>
+<li>Apply 调用具有给定this值和参数的函数。参数形式为数组</li>
+<li>Bind 创建一个新函数，该新函数在被调用时将其this关键字设置为所提供的值，并且在调用新函数时所提供的任何参数之前均具有给定的参数序列。</li>
+</ul>
+</li>
+</ul>
+<p>静态方法</p>
+<p>今日总结</p>
+<ol>
+<li>学习笔记梳理</li>
+<li>题目分享</li>
+<li>技术分享</li>
+<li>code验证api</li>
+</ol>
+<p>明日计划</p>
+<ul>
+<li><p>1、梳理Promise与Callback</p>
+</li>
+<li><p>2、Async Fn</p>
+</li>
+<li><p>3、RegExp</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2020/10/22/03Array & Function/" data-id="ckgkhvfyr0003dguk6rgpy5ah" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2020/10/22/04Promise&Callback&Async Function  /" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2020/10/22/02Number&String&Object/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title"></div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/10/">October 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/07/">July 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2020/10/22/webgl/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/README/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/emphasisAPI/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/09/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/08DOM事件/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2020 爱华<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+ <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css"> <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>  <script src="/blog/js/script.js"></script> 
+
+
+  </div>
+</body>
+</html>
