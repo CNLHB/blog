@@ -440,85 +440,6 @@
       </tags>
   </entry>
   <entry>
-    <title>Promise 与 Callback 与 Async Function</title>
-    <url>/blog/2020/10/22/04Promise&amp;Callback&amp;Async%20Function%20%20/</url>
-    <content><![CDATA[<h3 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h3><ul>
-<li>梳理 Promise 与 Callback 与 Async Function    </li>
-</ul>
-<h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><h5 id="CallBack"><a href="#CallBack" class="headerlink" title="CallBack"></a>CallBack</h5><blockquote>
-<p>回调函数</p>
-</blockquote>
-<ul>
-<li>简洁</li>
-<li>可异步，可同步</li>
-<li>高耦合</li>
-<li>容易出现回调地狱</li>
-<li>不能方便指定多个回调</li>
-<li>不方便任务调度</li>
-</ul>
-<h5 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h5><p>优缺点</p>
-<ul>
-<li>链式写法</li>
-<li>方便多任务方便调度</li>
-<li>状态可查询(vs事件监听)</li>
-</ul>
-<p>​    三种状态，只能从pending变为<em>fulfilled或rejected</em></p>
-<ul>
-<li><em>待定（pending）</em>: 初始状态，既没有被兑现，也没有被拒绝。</li>
-<li><em>已兑现（fulfilled）</em>: 意味着操作成功完成。</li>
-<li><em>已拒绝（rejected）</em>: 意味着操作失败。</li>
-</ul>
-<p>创建</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;...&#125; <span class="comment">/* executor */</span>  );</span><br></pre></td></tr></table></figure>
-
-<p>方法</p>
-<ul>
-<li><ul>
-<li><p>静态方法</p>
-</li>
-<li><ul>
-<li>resolve </li>
-<li>rejected</li>
-<li>race</li>
-<li>all</li>
-<li>allSettled 都执行完</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>any 任意一个成功，就返回resolve</p>
-</li>
-<li><p>实例方法</p>
-<ul>
-<li><ul>
-<li>then</li>
-<li>catch</li>
-<li>Finally</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="Async-Fn"><a href="#Async-Fn" class="headerlink" title="Async Fn"></a>Async Fn</h5><h4 id="async-amp-await"><a href="#async-amp-await" class="headerlink" title="async&amp;await"></a>async&amp;await</h4><ul>
-<li>可读性改善</li>
-<li>async函数直接执行时，返回Promise实例</li>
-<li>await后面的表达式可以是Promise也可以是其它</li>
-<li>await返回值是后面表达式的resolve值</li>
-<li>await被reject时，方便trycatch</li>
-</ul>
-<h5 id="今日总结"><a href="#今日总结" class="headerlink" title="今日总结"></a>今日总结</h5><ol>
-<li>code验证API</li>
-<li>进一步理解异步的处理方式</li>
-</ol>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>web前端</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>错误处理方式&amp;错误信息收集</title>
     <url>/blog/2020/10/22/05%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/</url>
     <content><![CDATA[<h5 id="在处理异步代码异常时，try-catch并不能正确处理异常；"><a href="#在处理异步代码异常时，try-catch并不能正确处理异常；" class="headerlink" title="在处理异步代码异常时，try catch并不能正确处理异常；"></a>在处理异步代码异常时，try catch并不能正确处理异常；</h5><p>如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息</p>
@@ -773,14 +694,6 @@
       </tags>
   </entry>
   <entry>
-    <title>爱华实习日记</title>
-    <url>/blog/2020/10/22/README/</url>
-    <content><![CDATA[<blockquote>
-<p>记录学习历程~up</p>
-</blockquote>
-]]></content>
-  </entry>
-  <entry>
     <title>DOM</title>
     <url>/blog/2020/10/22/07DOM%E9%83%A8%E5%88%86%E6%95%B4%E7%90%86/</url>
     <content><![CDATA[<h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><p>​    Level 1,2,3</p>
@@ -892,6 +805,99 @@
       <tags>
         <tag>web前端</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Promise 与 Callback 与 Async Function</title>
+    <url>/blog/2020/10/22/04Promise&amp;Callback&amp;Async%20Function%20%20/</url>
+    <content><![CDATA[<h3 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h3><ul>
+<li>梳理 Promise 与 Callback 与 Async Function    </li>
+</ul>
+<h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><h5 id="CallBack"><a href="#CallBack" class="headerlink" title="CallBack"></a>CallBack</h5><blockquote>
+<p>回调函数</p>
+</blockquote>
+<ul>
+<li>简洁</li>
+<li>可异步，可同步</li>
+<li>高耦合</li>
+<li>容易出现回调地狱</li>
+<li>不能方便指定多个回调</li>
+<li>不方便任务调度</li>
+</ul>
+<h5 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h5><p>优缺点</p>
+<ul>
+<li>链式写法</li>
+<li>方便多任务方便调度</li>
+<li>状态可查询(vs事件监听)</li>
+</ul>
+<p>​    三种状态，只能从pending变为<em>fulfilled或rejected</em></p>
+<ul>
+<li><em>待定（pending）</em>: 初始状态，既没有被兑现，也没有被拒绝。</li>
+<li><em>已兑现（fulfilled）</em>: 意味着操作成功完成。</li>
+<li><em>已拒绝（rejected）</em>: 意味着操作失败。</li>
+</ul>
+<p>创建</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;...&#125; <span class="comment">/* executor */</span>  );</span><br></pre></td></tr></table></figure>
+
+<p>方法</p>
+<ul>
+<li><ul>
+<li><p>静态方法</p>
+</li>
+<li><ul>
+<li>resolve </li>
+<li>rejected</li>
+<li>race</li>
+<li>all</li>
+<li>allSettled 都执行完</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>any 任意一个成功，就返回resolve</p>
+</li>
+<li><p>实例方法</p>
+<ul>
+<li><ul>
+<li>then</li>
+<li>catch</li>
+<li>Finally</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Async-Fn"><a href="#Async-Fn" class="headerlink" title="Async Fn"></a>Async Fn</h5><h4 id="async-amp-await"><a href="#async-amp-await" class="headerlink" title="async&amp;await"></a>async&amp;await</h4><ul>
+<li>可读性改善</li>
+<li>async函数直接执行时，返回Promise实例</li>
+<li>await后面的表达式可以是Promise也可以是其它</li>
+<li>await返回值是后面表达式的resolve值</li>
+<li>await被reject时，方便trycatch</li>
+</ul>
+<h5 id="今日总结"><a href="#今日总结" class="headerlink" title="今日总结"></a>今日总结</h5><ol>
+<li>code验证API</li>
+<li>进一步理解异步的处理方式</li>
+</ol>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ceshi</title>
+    <url>/blog/2020/10/22/ceshi/</url>
+    <content><![CDATA[<p><img src="/blog/2020/10/22/ceshi/image-20201022151724120.png" alt="image-20201021173413747"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>爱华实习日记</title>
+    <url>/blog/2020/10/22/README/</url>
+    <content><![CDATA[<blockquote>
+<p>记录学习历程~up</p>
+</blockquote>
+]]></content>
   </entry>
   <entry>
     <title>DOM(续)</title>
@@ -1187,11 +1193,6 @@
       </tags>
   </entry>
   <entry>
-    <title>ceshi</title>
-    <url>/blog/2020/10/22/ceshi/</url>
-    <content><![CDATA[]]></content>
-  </entry>
-  <entry>
     <title>H5 API（重点）</title>
     <url>/blog/2020/10/22/emphasisAPI/</url>
     <content><![CDATA[<ol>
@@ -1230,6 +1231,24 @@
 ]]></content>
   </entry>
   <entry>
+    <title>Hello World</title>
+    <url>/blog/2019/07/10/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
+  </entry>
+  <entry>
     <title>WebGL</title>
     <url>/blog/2020/10/22/webgl/</url>
     <content><![CDATA[<h3 id="Three四大组件"><a href="#Three四大组件" class="headerlink" title="Three四大组件"></a>Three四大组件</h3><ul>
@@ -1247,7 +1266,7 @@
 </li>
 <li>几何体 BoxGeometry</li>
 </ul>
-<h4 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系<img src="/blog/.com//ceshi%5Cimage-20201021173413747.png" alt="image-20201021173413747"></h4><h3 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h3><ul>
+<h4 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系<img src="/blog/2020/10/22/webgl/image-20201021173413747.png" alt="image-20201021173413747"></h4><h3 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h3><ul>
 <li>围腰x、y、z轴旋转 </li>
 <li>特定向量旋转</li>
 </ul>
@@ -1270,14 +1289,8 @@
 <ul>
 <li><p>相机</p>
 <ul>
-<li>正投影相机  &gt; 平行光<ul>
-<li><img src="/blog/.com//ceshi%5Cimage-20201022151724120.png" alt="image-20201022151724120"></li>
-</ul>
-</li>
-<li>透视投影相机<ul>
-<li><img src="/blog/.com//ceshi%5Cimage-20201022153928651.png" alt="image-20201022153928651"></li>
-</ul>
-</li>
+<li>正投影相机  &gt; 平行光<br> <img src="/blog/2020/10/22/webgl/image-20201022151724120.png" alt="image-20201022151724120"></li>
+<li>透视投影相机<br> <img src="/blog/2020/10/22/webgl/image-20201022153928651.png" alt="image-20201022153928651"></li>
 </ul>
 </li>
 </ul>
@@ -1289,23 +1302,5 @@
         <tag>web前端</tag>
         <tag>WebGL</tag>
       </tags>
-  </entry>
-  <entry>
-    <title>Hello World</title>
-    <url>/blog/2019/07/10/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
-]]></content>
   </entry>
 </search>
