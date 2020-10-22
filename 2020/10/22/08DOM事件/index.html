@@ -5,25 +5,26 @@
   
 
   
-  <title>爱华学习日记</title>
+  <title>DOM(续) | 爱华学习日记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="2020-10-20 今日工作 上午  DOM事件  理解事件流 使用事件处理程序 不同的事件类型   事件冒泡  事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深 的那个节点）接收，然后逐级向上传播到较为不具体的节点（文档）     事件捕获  事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在  事件">
+  <meta name="description" content="今日工作 上午  DOM事件  理解事件流 使用事件处理程序 不同的事件类型   事件冒泡  事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深 的那个节点）接收，然后逐级向上传播到较为不具体的节点（文档）     事件捕获  事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在  事件到达预定目标之前捕获它">
+<meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="爱华学习日记">
+<meta property="og:title" content="DOM(续)">
 <meta property="og:url" content="http://yoursite.com/2020/10/22/08DOM事件/index.html">
 <meta property="og:site_name" content="爱华学习日记">
-<meta property="og:description" content="2020-10-20 今日工作 上午  DOM事件  理解事件流 使用事件处理程序 不同的事件类型   事件冒泡  事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深 的那个节点）接收，然后逐级向上传播到较为不具体的节点（文档）     事件捕获  事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在  事件">
+<meta property="og:description" content="今日工作 上午  DOM事件  理解事件流 使用事件处理程序 不同的事件类型   事件冒泡  事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深 的那个节点）接收，然后逐级向上传播到较为不具体的节点（文档）     事件捕获  事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在  事件到达预定目标之前捕获它">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020143939968.png">
 <meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020143953777.png">
 <meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020144046011.png">
-<meta property="og:updated_time" content="2020-10-21T03:27:25.124Z">
+<meta property="og:updated_time" content="2020-10-22T08:26:59.069Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="爱华学习日记">
-<meta name="twitter:description" content="2020-10-20 今日工作 上午  DOM事件  理解事件流 使用事件处理程序 不同的事件类型   事件冒泡  事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深 的那个节点）接收，然后逐级向上传播到较为不具体的节点（文档）     事件捕获  事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在  事件">
+<meta name="twitter:title" content="DOM(续)">
+<meta name="twitter:description" content="今日工作 上午  DOM事件  理解事件流 使用事件处理程序 不同的事件类型   事件冒泡  事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深 的那个节点）接收，然后逐级向上传播到较为不具体的节点（文档）     事件捕获  事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在  事件到达预定目标之前捕获它">
 <meta name="twitter:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020143939968.png">
   
-    <link rel="alternate" href="/blog/atom.xml" title="爱华学习日记" type="application/atom+xml">
+    <link rel="alternate" href="https://github.com/CNLHB" title="爱华学习日记" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -57,7 +58,7 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="https://github.com/CNLHB" title="RSS Feed"></a>
         
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
@@ -74,14 +75,27 @@
   <time datetime="2020-10-22T07:18:40.036Z" itemprop="datePublished">2020-10-22</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/web前端/">web前端</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      DOM(续)
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <p><strong>2020-10-20</strong></p>
-<h3 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h3><ul>
+        <h3 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h3><ul>
 <li><p>上午</p>
 <ul>
 <li><p>DOM事件</p>
@@ -367,20 +381,22 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/22/08DOM事件/" data-id="ckgkjf0m500070sukt73i0idb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/22/08DOM事件/" data-id="ckgkjz9td0006v8uk0956qg3j" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web前端/">web前端</a></li></ul>
+
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/blog/2020/10/22/09/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/blog/2020/10/22/webgl/" id="article-nav-newer" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          (no title)
+          WebGL
         
       </div>
     </a>
@@ -388,7 +404,7 @@
   
     <a href="/blog/2020/10/22/07DOM部分整理/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title"></div>
+      <div class="article-nav-title">DOM</div>
     </a>
   
 </nav>
@@ -401,12 +417,33 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/web前端/">web前端</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Math对象/">Math对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/WebGL/">WebGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web前端/">web前端</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/Math对象/" style="font-size: 10px;">Math对象</a> <a href="/blog/tags/WebGL/" style="font-size: 10px;">WebGL</a> <a href="/blog/tags/web前端/" style="font-size: 20px;">web前端</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -425,6 +462,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/10/22/01Math对象/">Math对象</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/README/">爱华实习日记</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/10/22/emphasisAPI/">H5 API（重点）</a>
           </li>
         
@@ -433,15 +478,7 @@
           </li>
         
           <li>
-            <a href="/blog/2020/10/22/README/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/10/22/09/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/10/22/08DOM事件/">(no title)</a>
+            <a href="/blog/2020/10/22/08DOM事件/">DOM(续)</a>
           </li>
         
       </ul>

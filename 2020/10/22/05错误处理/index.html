@@ -5,26 +5,27 @@
   
 
   
-  <title>爱华学习日记</title>
+  <title>错误处理方式&amp;错误信息收集 | 爱华学习日记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="five 错误处理方式&amp;amp;错误信息收集2020-10-16 在处理异步代码异常时，try catch并不能正确处理异常；如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息 123456try&amp;#123;    setTimeout(()=&amp;gt;&amp;#123;console.log(a)&amp;#125;,100)&amp;#125;catch(err)&amp;#123;    console.">
+  <meta name="description" content="在处理异步代码异常时，try catch并不能正确处理异常；如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息 123456try&amp;#123;    setTimeout(()=&amp;gt;&amp;#123;console.log(a)&amp;#125;,100)&amp;#125;catch(err)&amp;#123;    console.log(err)&amp;#125;   try catch能捕获同步错误">
+<meta name="keywords" content="web前端">
 <meta property="og:type" content="article">
-<meta property="og:title" content="爱华学习日记">
+<meta property="og:title" content="错误处理方式&amp;错误信息收集">
 <meta property="og:url" content="http://yoursite.com/2020/10/22/05错误处理/index.html">
 <meta property="og:site_name" content="爱华学习日记">
-<meta property="og:description" content="five 错误处理方式&amp;amp;错误信息收集2020-10-16 在处理异步代码异常时，try catch并不能正确处理异常；如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息 123456try&amp;#123;    setTimeout(()=&amp;gt;&amp;#123;console.log(a)&amp;#125;,100)&amp;#125;catch(err)&amp;#123;    console.">
+<meta property="og:description" content="在处理异步代码异常时，try catch并不能正确处理异常；如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息 123456try&amp;#123;    setTimeout(()=&amp;gt;&amp;#123;console.log(a)&amp;#125;,100)&amp;#125;catch(err)&amp;#123;    console.log(err)&amp;#125;   try catch能捕获同步错误">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png">
 <meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020103635118.png">
 <meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020104405445.png">
 <meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020105424203.png">
-<meta property="og:updated_time" content="2020-10-21T03:22:13.866Z">
+<meta property="og:updated_time" content="2020-10-22T08:27:50.363Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="爱华学习日记">
-<meta name="twitter:description" content="five 错误处理方式&amp;amp;错误信息收集2020-10-16 在处理异步代码异常时，try catch并不能正确处理异常；如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息 123456try&amp;#123;    setTimeout(()=&amp;gt;&amp;#123;console.log(a)&amp;#125;,100)&amp;#125;catch(err)&amp;#123;    console.">
+<meta name="twitter:title" content="错误处理方式&amp;错误信息收集">
+<meta name="twitter:description" content="在处理异步代码异常时，try catch并不能正确处理异常；如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息 123456try&amp;#123;    setTimeout(()=&amp;gt;&amp;#123;console.log(a)&amp;#125;,100)&amp;#125;catch(err)&amp;#123;    console.log(err)&amp;#125;   try catch能捕获同步错误">
 <meta name="twitter:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png">
   
-    <link rel="alternate" href="/blog/atom.xml" title="爱华学习日记" type="application/atom+xml">
+    <link rel="alternate" href="https://github.com/CNLHB" title="爱华学习日记" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -58,7 +59,7 @@
       </nav>
       <nav id="sub-nav">
         
-          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+          <a id="nav-rss-link" class="nav-icon" href="https://github.com/CNLHB" title="RSS Feed"></a>
         
         <a id="nav-search-btn" class="nav-icon" title="Search"></a>
       </nav>
@@ -75,14 +76,27 @@
   <time datetime="2020-10-22T07:18:39.986Z" itemprop="datePublished">2020-10-22</time>
 </a>
     
+  <div class="article-category">
+    <a class="article-category-link" href="/blog/categories/web前端/">web前端</a>
+  </div>
+
   </div>
   <div class="article-inner">
     
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      错误处理方式&amp;错误信息收集
+    </h1>
+  
+
+      </header>
+    
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="five-错误处理方式-amp-错误信息收集"><a href="#five-错误处理方式-amp-错误信息收集" class="headerlink" title="five 错误处理方式&amp;错误信息收集"></a>five 错误处理方式&amp;错误信息收集</h1><p><strong>2020-10-16</strong></p>
-<h5 id="在处理异步代码异常时，try-catch并不能正确处理异常；"><a href="#在处理异步代码异常时，try-catch并不能正确处理异常；" class="headerlink" title="在处理异步代码异常时，try catch并不能正确处理异常；"></a>在处理异步代码异常时，try catch并不能正确处理异常；</h5><p>如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息</p>
+        <h5 id="在处理异步代码异常时，try-catch并不能正确处理异常；"><a href="#在处理异步代码异常时，try-catch并不能正确处理异常；" class="headerlink" title="在处理异步代码异常时，try catch并不能正确处理异常；"></a>在处理异步代码异常时，try catch并不能正确处理异常；</h5><p>如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(a)&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png" alt="image-20201020102441046"></p>
@@ -109,9 +123,11 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/22/05错误处理/" data-id="ckgkjf0m100050sukqjo1tgx6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/22/05错误处理/" data-id="ckgkjz9ta0004v8ukpaows2yt" class="article-share-link">Share</a>
       
       
+  <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web前端/">web前端</a></li></ul>
+
     </footer>
   </div>
   
@@ -122,7 +138,7 @@
       <strong class="article-nav-caption">Newer</strong>
       <div class="article-nav-title">
         
-          (no title)
+          正则表达式
         
       </div>
     </a>
@@ -130,7 +146,7 @@
   
     <a href="/blog/2020/10/22/04Promise&Callback&Async Function  /" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title"></div>
+      <div class="article-nav-title">Promise 与 Callback 与 Async Function</div>
     </a>
   
 </nav>
@@ -143,12 +159,33 @@
           <aside id="sidebar">
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Categories</h3>
+    <div class="widget">
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/web前端/">web前端</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tags</h3>
+    <div class="widget">
+      <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/Math对象/">Math对象</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/WebGL/">WebGL</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/web前端/">web前端</a></li></ul>
+    </div>
+  </div>
+
 
   
     
+  <div class="widget-wrap">
+    <h3 class="widget-title">Tag Cloud</h3>
+    <div class="widget tagcloud">
+      <a href="/blog/tags/Math对象/" style="font-size: 10px;">Math对象</a> <a href="/blog/tags/WebGL/" style="font-size: 10px;">WebGL</a> <a href="/blog/tags/web前端/" style="font-size: 20px;">web前端</a>
+    </div>
+  </div>
+
   
     
   <div class="widget-wrap">
@@ -167,6 +204,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/10/22/01Math对象/">Math对象</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/22/README/">爱华实习日记</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/10/22/emphasisAPI/">H5 API（重点）</a>
           </li>
         
@@ -175,15 +220,7 @@
           </li>
         
           <li>
-            <a href="/blog/2020/10/22/README/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/10/22/09/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/10/22/08DOM事件/">(no title)</a>
+            <a href="/blog/2020/10/22/08DOM事件/">DOM(续)</a>
           </li>
         
       </ul>
