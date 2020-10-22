@@ -259,6 +259,187 @@
       </tags>
   </entry>
   <entry>
+    <title>Array_Function</title>
+    <url>/blog/2020/10/22/03Array%20&amp;%20Function/</url>
+    <content><![CDATA[<h4 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h4><ul>
+<li><p>上午</p>
+</li>
+<li><ul>
+<li>梳理Array的属性和方法</li>
+</ul>
+</li>
+</ul>
+<p>内容</p>
+<p>Array</p>
+<p>创建</p>
+<ul>
+<li><p>字面量</p>
+</li>
+<li><p>new Array</p>
+</li>
+<li><p>Array.of   与new Array 区别</p>
+</li>
+<li><ul>
+<li><strong>Array.of()</strong> 和 <strong>Array</strong> 构造函数之间的区别在于处理整数参数：<strong>Array.of(7)</strong> 创建一个具有单个元素 <strong>7</strong> 的数组，而 <strong>Array(7)</strong> 创建一个长度为7的空数组（<strong>注意：</strong>这是指一个有7个空位(empty)的数组，而不是由7个undefined组成的数组）。</li>
+</ul>
+</li>
+<li><p>Array.from</p>
+</li>
+<li><ul>
+<li>接受两个参数，第一个参数 数组 or 类数组，第二个参数是函数，接受数组的每一项，处理并返回  </li>
+</ul>
+</li>
+</ul>
+<p>属性</p>
+<ul>
+<li>length</li>
+</ul>
+<p>静态方法</p>
+<ul>
+<li>Array.from()</li>
+<li>Array.isArray()</li>
+<li>Array.of()</li>
+</ul>
+<p>实例方法</p>
+<ul>
+<li><p>遍历</p>
+</li>
+<li><ul>
+<li>Array.prototype.forEach()</li>
+<li>Array.prototype.reduce()</li>
+<li>Array.prototype.reduceRight()</li>
+<li>Array.prototype.some()</li>
+<li>Array.prototype.every()</li>
+</ul>
+</li>
+<li><p>衍生，返回新数组</p>
+</li>
+<li><ul>
+<li>Array.prototype.concat()</li>
+<li>Array.prototype.slice()</li>
+<li>Array.prototype.flat()</li>
+<li>Array.prototype.flatMap()</li>
+<li>Array.prototype.filter()</li>
+<li>Array.prototype.map()</li>
+</ul>
+</li>
+<li><p>查找 </p>
+</li>
+<li><ul>
+<li>Array.prototype.find() 传入一个函数，返回满足条件的第一个值</li>
+<li>Array.prototype.findIndex()  传入一个函数，返回满足条件的第一个值的索引</li>
+<li>Array.prototype.includes()  判断传入的值在数组中是否存在</li>
+<li>Array.prototype.indexOf()</li>
+<li>Array.prototype.lastIndexOf()</li>
+</ul>
+</li>
+<li><p>修改原数组</p>
+</li>
+<li><ul>
+<li>Array.prototype.fill()</li>
+<li>Array.prototype.pop()</li>
+<li>Array.prototype.push()</li>
+<li>Array.prototype.shift()</li>
+<li>Array.prototype.splice()</li>
+<li>Array.prototype.unshift()</li>
+<li>Array.prototype.reverse() </li>
+<li>Array.prototype.sort()</li>
+<li>Array.prototype.copyWithin()</li>
+</ul>
+</li>
+<li><p>转字符串</p>
+</li>
+<li><ul>
+<li>Array.prototype.join()</li>
+</ul>
+</li>
+<li><p>类型数组</p>
+</li>
+<li><ul>
+<li>Int8Array</li>
+<li>Uint8Array</li>
+<li>Uint8ClampedArray  在处理像素时可以使用</li>
+</ul>
+</li>
+<li><p>…类数组</p>
+</li>
+<li><ul>
+<li>HTMLCollectionarguments…</li>
+</ul>
+<p>上述方法不能够处理需求时，可以用自定义函数处理，比如需要在索引80后重新到索引60,(for循环)</p>
+</li>
+<li><p>下午</p>
+</li>
+<li><ul>
+<li>梳理Function的属性和方法</li>
+</ul>
+</li>
+</ul>
+<p>内容</p>
+<p>Function</p>
+<p>创建</p>
+<ul>
+<li><ul>
+<li>函数声明 function(){}  存在函数声明整体提升</li>
+<li>函数表达式 let fn = function(){}</li>
+<li>new  Function(参数…，函数体字符串)</li>
+</ul>
+</li>
+</ul>
+<p>属性</p>
+<ul>
+<li><ul>
+<li></li>
+</ul>
+</li>
+</ul>
+<p>实例属性</p>
+<ul>
+<li><ul>
+<li>Arguments  传入的实参，类数组</li>
+<li>Length 形参个数</li>
+<li>Name 函数名</li>
+<li>displayName 函数的显示名称  可以被定义，返回定义函数名</li>
+</ul>
+</li>
+</ul>
+<p>实例方法</p>
+<ul>
+<li><p>改变函数作用域（this指向）</p>
+</li>
+<li><ul>
+<li>call  调用具有给定this值和参数的函数。</li>
+<li>Apply 调用具有给定this值和参数的函数。参数形式为数组</li>
+<li>Bind 创建一个新函数，该新函数在被调用时将其this关键字设置为所提供的值，并且在调用新函数时所提供的任何参数之前均具有给定的参数序列。</li>
+</ul>
+</li>
+</ul>
+<p>静态方法</p>
+<p>今日总结</p>
+<ol>
+<li>学习笔记梳理</li>
+<li>题目分享</li>
+<li>技术分享</li>
+<li>code验证api</li>
+</ol>
+<p>明日计划</p>
+<ul>
+<li><p>1、梳理Promise与Callback</p>
+</li>
+<li><p>2、Async Fn</p>
+</li>
+<li><p>3、RegExp</p>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Promise 与 Callback 与 Async Function</title>
     <url>/blog/2020/10/22/04Promise&amp;Callback&amp;Async%20Function%20%20/</url>
     <content><![CDATA[<h3 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h3><ul>
@@ -363,119 +544,6 @@
 <figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resouceErrorHandle</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> srcElement = e.target||e.srcElement;</span><br><span class="line">    <span class="keyword">if</span> (srcElement === <span class="built_in">window</span>) &#123;</span><br><span class="line">        <span class="comment">// 全局错误</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"全局错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"message"</span>, e.message);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 元素错误，比如引用资源报错</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"元素错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"tagname"</span>, srcElement.tagName);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"src"</span>, srcElement.src);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"error捕获网络请求错误"</span>); <span class="comment">// 捕获错误</span></span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'error'</span>,resouceErrorHandle,<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
 
 <p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020105424203.png" alt="image-20201020105424203"></p>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>web前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DOM</title>
-    <url>/blog/2020/10/22/07DOM%E9%83%A8%E5%88%86%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><p>​    Level 1,2,3</p>
-<h4 id="节点与节点树"><a href="#节点与节点树" class="headerlink" title="节点与节点树"></a>节点与节点树</h4><h5 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h5><ul>
-<li>​    Node类型</li>
-<li>​    Document类型</li>
-<li>​    DocumentType类型</li>
-<li>​    Element类型</li>
-<li>​    Attribute类型</li>
-<li>​    Text类型</li>
-<li>​    Comment类型</li>
-<li>​    DocumentFragment类型</li>
-</ul>
-<h5 id="元素"><a href="#元素" class="headerlink" title="元素"></a>元素</h5><p>​    <strong>增删改查接口</strong></p>
-<ul>
-<li><p>节点创建型API</p>
-<ul>
-<li>createElement</li>
-<li>createTextNode</li>
-<li>cloneNode</li>
-<li>createDocumentFragment</li>
-</ul>
-</li>
-<li><p>页面修改形API（包括删除和添加）（删）（改）</p>
-<ul>
-<li>appendChild(追加为子元素)</li>
-<li>insertBefore(插入前面)</li>
-<li>removeChild(删除子元素)</li>
-<li>replaceChild(替换子元素)</li>
-</ul>
-</li>
-<li><p>节点查询型API(查)</p>
-<ul>
-<li>document.querySelector</li>
-<li>document.querySelectorAll</li>
-<li>document.getElementById</li>
-<li>document.getElementsByTagName</li>
-<li>document.getElementsByName</li>
-<li>document.getElementsByClassName</li>
-<li>elementFromPoint()  //判断(x,y)当前位置是否有元素</li>
-</ul>
-</li>
-<li><p>元素属性型操作（属性节点的操作）</p>
-<ul>
-<li><p>getAttribute()  (获取属性)</p>
-</li>
-<li><p>createAttribute()  (创建属性)</p>
-</li>
-<li><p>setAttribute()  (设置属性)</p>
-</li>
-<li><p>romoveAttribute()  (删除属性)</p>
-</li>
-<li><p>element.attributes（将属性生成数组对象）</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="操作样式表"><a href="#操作样式表" class="headerlink" title="操作样式表"></a>操作样式表</h4><h4 id="操作CSS"><a href="#操作CSS" class="headerlink" title="操作CSS"></a>操作CSS</h4><p>dom.style.xxx</p>
-<p>在样式规则上重新定义规则</p>
-<p>图层概念</p>
-<h3 id="XML-DOM"><a href="#XML-DOM" class="headerlink" title="XML DOM"></a>XML DOM</h3><h3 id="SVG-DOM"><a href="#SVG-DOM" class="headerlink" title="SVG DOM"></a>SVG DOM</h3><h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><ul>
-<li>window对象——BOM核心<ul>
-<li>window.alert(‘提示信息’)</li>
-<li>window.confirm(‘确认信息’)</li>
-<li>window.prompt(‘弹出输入框’)</li>
-<li>window.open(‘url地址’, ‘_black或_self’, ‘新窗口大小’)；     // black：新开一个空白的窗口打开链接，self在当前框架中打开链接</li>
-<li>window.close()  // 关闭当前页</li>
-<li>setTimeout(函数， 时间)  // 定时器，只执行一次</li>
-<li>clearTimeout(定时器名称) // 清除计时器</li>
-<li>setInterval(函数，时间)   // 定时器，无限执行</li>
-<li>clearInterval()   // 停止执行 setInterval()</li>
-</ul>
-</li>
-<li>location对象<ul>
-<li>localtion.href = ‘url地址’;      // 跳转到这个url地址</li>
-<li>localtion.hostname     // 返回 web 主机名</li>
-<li>localtion.pathname      // 返回当前页面的路径和文件名</li>
-<li>localtion.port       // 返回 web 主机的端口</li>
-<li>localtion.protocol   // 返回页面使用的web协议，http||https</li>
-</ul>
-</li>
-<li>navigator对象 —— 获取浏览器的所有信息<ul>
-<li>navigator.appCodeName  // 返回浏览器的代码名</li>
-<li>navigator.appMinorVersion   // 返回浏览器的次级版本</li>
-<li>navigator.appName  // 返回浏览器的名称</li>
-<li>navigator.appVersion  // 返回浏览器的平台和版本信息</li>
-<li>navigator.browserLanguage   // 返回当前浏览器的语言</li>
-<li>navigator.userAgent    // 返回由客户机发送服务器的 user-agent 头部的值。</li>
-</ul>
-</li>
-<li>screen对象<ul>
-<li>screen.height   // 获取整个屏幕的高</li>
-<li>screen.width    // 获取整个屏幕的宽</li>
-<li>screen.availiHeight     // 整个屏幕的高减去系统部件的高（可用的屏幕高度）</li>
-<li>screen.availWidth     // 整个屏幕的宽减去系统部件的宽（可用的屏幕宽度）</li>
-</ul>
-</li>
-<li>history对象 包含浏览器的历史<ul>
-<li>history.back();     // 返回上一页</li>
-<li>history.forward()   // 前进下一页</li>
-<li>history.go(‘参数’);   // -1 表示上一页，1表示下一页</li>
-</ul>
-</li>
-</ul>
 ]]></content>
       <categories>
         <category>web前端</category>
@@ -695,187 +763,6 @@
 <li>replace      [Symbol.replace]</li>
 <li>search        [Symbol.search]</li>
 <li>split          [Symbol.split]</li>
-</ul>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>web前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Array_Function</title>
-    <url>/blog/2020/10/22/03Array%20&amp;%20Function/</url>
-    <content><![CDATA[<h4 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h4><ul>
-<li><p>上午</p>
-</li>
-<li><ul>
-<li>梳理Array的属性和方法</li>
-</ul>
-</li>
-</ul>
-<p>内容</p>
-<p>Array</p>
-<p>创建</p>
-<ul>
-<li><p>字面量</p>
-</li>
-<li><p>new Array</p>
-</li>
-<li><p>Array.of   与new Array 区别</p>
-</li>
-<li><ul>
-<li><strong>Array.of()</strong> 和 <strong>Array</strong> 构造函数之间的区别在于处理整数参数：<strong>Array.of(7)</strong> 创建一个具有单个元素 <strong>7</strong> 的数组，而 <strong>Array(7)</strong> 创建一个长度为7的空数组（<strong>注意：</strong>这是指一个有7个空位(empty)的数组，而不是由7个undefined组成的数组）。</li>
-</ul>
-</li>
-<li><p>Array.from</p>
-</li>
-<li><ul>
-<li>接受两个参数，第一个参数 数组 or 类数组，第二个参数是函数，接受数组的每一项，处理并返回  </li>
-</ul>
-</li>
-</ul>
-<p>属性</p>
-<ul>
-<li>length</li>
-</ul>
-<p>静态方法</p>
-<ul>
-<li>Array.from()</li>
-<li>Array.isArray()</li>
-<li>Array.of()</li>
-</ul>
-<p>实例方法</p>
-<ul>
-<li><p>遍历</p>
-</li>
-<li><ul>
-<li>Array.prototype.forEach()</li>
-<li>Array.prototype.reduce()</li>
-<li>Array.prototype.reduceRight()</li>
-<li>Array.prototype.some()</li>
-<li>Array.prototype.every()</li>
-</ul>
-</li>
-<li><p>衍生，返回新数组</p>
-</li>
-<li><ul>
-<li>Array.prototype.concat()</li>
-<li>Array.prototype.slice()</li>
-<li>Array.prototype.flat()</li>
-<li>Array.prototype.flatMap()</li>
-<li>Array.prototype.filter()</li>
-<li>Array.prototype.map()</li>
-</ul>
-</li>
-<li><p>查找 </p>
-</li>
-<li><ul>
-<li>Array.prototype.find() 传入一个函数，返回满足条件的第一个值</li>
-<li>Array.prototype.findIndex()  传入一个函数，返回满足条件的第一个值的索引</li>
-<li>Array.prototype.includes()  判断传入的值在数组中是否存在</li>
-<li>Array.prototype.indexOf()</li>
-<li>Array.prototype.lastIndexOf()</li>
-</ul>
-</li>
-<li><p>修改原数组</p>
-</li>
-<li><ul>
-<li>Array.prototype.fill()</li>
-<li>Array.prototype.pop()</li>
-<li>Array.prototype.push()</li>
-<li>Array.prototype.shift()</li>
-<li>Array.prototype.splice()</li>
-<li>Array.prototype.unshift()</li>
-<li>Array.prototype.reverse() </li>
-<li>Array.prototype.sort()</li>
-<li>Array.prototype.copyWithin()</li>
-</ul>
-</li>
-<li><p>转字符串</p>
-</li>
-<li><ul>
-<li>Array.prototype.join()</li>
-</ul>
-</li>
-<li><p>类型数组</p>
-</li>
-<li><ul>
-<li>Int8Array</li>
-<li>Uint8Array</li>
-<li>Uint8ClampedArray  在处理像素时可以使用</li>
-</ul>
-</li>
-<li><p>…类数组</p>
-</li>
-<li><ul>
-<li>HTMLCollectionarguments…</li>
-</ul>
-<p>上述方法不能够处理需求时，可以用自定义函数处理，比如需要在索引80后重新到索引60,(for循环)</p>
-</li>
-<li><p>下午</p>
-</li>
-<li><ul>
-<li>梳理Function的属性和方法</li>
-</ul>
-</li>
-</ul>
-<p>内容</p>
-<p>Function</p>
-<p>创建</p>
-<ul>
-<li><ul>
-<li>函数声明 function(){}  存在函数声明整体提升</li>
-<li>函数表达式 let fn = function(){}</li>
-<li>new  Function(参数…，函数体字符串)</li>
-</ul>
-</li>
-</ul>
-<p>属性</p>
-<ul>
-<li><ul>
-<li></li>
-</ul>
-</li>
-</ul>
-<p>实例属性</p>
-<ul>
-<li><ul>
-<li>Arguments  传入的实参，类数组</li>
-<li>Length 形参个数</li>
-<li>Name 函数名</li>
-<li>displayName 函数的显示名称  可以被定义，返回定义函数名</li>
-</ul>
-</li>
-</ul>
-<p>实例方法</p>
-<ul>
-<li><p>改变函数作用域（this指向）</p>
-</li>
-<li><ul>
-<li>call  调用具有给定this值和参数的函数。</li>
-<li>Apply 调用具有给定this值和参数的函数。参数形式为数组</li>
-<li>Bind 创建一个新函数，该新函数在被调用时将其this关键字设置为所提供的值，并且在调用新函数时所提供的任何参数之前均具有给定的参数序列。</li>
-</ul>
-</li>
-</ul>
-<p>静态方法</p>
-<p>今日总结</p>
-<ol>
-<li>学习笔记梳理</li>
-<li>题目分享</li>
-<li>技术分享</li>
-<li>code验证api</li>
-</ol>
-<p>明日计划</p>
-<ul>
-<li><p>1、梳理Promise与Callback</p>
-</li>
-<li><p>2、Async Fn</p>
-</li>
-<li><p>3、RegExp</p>
-</li>
 </ul>
 ]]></content>
       <categories>
@@ -1179,6 +1066,119 @@
       </tags>
   </entry>
   <entry>
+    <title>DOM</title>
+    <url>/blog/2020/10/22/07DOM%E9%83%A8%E5%88%86%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><p>​    Level 1,2,3</p>
+<h4 id="节点与节点树"><a href="#节点与节点树" class="headerlink" title="节点与节点树"></a>节点与节点树</h4><h5 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h5><ul>
+<li>​    Node类型</li>
+<li>​    Document类型</li>
+<li>​    DocumentType类型</li>
+<li>​    Element类型</li>
+<li>​    Attribute类型</li>
+<li>​    Text类型</li>
+<li>​    Comment类型</li>
+<li>​    DocumentFragment类型</li>
+</ul>
+<h5 id="元素"><a href="#元素" class="headerlink" title="元素"></a>元素</h5><p>​    <strong>增删改查接口</strong></p>
+<ul>
+<li><p>节点创建型API</p>
+<ul>
+<li>createElement</li>
+<li>createTextNode</li>
+<li>cloneNode</li>
+<li>createDocumentFragment</li>
+</ul>
+</li>
+<li><p>页面修改形API（包括删除和添加）（删）（改）</p>
+<ul>
+<li>appendChild(追加为子元素)</li>
+<li>insertBefore(插入前面)</li>
+<li>removeChild(删除子元素)</li>
+<li>replaceChild(替换子元素)</li>
+</ul>
+</li>
+<li><p>节点查询型API(查)</p>
+<ul>
+<li>document.querySelector</li>
+<li>document.querySelectorAll</li>
+<li>document.getElementById</li>
+<li>document.getElementsByTagName</li>
+<li>document.getElementsByName</li>
+<li>document.getElementsByClassName</li>
+<li>elementFromPoint()  //判断(x,y)当前位置是否有元素</li>
+</ul>
+</li>
+<li><p>元素属性型操作（属性节点的操作）</p>
+<ul>
+<li><p>getAttribute()  (获取属性)</p>
+</li>
+<li><p>createAttribute()  (创建属性)</p>
+</li>
+<li><p>setAttribute()  (设置属性)</p>
+</li>
+<li><p>romoveAttribute()  (删除属性)</p>
+</li>
+<li><p>element.attributes（将属性生成数组对象）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="操作样式表"><a href="#操作样式表" class="headerlink" title="操作样式表"></a>操作样式表</h4><h4 id="操作CSS"><a href="#操作CSS" class="headerlink" title="操作CSS"></a>操作CSS</h4><p>dom.style.xxx</p>
+<p>在样式规则上重新定义规则</p>
+<p>图层概念</p>
+<h3 id="XML-DOM"><a href="#XML-DOM" class="headerlink" title="XML DOM"></a>XML DOM</h3><h3 id="SVG-DOM"><a href="#SVG-DOM" class="headerlink" title="SVG DOM"></a>SVG DOM</h3><h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><ul>
+<li>window对象——BOM核心<ul>
+<li>window.alert(‘提示信息’)</li>
+<li>window.confirm(‘确认信息’)</li>
+<li>window.prompt(‘弹出输入框’)</li>
+<li>window.open(‘url地址’, ‘_black或_self’, ‘新窗口大小’)；     // black：新开一个空白的窗口打开链接，self在当前框架中打开链接</li>
+<li>window.close()  // 关闭当前页</li>
+<li>setTimeout(函数， 时间)  // 定时器，只执行一次</li>
+<li>clearTimeout(定时器名称) // 清除计时器</li>
+<li>setInterval(函数，时间)   // 定时器，无限执行</li>
+<li>clearInterval()   // 停止执行 setInterval()</li>
+</ul>
+</li>
+<li>location对象<ul>
+<li>localtion.href = ‘url地址’;      // 跳转到这个url地址</li>
+<li>localtion.hostname     // 返回 web 主机名</li>
+<li>localtion.pathname      // 返回当前页面的路径和文件名</li>
+<li>localtion.port       // 返回 web 主机的端口</li>
+<li>localtion.protocol   // 返回页面使用的web协议，http||https</li>
+</ul>
+</li>
+<li>navigator对象 —— 获取浏览器的所有信息<ul>
+<li>navigator.appCodeName  // 返回浏览器的代码名</li>
+<li>navigator.appMinorVersion   // 返回浏览器的次级版本</li>
+<li>navigator.appName  // 返回浏览器的名称</li>
+<li>navigator.appVersion  // 返回浏览器的平台和版本信息</li>
+<li>navigator.browserLanguage   // 返回当前浏览器的语言</li>
+<li>navigator.userAgent    // 返回由客户机发送服务器的 user-agent 头部的值。</li>
+</ul>
+</li>
+<li>screen对象<ul>
+<li>screen.height   // 获取整个屏幕的高</li>
+<li>screen.width    // 获取整个屏幕的宽</li>
+<li>screen.availiHeight     // 整个屏幕的高减去系统部件的高（可用的屏幕高度）</li>
+<li>screen.availWidth     // 整个屏幕的宽减去系统部件的宽（可用的屏幕宽度）</li>
+</ul>
+</li>
+<li>history对象 包含浏览器的历史<ul>
+<li>history.back();     // 返回上一页</li>
+<li>history.forward()   // 前进下一页</li>
+<li>history.go(‘参数’);   // -1 表示上一页，1表示下一页</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>爱华实习日记</title>
     <url>/blog/2020/10/22/README/</url>
     <content><![CDATA[<blockquote>
@@ -1187,10 +1187,9 @@
 ]]></content>
   </entry>
   <entry>
-    <title>firstblog</title>
-    <url>/blog/2019/07/10/firstblog/</url>
-    <content><![CDATA[<h1 id="Welcome-to-Hexo"><a href="#Welcome-to-Hexo" class="headerlink" title="Welcome to Hexo"></a>Welcome to Hexo</h1><p>##Wel come souhu</p>
-]]></content>
+    <title>ceshi</title>
+    <url>/blog/2020/10/22/ceshi/</url>
+    <content><![CDATA[]]></content>
   </entry>
   <entry>
     <title>H5 API（重点）</title>
@@ -1225,21 +1224,9 @@
 ]]></content>
   </entry>
   <entry>
-    <title>Hello World</title>
-    <url>/blog/2019/07/10/hello-world/</url>
-    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+    <title>firstblog</title>
+    <url>/blog/2019/07/10/firstblog/</url>
+    <content><![CDATA[<h1 id="Welcome-to-Hexo"><a href="#Welcome-to-Hexo" class="headerlink" title="Welcome to Hexo"></a>Welcome to Hexo</h1><p>##Wel come souhu</p>
 ]]></content>
   </entry>
   <entry>
@@ -1297,5 +1284,23 @@
         <tag>web前端</tag>
         <tag>WebGL</tag>
       </tags>
+  </entry>
+  <entry>
+    <title>Hello World</title>
+    <url>/blog/2019/07/10/hello-world/</url>
+    <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
+
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>
+]]></content>
   </entry>
 </search>
