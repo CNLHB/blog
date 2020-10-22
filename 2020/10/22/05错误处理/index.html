@@ -15,15 +15,15 @@
 <meta property="og:site_name" content="爱华学习日记">
 <meta property="og:description" content="在处理异步代码异常时，try catch并不能正确处理异常；如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息 123456try&amp;#123;    setTimeout(()=&amp;gt;&amp;#123;console.log(a)&amp;#125;,100)&amp;#125;catch(err)&amp;#123;    console.log(err)&amp;#125;   try catch能捕获同步错误">
 <meta property="og:locale" content="default">
-<meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png">
-<meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020103635118.png">
-<meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020104405445.png">
-<meta property="og:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020105424203.png">
+<meta property="og:image" content="http://yoursite.com/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png">
+<meta property="og:image" content="http://yoursite.com/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020103635118.png">
+<meta property="og:image" content="http://yoursite.com/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020104405445.png">
+<meta property="og:image" content="http://yoursite.com/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020105424203.png">
 <meta property="og:updated_time" content="2020-10-22T08:27:50.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="错误处理方式&amp;错误信息收集">
 <meta name="twitter:description" content="在处理异步代码异常时，try catch并不能正确处理异常；如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息 123456try&amp;#123;    setTimeout(()=&amp;gt;&amp;#123;console.log(a)&amp;#125;,100)&amp;#125;catch(err)&amp;#123;    console.log(err)&amp;#125;   try catch能捕获同步错误">
-<meta name="twitter:image" content="c:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png">
+<meta name="twitter:image" content="http://yoursite.com/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png">
   
     <link rel="alternate" href="https://github.com/CNLHB" title="爱华学习日记" type="application/atom+xml">
   
@@ -116,31 +116,31 @@
         <h5 id="在处理异步代码异常时，try-catch并不能正确处理异常；"><a href="#在处理异步代码异常时，try-catch并不能正确处理异常；" class="headerlink" title="在处理异步代码异常时，try catch并不能正确处理异常；"></a>在处理异步代码异常时，try catch并不能正确处理异常；</h5><p>如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(a)&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png" alt="image-20201020102441046"></p>
+<p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png" alt="image-20201020102441046"></p>
 <p><strong>try catch能捕获同步错误，异步错误和语法不能</strong></p>
 <h5 id="用winow-onerror处理异步错误"><a href="#用winow-onerror处理异步错误" class="headerlink" title="用winow.onerror处理异步错误"></a>用winow.onerror处理异步错误</h5><blockquote>
 <p> window.onerror 放在所有脚本之前，这样才能对语法异常和运行异常进行处理。window.onerror捕获不到资源加载错误和promise的reject</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(a)&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;    </span><br><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020103635118.png" alt="image-20201020103635118"></p>
+<p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020103635118.png" alt="image-20201020103635118"></p>
 <p><strong>window.onerror能够捕获到异步错误信息</strong></p>
 <p><strong>用window.addEventListener(‘unhandledrejection’) 捕获未能正确处理的Promise Rejected</strong></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rejectHandle</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'unhandledrejection'</span>,rejectHandle)</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020104405445.png" alt="image-20201020104405445"></p>
+<p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020104405445.png" alt="image-20201020104405445"></p>
 <p><strong>window.addEventListener(‘error’) 处理资源加载错误</strong></p>
 <blockquote>
 <p>需要在捕获阶段处理addEventListener第三个参数设置为true</p>
 </blockquote>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resouceErrorHandle</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> srcElement = e.target||e.srcElement;</span><br><span class="line">    <span class="keyword">if</span> (srcElement === <span class="built_in">window</span>) &#123;</span><br><span class="line">        <span class="comment">// 全局错误</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"全局错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"message"</span>, e.message);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 元素错误，比如引用资源报错</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"元素错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"tagname"</span>, srcElement.tagName);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"src"</span>, srcElement.src);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"error捕获网络请求错误"</span>); <span class="comment">// 捕获错误</span></span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'error'</span>,resouceErrorHandle,<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
 
-<p><img src="C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020105424203.png" alt="image-20201020105424203"></p>
+<p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020105424203.png" alt="image-20201020105424203"></p>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/22/05错误处理/" data-id="ckgkl2wtk00063gukw47k6qwn" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/22/05错误处理/" data-id="ckgklkm2l0006m4ukaej0slws" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web前端/">web前端</a></li></ul>
