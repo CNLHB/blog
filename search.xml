@@ -440,466 +440,6 @@
       </tags>
   </entry>
   <entry>
-    <title>错误处理方式&amp;错误信息收集</title>
-    <url>/blog/2020/10/22/05%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/</url>
-    <content><![CDATA[<h5 id="在处理异步代码异常时，try-catch并不能正确处理异常；"><a href="#在处理异步代码异常时，try-catch并不能正确处理异常；" class="headerlink" title="在处理异步代码异常时，try catch并不能正确处理异常；"></a>在处理异步代码异常时，try catch并不能正确处理异常；</h5><p>如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(a)&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png" alt="image-20201020102441046"></p>
-<p><strong>try catch能捕获同步错误，异步错误和语法不能</strong></p>
-<h5 id="用winow-onerror处理异步错误"><a href="#用winow-onerror处理异步错误" class="headerlink" title="用winow.onerror处理异步错误"></a>用winow.onerror处理异步错误</h5><blockquote>
-<p> window.onerror 放在所有脚本之前，这样才能对语法异常和运行异常进行处理。window.onerror捕获不到资源加载错误和promise的reject</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(a)&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;    </span><br><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020103635118.png" alt="image-20201020103635118"></p>
-<p><strong>window.onerror能够捕获到异步错误信息</strong></p>
-<p><strong>用window.addEventListener(‘unhandledrejection’) 捕获未能正确处理的Promise Rejected</strong></p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rejectHandle</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'unhandledrejection'</span>,rejectHandle)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020104405445.png" alt="image-20201020104405445"></p>
-<p><strong>window.addEventListener(‘error’) 处理资源加载错误</strong></p>
-<blockquote>
-<p>需要在捕获阶段处理addEventListener第三个参数设置为true</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resouceErrorHandle</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> srcElement = e.target||e.srcElement;</span><br><span class="line">    <span class="keyword">if</span> (srcElement === <span class="built_in">window</span>) &#123;</span><br><span class="line">        <span class="comment">// 全局错误</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"全局错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"message"</span>, e.message);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 元素错误，比如引用资源报错</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"元素错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"tagname"</span>, srcElement.tagName);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"src"</span>, srcElement.src);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"error捕获网络请求错误"</span>); <span class="comment">// 捕获错误</span></span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'error'</span>,resouceErrorHandle,<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
-
-<p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020105424203.png" alt="image-20201020105424203"></p>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>web前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>正则表达式</title>
-    <url>/blog/2020/10/22/06%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
-    <content><![CDATA[<blockquote>
-<p> 正则相关符号</p>
-</blockquote>
-<table>
-<thead>
-<tr>
-<th>\cx</th>
-<th>匹配由x指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 ‘c’ 字符。</th>
-</tr>
-</thead>
-<tbody><tr>
-<td>\f</td>
-<td>匹配一个换页符。等价于 \x0c 和 \cL。</td>
-</tr>
-<tr>
-<td>\n</td>
-<td>匹配一个换行符。等价于 \x0a 和 \cJ。</td>
-</tr>
-<tr>
-<td>\r</td>
-<td>匹配一个回车符。等价于 \x0d 和 \cM。</td>
-</tr>
-<tr>
-<td>\s</td>
-<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。注意 Unicode 正则表达式会匹配全角空格符。</td>
-</tr>
-<tr>
-<td>\S</td>
-<td>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</td>
-</tr>
-<tr>
-<td>\t</td>
-<td>匹配一个制表符。等价于 \x09 和 \cI。</td>
-</tr>
-<tr>
-<td>\v</td>
-<td>匹配一个垂直制表符。等价于 \x0b 和 \cK。</td>
-</tr>
-</tbody></table>
-<table>
-<thead>
-<tr>
-<th align="left">特别字符</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">$</td>
-<td align="left">匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline 属性，则 $ 也匹配 ‘\n’ 或 ‘\r’。要匹配 $ 字符本身，请使用 $。</td>
-</tr>
-<tr>
-<td align="left">( )</td>
-<td align="left">标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 ( 和 )。</td>
-</tr>
-<tr>
-<td align="left">*</td>
-<td align="left">匹配前面的子表达式零次或多次。要匹配 * 字符，请使用 *。</td>
-</tr>
-<tr>
-<td align="left">+</td>
-<td align="left">匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 +。</td>
-</tr>
-<tr>
-<td align="left">.</td>
-<td align="left">匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 . 。</td>
-</tr>
-<tr>
-<td align="left">[</td>
-<td align="left">标记一个中括号表达式的开始。要匹配 [，请使用 [。</td>
-</tr>
-<tr>
-<td align="left">?</td>
-<td align="left">匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 ?。</td>
-</tr>
-<tr>
-<td align="left">\</td>
-<td align="left">将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， ‘n’ 匹配字符 ‘n’。’\n’ 匹配换行符。序列 ‘\‘ 匹配 “&quot;，而 ‘(‘ 则匹配 “(“。</td>
-</tr>
-<tr>
-<td align="left">^</td>
-<td align="left">匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合。要匹配 ^ 字符本身，请使用 ^。</td>
-</tr>
-<tr>
-<td align="left">{</td>
-<td align="left">标记限定符表达式的开始。要匹配 {，请使用 {。</td>
-</tr>
-<tr>
-<td align="left">|</td>
-<td align="left">指明两项之间的一个选择。要匹配 |，请使用 |。</td>
-</tr>
-</tbody></table>
-<h2 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h2><p>限定符用来指定正则表达式的一个给定组件必须要出现多少次才能满足匹配。有 <strong>*** 或 **+</strong> 或 <strong>?</strong> 或 <strong>{n}</strong> 或 <strong>{n,}</strong> 或 <strong>{n,m}</strong> 共6种。</p>
-<p>正则表达式的限定符有：</p>
-<table>
-<thead>
-<tr>
-<th align="left">字符</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">*</td>
-<td align="left">匹配前面的子表达式零次或多次。例如，zo* 能匹配 “z” 以及 “zoo”。* 等价于{0,}。</td>
-</tr>
-<tr>
-<td align="left">+</td>
-<td align="left">匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
-</tr>
-<tr>
-<td align="left">?</td>
-<td align="left">匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 、 “does” 中的 “does” 、 “doxy” 中的 “do” 。? 等价于 {0,1}。</td>
-</tr>
-<tr>
-<td align="left">{n}</td>
-<td align="left">n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
-</tr>
-<tr>
-<td align="left">{n,}</td>
-<td align="left">n 是一个非负整数。至少匹配n 次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td>
-</tr>
-<tr>
-<td align="left">{n,m}</td>
-<td align="left">m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。</td>
-</tr>
-</tbody></table>
-<p>以下正则表达式匹配一个正整数，<strong>[1-9]</strong>设置第一个数字不是 0，<strong>[0-9]*</strong> 表示任意多个数字：</p>
-<h2 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h2><p>定位符使您能够将正则表达式固定到行首或行尾。它们还使您能够创建这样的正则表达式，这些正则表达式出现在一个单词内、在一个单词的开头或者一个单词的结尾。</p>
-<p>定位符用来描述字符串或单词的边界，<strong>^</strong> 和 <strong>$</strong> 分别指字符串的开始与结束，<strong>\b</strong> 描述单词的前或后边界，<strong>\B</strong> 表示非单词边界。</p>
-<p>正则表达式的定位符有：</p>
-<table>
-<thead>
-<tr>
-<th align="left">字符</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">^</td>
-<td align="left">匹配输入字符串开始的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \n 或 \r 之后的位置匹配。</td>
-</tr>
-<tr>
-<td align="left">$</td>
-<td align="left">匹配输入字符串结尾的位置。如果设置了 RegExp 对象的 Multiline 属性，$ 还会与 \n 或 \r 之前的位置匹配。</td>
-</tr>
-<tr>
-<td align="left">\b</td>
-<td align="left">匹配一个单词边界，即字与空格间的位置。</td>
-</tr>
-<tr>
-<td align="left">\B</td>
-<td align="left">非单词边界匹配。</td>
-</tr>
-</tbody></table>
-<h5 id="正向预查"><a href="#正向预查" class="headerlink" title="正向预查"></a>正向预查</h5><table>
-<thead>
-<tr>
-<th align="left">字符</th>
-<th align="left">描述</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="left">(?=pattern)</td>
-<td align="left">后面跟着匹配的字符，但不包括</td>
-</tr>
-<tr>
-<td align="left">(?!pattern)</td>
-<td align="left">后面跟着不是匹配的字符</td>
-</tr>
-<tr>
-<td align="left">(?&lt;=pattern)</td>
-<td align="left">前面跟着匹配的字符，但不包括</td>
-</tr>
-<tr>
-<td align="left">(?&lt;!pattern)</td>
-<td align="left">前面跟着不是匹配的字符</td>
-</tr>
-</tbody></table>
-<h5 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h5><blockquote>
-<p> 引用子匹配串匹配的字符</p>
-</blockquote>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"Is is the cost of of gasoline going up up"</span>;</span><br><span class="line"><span class="keyword">var</span> patt1 = <span class="regexp">/\b([a-z]+) \1\b/ig</span>;</span><br><span class="line"><span class="built_in">document</span>.write(str.match(patt1));</span><br></pre></td></tr></table></figure>
-
-<p><strong>创建一个正则表达式</strong></p>
-<ul>
-<li>第一种方法：var reg = /pattern/;</li>
-<li>第二种方法：var reg = RegExp(pattern [, flags]) || new RegExp(‘pattern’ [, flags]);</li>
-</ul>
-<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><h5 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h5><ul>
-<li>RegExp.$1-$9</li>
-<li>RegExp.input ($_)</li>
-<li>RegExp.lastMatch ($&amp;)</li>
-<li>RegExp.lastParen ($+)</li>
-<li>。。。</li>
-</ul>
-<h5 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h5><ul>
-<li>exec()方法在一个指定字符串中执行一个搜索匹配。返回一个结果数组或 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null" target="_blank" rel="noopener"><code>null</code></a>。</li>
-<li>test() 方法执行一个检索，用来查看正则表达式与指定的字符串是否匹配。返回 <code>true</code> 或 <code>false</code>。</li>
-<li>[Symbol.match]</li>
-<li>[Symbol.replace]</li>
-<li>[Symbol.search]</li>
-<li>[Symbol.split]</li>
-</ul>
-<p>字符串相关的4个方法</p>
-<ul>
-<li>match          [Symbol.match]</li>
-<li>replace      [Symbol.replace]</li>
-<li>search        [Symbol.search]</li>
-<li>split          [Symbol.split]</li>
-</ul>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>web前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>DOM</title>
-    <url>/blog/2020/10/22/07DOM%E9%83%A8%E5%88%86%E6%95%B4%E7%90%86/</url>
-    <content><![CDATA[<h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><p>​    Level 1,2,3</p>
-<h4 id="节点与节点树"><a href="#节点与节点树" class="headerlink" title="节点与节点树"></a>节点与节点树</h4><h5 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h5><ul>
-<li>​    Node类型</li>
-<li>​    Document类型</li>
-<li>​    DocumentType类型</li>
-<li>​    Element类型</li>
-<li>​    Attribute类型</li>
-<li>​    Text类型</li>
-<li>​    Comment类型</li>
-<li>​    DocumentFragment类型</li>
-</ul>
-<h5 id="元素"><a href="#元素" class="headerlink" title="元素"></a>元素</h5><p>​    <strong>增删改查接口</strong></p>
-<ul>
-<li><p>节点创建型API</p>
-<ul>
-<li>createElement</li>
-<li>createTextNode</li>
-<li>cloneNode</li>
-<li>createDocumentFragment</li>
-</ul>
-</li>
-<li><p>页面修改形API（包括删除和添加）（删）（改）</p>
-<ul>
-<li>appendChild(追加为子元素)</li>
-<li>insertBefore(插入前面)</li>
-<li>removeChild(删除子元素)</li>
-<li>replaceChild(替换子元素)</li>
-</ul>
-</li>
-<li><p>节点查询型API(查)</p>
-<ul>
-<li>document.querySelector</li>
-<li>document.querySelectorAll</li>
-<li>document.getElementById</li>
-<li>document.getElementsByTagName</li>
-<li>document.getElementsByName</li>
-<li>document.getElementsByClassName</li>
-<li>elementFromPoint()  //判断(x,y)当前位置是否有元素</li>
-</ul>
-</li>
-<li><p>元素属性型操作（属性节点的操作）</p>
-<ul>
-<li><p>getAttribute()  (获取属性)</p>
-</li>
-<li><p>createAttribute()  (创建属性)</p>
-</li>
-<li><p>setAttribute()  (设置属性)</p>
-</li>
-<li><p>romoveAttribute()  (删除属性)</p>
-</li>
-<li><p>element.attributes（将属性生成数组对象）</p>
-</li>
-</ul>
-</li>
-</ul>
-<h4 id="操作样式表"><a href="#操作样式表" class="headerlink" title="操作样式表"></a>操作样式表</h4><h4 id="操作CSS"><a href="#操作CSS" class="headerlink" title="操作CSS"></a>操作CSS</h4><p>dom.style.xxx</p>
-<p>在样式规则上重新定义规则</p>
-<p>图层概念</p>
-<h3 id="XML-DOM"><a href="#XML-DOM" class="headerlink" title="XML DOM"></a>XML DOM</h3><h3 id="SVG-DOM"><a href="#SVG-DOM" class="headerlink" title="SVG DOM"></a>SVG DOM</h3><h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><ul>
-<li>window对象——BOM核心<ul>
-<li>window.alert(‘提示信息’)</li>
-<li>window.confirm(‘确认信息’)</li>
-<li>window.prompt(‘弹出输入框’)</li>
-<li>window.open(‘url地址’, ‘_black或_self’, ‘新窗口大小’)；     // black：新开一个空白的窗口打开链接，self在当前框架中打开链接</li>
-<li>window.close()  // 关闭当前页</li>
-<li>setTimeout(函数， 时间)  // 定时器，只执行一次</li>
-<li>clearTimeout(定时器名称) // 清除计时器</li>
-<li>setInterval(函数，时间)   // 定时器，无限执行</li>
-<li>clearInterval()   // 停止执行 setInterval()</li>
-</ul>
-</li>
-<li>location对象<ul>
-<li>localtion.href = ‘url地址’;      // 跳转到这个url地址</li>
-<li>localtion.hostname     // 返回 web 主机名</li>
-<li>localtion.pathname      // 返回当前页面的路径和文件名</li>
-<li>localtion.port       // 返回 web 主机的端口</li>
-<li>localtion.protocol   // 返回页面使用的web协议，http||https</li>
-</ul>
-</li>
-<li>navigator对象 —— 获取浏览器的所有信息<ul>
-<li>navigator.appCodeName  // 返回浏览器的代码名</li>
-<li>navigator.appMinorVersion   // 返回浏览器的次级版本</li>
-<li>navigator.appName  // 返回浏览器的名称</li>
-<li>navigator.appVersion  // 返回浏览器的平台和版本信息</li>
-<li>navigator.browserLanguage   // 返回当前浏览器的语言</li>
-<li>navigator.userAgent    // 返回由客户机发送服务器的 user-agent 头部的值。</li>
-</ul>
-</li>
-<li>screen对象<ul>
-<li>screen.height   // 获取整个屏幕的高</li>
-<li>screen.width    // 获取整个屏幕的宽</li>
-<li>screen.availiHeight     // 整个屏幕的高减去系统部件的高（可用的屏幕高度）</li>
-<li>screen.availWidth     // 整个屏幕的宽减去系统部件的宽（可用的屏幕宽度）</li>
-</ul>
-</li>
-<li>history对象 包含浏览器的历史<ul>
-<li>history.back();     // 返回上一页</li>
-<li>history.forward()   // 前进下一页</li>
-<li>history.go(‘参数’);   // -1 表示上一页，1表示下一页</li>
-</ul>
-</li>
-</ul>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>web前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>Promise 与 Callback 与 Async Function</title>
-    <url>/blog/2020/10/22/04Promise&amp;Callback&amp;Async%20Function%20%20/</url>
-    <content><![CDATA[<h3 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h3><ul>
-<li>梳理 Promise 与 Callback 与 Async Function    </li>
-</ul>
-<h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><h5 id="CallBack"><a href="#CallBack" class="headerlink" title="CallBack"></a>CallBack</h5><blockquote>
-<p>回调函数</p>
-</blockquote>
-<ul>
-<li>简洁</li>
-<li>可异步，可同步</li>
-<li>高耦合</li>
-<li>容易出现回调地狱</li>
-<li>不能方便指定多个回调</li>
-<li>不方便任务调度</li>
-</ul>
-<h5 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h5><p>优缺点</p>
-<ul>
-<li>链式写法</li>
-<li>方便多任务方便调度</li>
-<li>状态可查询(vs事件监听)</li>
-</ul>
-<p>​    三种状态，只能从pending变为<em>fulfilled或rejected</em></p>
-<ul>
-<li><em>待定（pending）</em>: 初始状态，既没有被兑现，也没有被拒绝。</li>
-<li><em>已兑现（fulfilled）</em>: 意味着操作成功完成。</li>
-<li><em>已拒绝（rejected）</em>: 意味着操作失败。</li>
-</ul>
-<p>创建</p>
-<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;...&#125; <span class="comment">/* executor */</span>  );</span><br></pre></td></tr></table></figure>
-
-<p>方法</p>
-<ul>
-<li><ul>
-<li><p>静态方法</p>
-</li>
-<li><ul>
-<li>resolve </li>
-<li>rejected</li>
-<li>race</li>
-<li>all</li>
-<li>allSettled 都执行完</li>
-</ul>
-</li>
-</ul>
-</li>
-<li><p>any 任意一个成功，就返回resolve</p>
-</li>
-<li><p>实例方法</p>
-<ul>
-<li><ul>
-<li>then</li>
-<li>catch</li>
-<li>Finally</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<h5 id="Async-Fn"><a href="#Async-Fn" class="headerlink" title="Async Fn"></a>Async Fn</h5><h4 id="async-amp-await"><a href="#async-amp-await" class="headerlink" title="async&amp;await"></a>async&amp;await</h4><ul>
-<li>可读性改善</li>
-<li>async函数直接执行时，返回Promise实例</li>
-<li>await后面的表达式可以是Promise也可以是其它</li>
-<li>await返回值是后面表达式的resolve值</li>
-<li>await被reject时，方便trycatch</li>
-</ul>
-<h5 id="今日总结"><a href="#今日总结" class="headerlink" title="今日总结"></a>今日总结</h5><ol>
-<li>code验证API</li>
-<li>进一步理解异步的处理方式</li>
-</ol>
-]]></content>
-      <categories>
-        <category>web前端</category>
-      </categories>
-      <tags>
-        <tag>web前端</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>ceshi</title>
-    <url>/blog/2020/10/22/ceshi/</url>
-    <content><![CDATA[<p><img src="/blog/2020/10/22/ceshi/image-20201022151724120.png" alt="image-20201021173413747"></p>
-]]></content>
-  </entry>
-  <entry>
-    <title>爱华实习日记</title>
-    <url>/blog/2020/10/22/README/</url>
-    <content><![CDATA[<blockquote>
-<p>记录学习历程~up</p>
-</blockquote>
-]]></content>
-  </entry>
-  <entry>
     <title>DOM(续)</title>
     <url>/blog/2020/10/22/08DOM%E4%BA%8B%E4%BB%B6/</url>
     <content><![CDATA[<h3 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h3><ul>
@@ -916,7 +456,7 @@
 <ul>
 <li><p>事件冒泡（event bubbling），即事件开始时由最具体的元素（文档中嵌套层次最深</p>
 <p>的那个节点）接收，然后逐级向上传播到较为不具体的节点（文档）</p>
-<p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020143939968.png" alt="image-20201020143939968"></p>
+<p><img src="/blog/2020/10/22/08DOM事件/C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020143939968.png" alt="image-20201020143939968"></p>
 </li>
 </ul>
 </li>
@@ -925,10 +465,10 @@
 <li>事件捕获的思想是不太具体的节点应该更早接收到事件，而最具体的节点应该最后接收到事件。事件捕获的用意在于在</li>
 </ul>
 <p>事件到达预定目标之前捕获它。</p>
-<p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020143953777.png" alt="image-20201020143953777"></p>
+<p><img src="/blog/2020/10/22/08DOM事件/C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020143953777.png" alt="image-20201020143953777"></p>
 </li>
 <li><p>整个事件流</p>
-<p><img src="/blog/.com//C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020144046011.png" alt="image-20201020144046011"></p>
+<p><img src="/blog/2020/10/22/08DOM事件/C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020144046011.png" alt="image-20201020144046011"></p>
 </li>
 </ul>
 </li>
@@ -1193,6 +733,345 @@
       </tags>
   </entry>
   <entry>
+    <title>indexDB的使用</title>
+    <url>/blog/2020/10/29/12indexDB%E7%9A%84%E4%BD%BF%E7%94%A8/</url>
+    <content><![CDATA[<h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>目的<ul>
+<li>随着浏览器的功能不断增强，越来越多的网站开始考虑，将大量数据储存在客户端，这样可以减少从服务器获取数据，直接从本地获取数据。</li>
+</ul>
+</li>
+<li>前景<ul>
+<li>现有的浏览器数据储存方案，都不适合储存大量数据：Cookie 的大小不超过4KB，且每次请求都会发送回服务器；LocalStorage 在 2.5MB 到 10MB 之间（各家浏览器不同），而且不提供搜索功能，不能建立自定义的索引。所以，需要一种新的解决方案，这就是 IndexedDB 诞生的背景。</li>
+</ul>
+</li>
+<li>特点<ul>
+<li>键值对存储<ul>
+<li>现有的浏览器数据储存方案，都不适合储存大量数据：Cookie 的大小不超过4KB，且每次请求都会发送回服务器；LocalStorage 在 2.5MB 到 10MB 之间（各家浏览器不同），而且不提供搜索功能，不能建立自定义的索引。所以，需要一种新的解决方案，这就是 IndexedDB 诞生的背景。</li>
+</ul>
+</li>
+<li>异步<ul>
+<li>IndexedDB 操作时不会锁死浏览器，用户依然可以进行其他操作，这与 LocalStorage 形成对比，后者的操作是同步的。异步设计是为了防止大量数据的读写，拖慢网页的表现。</li>
+</ul>
+</li>
+<li>支持事务<ul>
+<li>支持事务。 IndexedDB 支持事务（transaction），这意味着一系列操作步骤之中，只要有一步失败，整个事务就都取消，数据库回滚到事务发生之前的状态，不存在只改写一部分数据的情况。 </li>
+</ul>
+</li>
+<li>同源策略<ul>
+<li>同源限制 IndexedDB 受到同源限制，每一个数据库对应创建它的域名。网页只能访问自身域名下的数据库，而不能访问跨域的数据库。</li>
+</ul>
+</li>
+<li>存储空间大<ul>
+<li>储存空间大 IndexedDB 的储存空间比 LocalStorage 大得多，一般来说不少于 250MB，甚至没有上限。</li>
+</ul>
+</li>
+<li>支持二进制存储<ul>
+<li>支持二进制储存。 IndexedDB 不仅可以储存字符串，还可以储存二进制数据（ArrayBuffer 对象和 Blob 对象）。 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="基本概念"><a href="#基本概念" class="headerlink" title="基本概念"></a>基本概念</h3><ul>
+<li>对象仓库<ul>
+<li>每个数据库包含若干个对象仓库（object store）。它类似于关系型数据库的表格。</li>
+</ul>
+</li>
+<li>数据记录<ul>
+<li>对象仓库保存的是数据记录。每条记录类似于关系型数据库的行，但是只有主键和数据体两部分。主键用来建立默认的索引，必须是不同的，否则会报错。主键可以是数据记录里面的一个属性，也可以指定为一个递增的整数编号。</li>
+</ul>
+</li>
+<li>索引<ul>
+<li>为了加速数据的检索，可以在对象仓库里面，为不同的属性建立索引。</li>
+</ul>
+</li>
+<li>事务<ul>
+<li>数据记录的读写和删改，都要通过事务完成。事务对象提供error、abort和complete三个事件，用来监听操作结果。</li>
+</ul>
+</li>
+</ul>
+<h3 id="操作流程"><a href="#操作流程" class="headerlink" title="操作流程"></a>操作流程</h3><h4 id="1、连接indexDB创建数据仓库"><a href="#1、连接indexDB创建数据仓库" class="headerlink" title="1、连接indexDB创建数据仓库"></a>1、连接indexDB创建数据仓库</h4><p>在第一次连接时会执行onupgradeneeded回调，创建对应的对象仓库</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//indexDB是浏览器本地数据库,用于存储大量数据,存储格式为json</span></span><br><span class="line">    <span class="built_in">window</span>.indexedDB = <span class="built_in">window</span>.indexedDB || <span class="built_in">window</span>.mozIndexedDB || <span class="built_in">window</span>.webkitIndexedDB || <span class="built_in">window</span>.msIndexedDB;</span><br><span class="line"></span><br><span class="line">   <span class="keyword">var</span> db;</span><br><span class="line">   <span class="comment">//1. 打开创建数据库:</span></span><br><span class="line">   <span class="function"><span class="keyword">function</span> <span class="title">openDB</span>(<span class="params">name,version = <span class="number">1</span></span>)</span>&#123;</span><br><span class="line">       <span class="keyword">if</span>(!<span class="built_in">window</span>.indexedDB)&#123;</span><br><span class="line">           alert(<span class="string">'您的浏览器不支持indexDB'</span>);</span><br><span class="line">           <span class="keyword">return</span>;</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="keyword">var</span> indexDBRequest = <span class="built_in">window</span>.indexedDB.open(name,version);</span><br><span class="line">       indexDBRequest.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="string">'Open Error!'</span>);</span><br><span class="line">       &#125;</span><br><span class="line">       indexDBRequest.onsuccess = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">           db = indexDBRequest.result;<span class="comment">//这里才是 indexedDB对象</span></span><br><span class="line">           <span class="built_in">console</span>.log(<span class="string">'创建/打开数据库成功。db:%o'</span>,db);</span><br><span class="line">           <span class="comment">// add()</span></span><br><span class="line">           saveData(<span class="string">'persons'</span>,&#123;<span class="attr">id</span>:<span class="number">3</span>,<span class="attr">name</span>:<span class="string">'张三3'</span>,<span class="attr">age</span>:<span class="number">18</span>, <span class="attr">email</span>: <span class="string">'zhangsan@example.com'</span>&#125;);</span><br><span class="line">       &#125;</span><br><span class="line">       <span class="comment">// 注意: 只能请求&gt;=当前数据库版本号的版本</span></span><br><span class="line">       <span class="comment">//  大于当前版本号, 则触发 onupgradeneeded,</span></span><br><span class="line">       <span class="comment">//  小于当前版本号，则触发 onerror</span></span><br><span class="line">       indexDBRequest.onupgradeneeded = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">           <span class="built_in">console</span>.log(<span class="string">'DB version change to '</span> + version);</span><br><span class="line">           db = indexDBRequest.result;</span><br><span class="line">           <span class="comment">//4. 有了数据库后我们自然希望创建一个表用来存储数据，但indexedDB中没有表的概念，而是叫 objectStore ，一个数据库中可以包含多个objectStore，objectStore是一个灵活的数据结构，可以存放多种类型数据。也就是说一个objectStore相当于一张表，里面存储的每条数据和一个键相关联。</span></span><br><span class="line">           <span class="keyword">if</span>(!db.objectStoreNames.contains(<span class="string">'persons'</span>))&#123;</span><br><span class="line">               <span class="comment">//keyPath	对象，eg: &#123;keyPath: ‘id’&#125;</span></span><br><span class="line">               <span class="comment">// keyGenerator	任意值 eg: &#123;autoincrement: true&#125;</span></span><br><span class="line">               <span class="comment">/*</span></span><br><span class="line"><span class="comment">                   自动生成主键：</span></span><br><span class="line"><span class="comment">                   var objectStore = db.createObjectStore(</span></span><br><span class="line"><span class="comment">                     'students',</span></span><br><span class="line"><span class="comment">                     &#123; autoIncrement: true &#125;</span></span><br><span class="line"><span class="comment">                   );</span></span><br><span class="line"><span class="comment">               */</span></span><br><span class="line">               <span class="keyword">var</span> store = db.createObjectStore(<span class="string">'persons'</span>, &#123; <span class="attr">keyPath</span>: <span class="string">'id'</span> &#125;);</span><br><span class="line">               <span class="comment">//10. 创建索引</span></span><br><span class="line">               <span class="comment">// 在indexedDB中有两种索引，一种是自增长的int值，一种是keyPath：自己指定索引列</span></span><br><span class="line">               store.createIndex(<span class="string">'nameIndex'</span>,<span class="string">'name'</span>,&#123;<span class="attr">unique</span>:<span class="literal">true</span>&#125;);</span><br><span class="line">               store.createIndex(<span class="string">'ageIndex'</span>,<span class="string">'age'</span>,&#123;<span class="attr">unique</span>:<span class="literal">false</span>&#125;);</span><br><span class="line">               <span class="comment">//store中有三列数据:id | name | age</span></span><br><span class="line"></span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line">   &#125;</span><br><span class="line">   openDB(<span class="string">"aiwa_db"</span>)</span><br></pre></td></tr></table></figure>
+
+<h4 id="2、在第一步上新值数据"><a href="#2、在第一步上新值数据" class="headerlink" title="2、在第一步上新值数据"></a>2、在第一步上新值数据</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//保存数据到objectStore</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">addData</span>(<span class="params">storeName,data</span>)</span>&#123;</span><br><span class="line">    <span class="comment">//创建事务</span></span><br><span class="line">    <span class="keyword">var</span> transaction = db.transaction([storeName],<span class="string">'readwrite'</span>);</span><br><span class="line">    <span class="comment">//访问事务中的objectStore</span></span><br><span class="line">    <span class="keyword">var</span> store = transaction.objectStore(storeName);</span><br><span class="line">    <span class="keyword">var</span> addRequest</span><br><span class="line">    <span class="comment">//data为数组</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="built_in">Array</span>.isArray(data))&#123;</span><br><span class="line">                 data.foreach(<span class="function">(<span class="params">item,index</span>) =&gt;</span> &#123;</span><br><span class="line">     	store.add(item);<span class="comment">//保存数据</span></span><br><span class="line">     &#125;);</span><br><span class="line">    &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">     addRequest = store.add(data);</span><br><span class="line">        </span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">//data为对象</span></span><br><span class="line">    addRequest.onsuccess = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'save data done...'</span>,store);</span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line">    addRequest.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'数据写入失败'</span>,store);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3、根据主键删除数据"><a href="#3、根据主键删除数据" class="headerlink" title="3、根据主键删除数据"></a>3、根据主键删除数据</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">deleteDataByKey</span>(<span class="params">storeName,key</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> transaction = db.transaction([storeName],<span class="string">'readwrite'</span>);</span><br><span class="line">    <span class="keyword">var</span> store = transaction.objectStore(storeName);</span><br><span class="line">    <span class="keyword">var</span> deleteRequest = store.delete(key);</span><br><span class="line">    deleteRequest.onsuccess = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'delete data done...'</span>,store);</span><br><span class="line">    &#125;</span><br><span class="line">    deleteRequest.onerror = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'delete data failed...'</span>,store);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">deletes.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    deleteDataByKey(<span class="string">'persons'</span>,inputId.value?<span class="built_in">Number</span>(inputId.value):<span class="number">0</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="4、根据仓库名clear仓库"><a href="#4、根据仓库名clear仓库" class="headerlink" title="4、根据仓库名clear仓库"></a>4、根据仓库名clear仓库</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//4、clear仓库</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">clearObjectStore</span>(<span class="params">storeName</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> transaction = db.transaction([storeName], <span class="string">'readwrite'</span>);</span><br><span class="line">    <span class="keyword">var</span> store = transaction.objectStore(storeName);</span><br><span class="line">    store.clear();</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'clear data done...'</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">clear.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">    clearObjectStore(<span class="string">'persons'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5、根据查找主键数据"><a href="#5、根据查找主键数据" class="headerlink" title="5、根据查找主键数据"></a>5、根据查找主键数据</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//5、查找数据</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDataByKey</span>(<span class="params">storeName, key</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> transaction = db.transaction([storeName], <span class="string">'readwrite'</span>);</span><br><span class="line">    <span class="keyword">var</span> store = transaction.objectStore(storeName);</span><br><span class="line">    <span class="keyword">var</span> dataRequest = store.get(key);</span><br><span class="line">    <span class="comment">//异步的</span></span><br><span class="line">    dataRequest.onsuccess = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> data = e.target.result;</span><br><span class="line">        <span class="built_in">console</span>.log(data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">get</span>.onclick = function () &#123;</span><br><span class="line">    getDataByKey(<span class="string">'persons'</span>, inputGetId.value ? <span class="built_in">Number</span>(inputGetId.value) : <span class="number">0</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6、根据主键修改数据"><a href="#6、根据主键修改数据" class="headerlink" title="6、根据主键修改数据"></a>6、根据主键修改数据</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//6、修改数据 inputPutId.value</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">putDataByKey</span>(<span class="params">storeName, data</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> transaction = db.transaction([storeName], <span class="string">"readwrite"</span>);</span><br><span class="line">    <span class="keyword">let</span> store = transaction.objectStore(storeName)</span><br><span class="line">    store.put(data)</span><br><span class="line">&#125;</span><br><span class="line">put.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> obj = &#123;<span class="attr">id</span>: inputPutId.value ? <span class="built_in">Number</span>(inputPutId.value) : <span class="number">0</span>  , <span class="attr">name</span>: <span class="string">'张三'</span> + <span class="built_in">Math</span>.round(<span class="built_in">Math</span>.random() * <span class="number">100</span>), <span class="attr">age</span>:  <span class="built_in">Math</span>.round(<span class="built_in">Math</span>.random() * <span class="number">100</span>)&#125;</span><br><span class="line">    putDataByKey(<span class="string">'persons'</span>, obj);</span><br><span class="line">    <span class="built_in">console</span>.log(obj)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="7、根据索引值查找数据"><a href="#7、根据索引值查找数据" class="headerlink" title="7、根据索引值查找数据"></a>7、根据索引值查找数据</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 7、获取索引值对应的数据</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getDataByIndex</span>(<span class="params">storeName,indexName, value</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> transaction = db.transaction([storeName],<span class="string">'readwrite'</span>);</span><br><span class="line">    <span class="keyword">var</span> store = transaction.objectStore(storeName);</span><br><span class="line">    <span class="keyword">var</span> index = store.index(indexName);<span class="comment">//获取索引</span></span><br><span class="line">    <span class="keyword">var</span> request = index.get(value);</span><br><span class="line">    request.onsuccess = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> data = e.target.result;</span><br><span class="line">        <span class="built_in">console</span>.log(data?data:<span class="string">"索引对应的值不存在"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">getIndex.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    getDataByIndex(<span class="string">'persons'</span>,<span class="string">'nameIndex'</span>,inputGetIndex.value);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="8、根据游标查询数据"><a href="#8、根据游标查询数据" class="headerlink" title="8、根据游标查询数据"></a>8、根据游标查询数据</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//8. 根据游标获取数据</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fetchStoreByCursor</span>(<span class="params">storeName</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> transaction = db.transaction([storeName],<span class="string">'readwrite'</span>);</span><br><span class="line">    <span class="keyword">var</span> store = transaction.objectStore(storeName);</span><br><span class="line">    <span class="keyword">var</span> cursorRequest = store.openCursor();</span><br><span class="line">    cursorRequest.onsuccess = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> cursor = e.target.result;</span><br><span class="line">        <span class="keyword">if</span>(cursor)&#123;</span><br><span class="line">            <span class="keyword">var</span> currentData = cursor.value;</span><br><span class="line">            <span class="built_in">console</span>.log(currentData);</span><br><span class="line">            cursor.continue();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">getCursor.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    fetchStoreByCursor(<span class="string">'persons'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9、根据游标和索引查找数据"><a href="#9、根据游标和索引查找数据" class="headerlink" title="9、根据游标和索引查找数据"></a>9、根据游标和索引查找数据</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">//9. 游标与index结合</span></span><br><span class="line"><span class="comment">//获取age为26的persons</span></span><br><span class="line"><span class="comment">// index.openCursor()/index.openKeyCursor() 方法在不传递参数的时候会获取objectStore所有记录，像上面例子一样我们可以对搜索进行筛选</span></span><br><span class="line"><span class="comment">// 可以使用 IDBKeyRange 限制游标中值的范围，把它作为第一个参数传给 openCursor() 或是 openKeyCursor()</span></span><br><span class="line"><span class="comment">//</span></span><br><span class="line"><span class="comment">// IDBKeyRange.only(value):只获取指定数据</span></span><br><span class="line"><span class="comment">// IDBKeyRange.lowerBound(value,isOpen)：获取最小是value的数据，第二个参数用来指示是否排除value值本身，也就是数学中的是否是开区间</span></span><br><span class="line"><span class="comment">// IDBKeyRange.upperBound(value,isOpen)：和上面类似，用于获取最大值是value的数据</span></span><br><span class="line"><span class="comment">// IDBKeyRange.bound(value1,value2,isOpen1,isOpen2)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getMultipleData</span>(<span class="params">storeName, indexName</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> transaction=db.transaction([storeName]);</span><br><span class="line">    <span class="keyword">var</span> store=transaction.objectStore(storeName);</span><br><span class="line">    <span class="keyword">var</span> index = store.index(indexName);</span><br><span class="line">    <span class="comment">//传入索引限制条件</span></span><br><span class="line">    <span class="keyword">var</span> request=index.openCursor(IDBKeyRange.only(<span class="number">26</span>))</span><br><span class="line">    request.onsuccess=<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> cursor=e.target.result;</span><br><span class="line">        <span class="keyword">if</span>(cursor)&#123;</span><br><span class="line">            <span class="keyword">var</span> person=cursor.value;</span><br><span class="line">            <span class="built_in">console</span>.log(person);</span><br><span class="line">            cursor.continue();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">indexAndCursor.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    getMultipleData(<span class="string">'persons'</span>,<span class="string">'ageIndex'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9、获取主键处于某一范围的值-不会对data进行deepClone"><a href="#9、获取主键处于某一范围的值-不会对data进行deepClone" class="headerlink" title="9、获取主键处于某一范围的值(不会对data进行deepClone)"></a>9、获取主键处于某一范围的值(不会对data进行deepClone)</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getKeysByKeyRange</span>(<span class="params">storeName</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> transaction=db.transaction([storeName]);</span><br><span class="line">    <span class="keyword">var</span> store=transaction.objectStore(storeName);</span><br><span class="line">    <span class="comment">// var keyRange = IDBKeyRange.bound(0, 100,false,false); // [0,3]keyRange</span></span><br><span class="line">    <span class="keyword">var</span> request = store.getAllKeys();</span><br><span class="line">    request.onsuccess=<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">        <span class="keyword">var</span> cursor=e.target.result;</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">'getKeys...'</span>,cursor)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">getKeys.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    getKeysByKeyRange(<span class="string">'persons'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="9、获取index处于某一范围的值-不会对data进行deepClone"><a href="#9、获取index处于某一范围的值-不会对data进行deepClone" class="headerlink" title="9、获取index处于某一范围的值(不会对data进行deepClone)"></a>9、获取index处于某一范围的值(不会对data进行deepClone)</h4><figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="comment">// 11、获取index处于某一范围的值(不会对data进行deepClone)</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">getIndexsByCondition</span>(<span class="params">storeName,indexName</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">var</span> transaction=db.transaction([storeName]);</span><br><span class="line">    <span class="keyword">var</span> store=transaction.objectStore(storeName);</span><br><span class="line">    <span class="keyword">var</span> index = store.index(indexName);</span><br><span class="line">    <span class="keyword">var</span> request = index.openKeyCursor(IDBKeyRange.bound(<span class="number">0</span>,<span class="number">100</span>,<span class="literal">false</span>, <span class="literal">false</span> ));</span><br><span class="line">    request.onsuccess = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span><br><span class="line">        <span class="keyword">var</span> cursor = event.target.result;</span><br><span class="line">        <span class="keyword">if</span>(cursor) &#123;</span><br><span class="line">            <span class="comment">// console.log(cursor)  //非数据项</span></span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'cursor.key'</span>,cursor.key,<span class="string">'cursor.primaryKey'</span>,cursor.primaryKey)</span><br><span class="line">            cursor.continue();</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="built_in">console</span>.log(<span class="string">'All last names displayed.'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;;</span><br><span class="line">&#125;</span><br><span class="line">getIndexs.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    getIndexsByCondition(<span class="string">'persons'</span>,<span class="string">'ageIndex'</span>);</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h4 id="完整代码"><a href="#完整代码" class="headerlink" title="完整代码"></a>完整代码</h4><figure class="highlight html"><table><tr><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">"en"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>indexDB<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'add'</span>&gt;</span>add<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"请输入主键id删除"</span> <span class="attr">id</span>=<span class="string">"inputId"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'deletes'</span>&gt;</span>delete<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'clear'</span>&gt;</span>clear仓库<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"根据主键进行查找"</span> <span class="attr">id</span>=<span class="string">"inputGetId"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'get'</span>&gt;</span>get<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"根据主键进行修改"</span> <span class="attr">id</span>=<span class="string">"inputPutId"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'put'</span>&gt;</span>put<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"text"</span> <span class="attr">placeholder</span>=<span class="string">"根据索引值进行查找"</span> <span class="attr">id</span>=<span class="string">"inputGetIndex"</span>&gt;</span><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'getIndex'</span>&gt;</span>getIndex<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'getCursor'</span>&gt;</span>getCursor<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'indexAndCursor'</span>&gt;</span>indexAndCursor（可传入条件进行筛选）<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'getKeys'</span>&gt;</span>getKeys（可传入条件进行筛选）<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'getIndexs'</span>&gt;</span>getIndexs<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="javascript">    <span class="comment">//indexDB是浏览器本地数据库,用于存储大量数据,存储格式为json</span></span></span><br><span class="line"><span class="javascript">    <span class="built_in">window</span>.indexedDB = <span class="built_in">window</span>.indexedDB || <span class="built_in">window</span>.mozIndexedDB || <span class="built_in">window</span>.webkitIndexedDB || <span class="built_in">window</span>.msIndexedDB;</span></span><br><span class="line"><span class="javascript">    <span class="keyword">let</span> db;</span></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//1. 打开创建数据库:</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">openDB</span>(<span class="params">name, version = <span class="number">1</span></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (!<span class="built_in">window</span>.indexedDB) &#123;</span></span><br><span class="line"><span class="javascript">            alert(<span class="string">'您的浏览器不支持indexDB'</span>);</span></span><br><span class="line"><span class="javascript">            <span class="keyword">return</span>;</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> indexDBRequest = <span class="built_in">window</span>.indexedDB.open(name, version);</span></span><br><span class="line"><span class="javascript">        indexDBRequest.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">'Open Error!'</span>);</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        indexDBRequest.onsuccess = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            db = indexDBRequest.result;<span class="comment">//这里才是 indexedDB对象</span></span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">'创建/打开数据库成功。db:%o'</span>, db);</span></span><br><span class="line"><span class="javascript">            <span class="comment">// add()</span></span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        <span class="comment">// 注意: 只能请求&gt;=当前数据库版本号的版本</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">//  大于当前版本号, 则触发 onupgradeneeded,</span></span></span><br><span class="line"><span class="javascript">        <span class="comment">//  小于当前版本号，则触发 onerror</span></span></span><br><span class="line"><span class="javascript">        indexDBRequest.onupgradeneeded = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">'DB version change to '</span> + version);</span></span><br><span class="line">            db = indexDBRequest.result;</span><br><span class="line"><span class="javascript">            <span class="comment">//4. 有了数据库后我们自然希望创建一个表用来存储数据，但indexedDB中没有表的概念，而是叫 objectStore ，一个数据库中可以包含多个objectStore，objectStore是一个灵活的数据结构，可以存放多种类型数据。也就是说一个objectStore相当于一张表，里面存储的每条数据和一个键相关联。</span></span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span> (!db.objectStoreNames.contains(<span class="string">'persons'</span>)) &#123;</span></span><br><span class="line"><span class="javascript">                <span class="comment">//keyPath	对象，eg: &#123;keyPath: ‘id’&#125;</span></span></span><br><span class="line"><span class="javascript">                <span class="comment">// keyGenerator	任意值 eg: &#123;autoincrement: true&#125;</span></span></span><br><span class="line">                /*</span><br><span class="line">                    自动生成主键：</span><br><span class="line"><span class="javascript">                    <span class="keyword">var</span> objectStore = db.createObjectStore(</span></span><br><span class="line"><span class="javascript">                      <span class="string">'students'</span>,</span></span><br><span class="line"><span class="javascript">                      &#123; <span class="attr">autoIncrement</span>: <span class="literal">true</span> &#125;</span></span><br><span class="line">                    );</span><br><span class="line">                */</span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> store = db.createObjectStore(<span class="string">'persons'</span>, &#123;<span class="attr">keyPath</span>: <span class="string">'id'</span>&#125;);</span></span><br><span class="line"><span class="javascript">                <span class="comment">//删除objectStore</span></span></span><br><span class="line"><span class="javascript">                <span class="comment">// db.deleteObjectStore('storeName');</span></span></span><br><span class="line"><span class="javascript">                <span class="comment">//10. 创建索引</span></span></span><br><span class="line"><span class="javascript">                <span class="comment">// 在indexedDB中有两种索引，一种是自增长的int值，一种是keyPath：自己指定索引列</span></span></span><br><span class="line"><span class="javascript">                store.createIndex(<span class="string">'nameIndex'</span>, <span class="string">'name'</span>, &#123;<span class="attr">unique</span>: <span class="literal">true</span>&#125;);</span></span><br><span class="line"><span class="javascript">                store.createIndex(<span class="string">'ageIndex'</span>, <span class="string">'age'</span>, &#123;<span class="attr">unique</span>: <span class="literal">false</span>&#125;);</span></span><br><span class="line"><span class="javascript">                <span class="comment">//store中有三列数据:id | name | age</span></span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'第一次创建数据库或者更新数据库。db:%o'</span>, db);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">    openDB(<span class="string">"aiwa_db"</span>)</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//2、保存数据到objectStore</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">addData</span>(<span class="params">storeName, data</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="comment">//创建事务</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> transaction = db.transaction([storeName], <span class="string">'readwrite'</span>);</span></span><br><span class="line"><span class="javascript">        <span class="comment">//访问事务中的objectStore</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> store = transaction.objectStore(storeName);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> addRequest</span></span><br><span class="line"><span class="javascript">        <span class="comment">//data为数组</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">if</span> (<span class="built_in">Array</span>.isArray(data)) &#123;</span></span><br><span class="line"><span class="javascript">            data.forEach(<span class="keyword">async</span> (item, index) =&gt; &#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">await</span> store.add(item);<span class="comment">//保存数据</span></span></span><br><span class="line">            &#125;);</span><br><span class="line"></span><br><span class="line"><span class="javascript">        &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line">            addRequest = store.add(data);</span><br><span class="line"><span class="javascript">            addRequest.onsuccess = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'save data done...'</span>, store);</span></span><br><span class="line">            &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">            addRequest.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'数据写入失败'</span>, store);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">    add.onclick = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> obj = &#123;<span class="attr">id</span>: <span class="built_in">Math</span>.round(<span class="built_in">Math</span>.random() * <span class="number">100</span>), <span class="attr">name</span>: <span class="string">'张三'</span> + <span class="built_in">Math</span>.round(<span class="built_in">Math</span>.random() * <span class="number">100</span>), <span class="attr">age</span>: <span class="number">26</span>&#125;</span></span><br><span class="line"><span class="javascript">        addData(<span class="string">'persons'</span>, obj);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(obj)</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//3. 根据主键删除数据</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">deleteDataByKey</span>(<span class="params">storeName, key</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> transaction = db.transaction([storeName], <span class="string">'readwrite'</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> store = transaction.objectStore(storeName);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> deleteRequest = store.delete(key);</span></span><br><span class="line"><span class="javascript">        deleteRequest.onsuccess = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">'delete data done...'</span>, store);</span></span><br><span class="line">        &#125;</span><br><span class="line"><span class="javascript">        deleteRequest.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">'delete data failed...'</span>, store);</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">    deletes.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        deleteDataByKey(<span class="string">'persons'</span>, inputId.value ? <span class="built_in">Number</span>(inputId.value) : <span class="number">0</span>);</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//4、clear仓库</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">clearObjectStore</span>(<span class="params">storeName</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> transaction = db.transaction([storeName], <span class="string">'readwrite'</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> store = transaction.objectStore(storeName);</span></span><br><span class="line">        store.clear();</span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(<span class="string">'clear data done...'</span>);</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">    clear.onclick = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        clearObjectStore(<span class="string">'persons'</span>);</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//5、查找数据</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">getDataByKey</span>(<span class="params">storeName, key</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> transaction = db.transaction([storeName], <span class="string">'readwrite'</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> store = transaction.objectStore(storeName);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> dataRequest = store.get(key);</span></span><br><span class="line"><span class="javascript">        <span class="comment">//异步的</span></span></span><br><span class="line"><span class="javascript">        dataRequest.onsuccess = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> data = e.target.result;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(data);</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="keyword">get</span>.onclick = function () &#123;</span></span><br><span class="line"><span class="javascript">        getDataByKey(<span class="string">'persons'</span>, inputGetId.value ? <span class="built_in">Number</span>(inputGetId.value) : <span class="number">0</span>);</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="javascript">    <span class="comment">//6、修改数据 inputPutId.value</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">putDataByKey</span>(<span class="params">storeName, data</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> transaction = db.transaction([storeName], <span class="string">"readwrite"</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> store = transaction.objectStore(storeName)</span></span><br><span class="line">        store.put(data)</span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    put.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">let</span> obj = &#123;<span class="attr">id</span>: inputPutId.value ? <span class="built_in">Number</span>(inputPutId.value) : <span class="number">0</span>  , <span class="attr">name</span>: <span class="string">'张三'</span> + <span class="built_in">Math</span>.round(<span class="built_in">Math</span>.random() * <span class="number">100</span>), <span class="attr">age</span>:  <span class="built_in">Math</span>.round(<span class="built_in">Math</span>.random() * <span class="number">100</span>)&#125;</span></span><br><span class="line"><span class="javascript">        putDataByKey(<span class="string">'persons'</span>, obj);</span></span><br><span class="line"><span class="javascript">        <span class="built_in">console</span>.log(obj)</span></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// 7、获取索引值对应的数据</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">getDataByIndex</span>(<span class="params">storeName,indexName, value</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> transaction = db.transaction([storeName],<span class="string">'readwrite'</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> store = transaction.objectStore(storeName);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> index = store.index(indexName);<span class="comment">//获取索引</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> request = index.get(value);</span></span><br><span class="line"><span class="javascript">        request.onsuccess = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> data = e.target.result;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(data?data:<span class="string">"索引对应的值不存在"</span>);</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    getIndex.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        getDataByIndex(<span class="string">'persons'</span>,<span class="string">'nameIndex'</span>,inputGetIndex.value);</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//8. 根据游标获取数据</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">fetchStoreByCursor</span>(<span class="params">storeName</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> transaction = db.transaction([storeName],<span class="string">'readwrite'</span>);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> store = transaction.objectStore(storeName);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> cursorRequest = store.openCursor();</span></span><br><span class="line"><span class="javascript">        cursorRequest.onsuccess = <span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> cursor = e.target.result;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(cursor)&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> currentData = cursor.value;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(currentData);</span></span><br><span class="line">                cursor.continue();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    getCursor.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        fetchStoreByCursor(<span class="string">'persons'</span>);</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">//9. 游标与index结合</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//获取age为26的persons</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// index.openCursor()/index.openKeyCursor() 方法在不传递参数的时候会获取objectStore所有记录，像上面例子一样我们可以对搜索进行筛选</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// 可以使用 IDBKeyRange 限制游标中值的范围，把它作为第一个参数传给 openCursor() 或是 openKeyCursor()</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">//</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// IDBKeyRange.only(value):只获取指定数据</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// IDBKeyRange.lowerBound(value,isOpen)：获取最小是value的数据，第二个参数用来指示是否排除value值本身，也就是数学中的是否是开区间</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// IDBKeyRange.upperBound(value,isOpen)：和上面类似，用于获取最大值是value的数据</span></span></span><br><span class="line"><span class="javascript">    <span class="comment">// IDBKeyRange.bound(value1,value2,isOpen1,isOpen2)</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">getMultipleData</span>(<span class="params">storeName, indexName</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> transaction=db.transaction([storeName]);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> store=transaction.objectStore(storeName);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> index = store.index(indexName);</span></span><br><span class="line"><span class="javascript">        <span class="comment">//传入索引限制条件</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> request=index.openCursor(IDBKeyRange.only(<span class="number">26</span>))</span></span><br><span class="line"><span class="javascript">        request.onsuccess=<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> cursor=e.target.result;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(cursor)&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">var</span> person=cursor.value;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(person);</span></span><br><span class="line">                cursor.continue();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    indexAndCursor.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        getMultipleData(<span class="string">'persons'</span>,<span class="string">'ageIndex'</span>);</span></span><br><span class="line">    &#125;;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="javascript">    <span class="comment">// 10、获取主键处于某一范围的值(不会对data进行deepClone)</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">getKeysByKeyRange</span>(<span class="params">storeName</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> transaction=db.transaction([storeName]);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> store=transaction.objectStore(storeName);</span></span><br><span class="line"><span class="javascript">        <span class="comment">// var keyRange = IDBKeyRange.bound(0, 100,false,false); // [0,3]keyRange</span></span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> request = store.getAllKeys();</span></span><br><span class="line"><span class="javascript">        request.onsuccess=<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> cursor=e.target.result;</span></span><br><span class="line"><span class="javascript">            <span class="built_in">console</span>.log(<span class="string">'getKeys...'</span>,cursor)</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    getKeys.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        getKeysByKeyRange(<span class="string">'persons'</span>);</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="javascript">    <span class="comment">// 11、获取index处于某一范围的值(不会对data进行deepClone)</span></span></span><br><span class="line"><span class="javascript">    <span class="function"><span class="keyword">function</span> <span class="title">getIndexsByCondition</span>(<span class="params">storeName,indexName</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> transaction=db.transaction([storeName]);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> store=transaction.objectStore(storeName);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> index = store.index(indexName);</span></span><br><span class="line"><span class="javascript">        <span class="keyword">var</span> request = index.openKeyCursor(IDBKeyRange.bound(<span class="number">0</span>,<span class="number">100</span>,<span class="literal">false</span>, <span class="literal">false</span> ));</span></span><br><span class="line"><span class="javascript">        request.onsuccess = <span class="function"><span class="keyword">function</span>(<span class="params">event</span>) </span>&#123;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">var</span> cursor = event.target.result;</span></span><br><span class="line"><span class="javascript">            <span class="keyword">if</span>(cursor) &#123;</span></span><br><span class="line"><span class="javascript">                <span class="comment">// console.log(cursor)  //非数据项</span></span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'cursor.key'</span>,cursor.key,<span class="string">'cursor.primaryKey'</span>,cursor.primaryKey)</span></span><br><span class="line">                cursor.continue();</span><br><span class="line"><span class="javascript">            &#125; <span class="keyword">else</span> &#123;</span></span><br><span class="line"><span class="javascript">                <span class="built_in">console</span>.log(<span class="string">'All last names displayed.'</span>);</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">    &#125;</span><br><span class="line"><span class="javascript">    getIndexs.onclick = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">        getIndexsByCondition(<span class="string">'persons'</span>,<span class="string">'ageIndex'</span>);</span></span><br><span class="line">    &#125;;</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+]]></content>
+      <categories>
+        <category>web前端</category>
+        <category>浏览器存储</category>
+        <category>indexDB</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>DOM</title>
+    <url>/blog/2020/10/22/07DOM%E9%83%A8%E5%88%86%E6%95%B4%E7%90%86/</url>
+    <content><![CDATA[<h3 id="标准"><a href="#标准" class="headerlink" title="标准"></a>标准</h3><p>​    Level 1,2,3</p>
+<h4 id="节点与节点树"><a href="#节点与节点树" class="headerlink" title="节点与节点树"></a>节点与节点树</h4><h5 id="节点类型"><a href="#节点类型" class="headerlink" title="节点类型"></a>节点类型</h5><ul>
+<li>​    Node类型</li>
+<li>​    Document类型</li>
+<li>​    DocumentType类型</li>
+<li>​    Element类型</li>
+<li>​    Attribute类型</li>
+<li>​    Text类型</li>
+<li>​    Comment类型</li>
+<li>​    DocumentFragment类型</li>
+</ul>
+<h5 id="元素"><a href="#元素" class="headerlink" title="元素"></a>元素</h5><p>​    <strong>增删改查接口</strong></p>
+<ul>
+<li><p>节点创建型API</p>
+<ul>
+<li>createElement</li>
+<li>createTextNode</li>
+<li>cloneNode</li>
+<li>createDocumentFragment</li>
+</ul>
+</li>
+<li><p>页面修改形API（包括删除和添加）（删）（改）</p>
+<ul>
+<li>appendChild(追加为子元素)</li>
+<li>insertBefore(插入前面)</li>
+<li>removeChild(删除子元素)</li>
+<li>replaceChild(替换子元素)</li>
+</ul>
+</li>
+<li><p>节点查询型API(查)</p>
+<ul>
+<li>document.querySelector</li>
+<li>document.querySelectorAll</li>
+<li>document.getElementById</li>
+<li>document.getElementsByTagName</li>
+<li>document.getElementsByName</li>
+<li>document.getElementsByClassName</li>
+<li>elementFromPoint()  //判断(x,y)当前位置是否有元素</li>
+</ul>
+</li>
+<li><p>元素属性型操作（属性节点的操作）</p>
+<ul>
+<li><p>getAttribute()  (获取属性)</p>
+</li>
+<li><p>createAttribute()  (创建属性)</p>
+</li>
+<li><p>setAttribute()  (设置属性)</p>
+</li>
+<li><p>romoveAttribute()  (删除属性)</p>
+</li>
+<li><p>element.attributes（将属性生成数组对象）</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="操作样式表"><a href="#操作样式表" class="headerlink" title="操作样式表"></a>操作样式表</h4><h4 id="操作CSS"><a href="#操作CSS" class="headerlink" title="操作CSS"></a>操作CSS</h4><p>dom.style.xxx</p>
+<p>在样式规则上重新定义规则</p>
+<p>图层概念</p>
+<h3 id="XML-DOM"><a href="#XML-DOM" class="headerlink" title="XML DOM"></a>XML DOM</h3><h3 id="SVG-DOM"><a href="#SVG-DOM" class="headerlink" title="SVG DOM"></a>SVG DOM</h3><h2 id="BOM"><a href="#BOM" class="headerlink" title="BOM"></a>BOM</h2><ul>
+<li>window对象——BOM核心<ul>
+<li>window.alert(‘提示信息’)</li>
+<li>window.confirm(‘确认信息’)</li>
+<li>window.prompt(‘弹出输入框’)</li>
+<li>window.open(‘url地址’, ‘_black或_self’, ‘新窗口大小’)；     // black：新开一个空白的窗口打开链接，self在当前框架中打开链接</li>
+<li>window.close()  // 关闭当前页</li>
+<li>setTimeout(函数， 时间)  // 定时器，只执行一次</li>
+<li>clearTimeout(定时器名称) // 清除计时器</li>
+<li>setInterval(函数，时间)   // 定时器，无限执行</li>
+<li>clearInterval()   // 停止执行 setInterval()</li>
+</ul>
+</li>
+<li>location对象<ul>
+<li>localtion.href = ‘url地址’;      // 跳转到这个url地址</li>
+<li>localtion.hostname     // 返回 web 主机名</li>
+<li>localtion.pathname      // 返回当前页面的路径和文件名</li>
+<li>localtion.port       // 返回 web 主机的端口</li>
+<li>localtion.protocol   // 返回页面使用的web协议，http||https</li>
+</ul>
+</li>
+<li>navigator对象 —— 获取浏览器的所有信息<ul>
+<li>navigator.appCodeName  // 返回浏览器的代码名</li>
+<li>navigator.appMinorVersion   // 返回浏览器的次级版本</li>
+<li>navigator.appName  // 返回浏览器的名称</li>
+<li>navigator.appVersion  // 返回浏览器的平台和版本信息</li>
+<li>navigator.browserLanguage   // 返回当前浏览器的语言</li>
+<li>navigator.userAgent    // 返回由客户机发送服务器的 user-agent 头部的值。</li>
+</ul>
+</li>
+<li>screen对象<ul>
+<li>screen.height   // 获取整个屏幕的高</li>
+<li>screen.width    // 获取整个屏幕的宽</li>
+<li>screen.availiHeight     // 整个屏幕的高减去系统部件的高（可用的屏幕高度）</li>
+<li>screen.availWidth     // 整个屏幕的宽减去系统部件的宽（可用的屏幕宽度）</li>
+</ul>
+</li>
+<li>history对象 包含浏览器的历史<ul>
+<li>history.back();     // 返回上一页</li>
+<li>history.forward()   // 前进下一页</li>
+<li>history.go(‘参数’);   // -1 表示上一页，1表示下一页</li>
+</ul>
+</li>
+</ul>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>爱华实习日记</title>
+    <url>/blog/2020/10/22/README/</url>
+    <content><![CDATA[<blockquote>
+<p>记录学习历程~up</p>
+</blockquote>
+]]></content>
+  </entry>
+  <entry>
+    <title>Promise 与 Callback 与 Async Function</title>
+    <url>/blog/2020/10/22/04Promise&amp;Callback&amp;Async%20Function%20%20/</url>
+    <content><![CDATA[<h3 id="今日工作"><a href="#今日工作" class="headerlink" title="今日工作"></a>今日工作</h3><ul>
+<li>梳理 Promise 与 Callback 与 Async Function    </li>
+</ul>
+<h4 id="内容"><a href="#内容" class="headerlink" title="内容"></a>内容</h4><h5 id="CallBack"><a href="#CallBack" class="headerlink" title="CallBack"></a>CallBack</h5><blockquote>
+<p>回调函数</p>
+</blockquote>
+<ul>
+<li>简洁</li>
+<li>可异步，可同步</li>
+<li>高耦合</li>
+<li>容易出现回调地狱</li>
+<li>不能方便指定多个回调</li>
+<li>不方便任务调度</li>
+</ul>
+<h5 id="Promise"><a href="#Promise" class="headerlink" title="Promise"></a>Promise</h5><p>优缺点</p>
+<ul>
+<li>链式写法</li>
+<li>方便多任务方便调度</li>
+<li>状态可查询(vs事件监听)</li>
+</ul>
+<p>​    三种状态，只能从pending变为<em>fulfilled或rejected</em></p>
+<ul>
+<li><em>待定（pending）</em>: 初始状态，既没有被兑现，也没有被拒绝。</li>
+<li><em>已兑现（fulfilled）</em>: 意味着操作成功完成。</li>
+<li><em>已拒绝（rejected）</em>: 意味着操作失败。</li>
+</ul>
+<p>创建</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">new</span> <span class="built_in">Promise</span>( <span class="function"><span class="keyword">function</span>(<span class="params">resolve, reject</span>) </span>&#123;...&#125; <span class="comment">/* executor */</span>  );</span><br></pre></td></tr></table></figure>
+
+<p>方法</p>
+<ul>
+<li><ul>
+<li><p>静态方法</p>
+</li>
+<li><ul>
+<li>resolve </li>
+<li>rejected</li>
+<li>race</li>
+<li>all</li>
+<li>allSettled 都执行完</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>any 任意一个成功，就返回resolve</p>
+</li>
+<li><p>实例方法</p>
+<ul>
+<li><ul>
+<li>then</li>
+<li>catch</li>
+<li>Finally</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="Async-Fn"><a href="#Async-Fn" class="headerlink" title="Async Fn"></a>Async Fn</h5><h4 id="async-amp-await"><a href="#async-amp-await" class="headerlink" title="async&amp;await"></a>async&amp;await</h4><ul>
+<li>可读性改善</li>
+<li>async函数直接执行时，返回Promise实例</li>
+<li>await后面的表达式可以是Promise也可以是其它</li>
+<li>await返回值是后面表达式的resolve值</li>
+<li>await被reject时，方便trycatch</li>
+</ul>
+<h5 id="今日总结"><a href="#今日总结" class="headerlink" title="今日总结"></a>今日总结</h5><ol>
+<li>code验证API</li>
+<li>进一步理解异步的处理方式</li>
+</ol>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>ceshi</title>
+    <url>/blog/2020/10/22/ceshi/</url>
+    <content><![CDATA[<p><img src="/blog/2020/10/22/ceshi/image-20201022151724120.png" alt="image-20201021173413747"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>错误处理方式&amp;错误信息收集</title>
+    <url>/blog/2020/10/22/05%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86/</url>
+    <content><![CDATA[<h5 id="在处理异步代码异常时，try-catch并不能正确处理异常；"><a href="#在处理异步代码异常时，try-catch并不能正确处理异常；" class="headerlink" title="在处理异步代码异常时，try catch并不能正确处理异常；"></a>在处理异步代码异常时，try catch并不能正确处理异常；</h5><p>如下面代码,依然会抛出错误，a未定义，未能进行捕获，无法输出错误信息</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(a)&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/2020/10/22/05错误处理/C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020102441046.png" alt="image-20201020102441046"></p>
+<p><strong>try catch能捕获同步错误，异步错误和语法不能</strong></p>
+<h5 id="用winow-onerror处理异步错误"><a href="#用winow-onerror处理异步错误" class="headerlink" title="用winow.onerror处理异步错误"></a>用winow.onerror处理异步错误</h5><blockquote>
+<p> window.onerror 放在所有脚本之前，这样才能对语法异常和运行异常进行处理。window.onerror捕获不到资源加载错误和promise的reject</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">try</span>&#123;</span><br><span class="line">    setTimeout(<span class="function"><span class="params">()</span>=&gt;</span>&#123;<span class="built_in">console</span>.log(a)&#125;,<span class="number">100</span>)</span><br><span class="line">&#125;<span class="keyword">catch</span>(err)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(err)</span><br><span class="line">&#125;    </span><br><span class="line"><span class="built_in">window</span>.onerror = <span class="function"><span class="keyword">function</span> (<span class="params">err</span>) </span>&#123;</span><br><span class="line">        <span class="built_in">console</span>.log(err)</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/2020/10/22/05错误处理/C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020103635118.png" alt="image-20201020103635118"></p>
+<p><strong>window.onerror能够捕获到异步错误信息</strong></p>
+<p><strong>用window.addEventListener(‘unhandledrejection’) 捕获未能正确处理的Promise Rejected</strong></p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">rejectHandle</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'unhandledrejection'</span>,rejectHandle)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/2020/10/22/05错误处理/C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020104405445.png" alt="image-20201020104405445"></p>
+<p><strong>window.addEventListener(‘error’) 处理资源加载错误</strong></p>
+<blockquote>
+<p>需要在捕获阶段处理addEventListener第三个参数设置为true</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">resouceErrorHandle</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">const</span> srcElement = e.target||e.srcElement;</span><br><span class="line">    <span class="keyword">if</span> (srcElement === <span class="built_in">window</span>) &#123;</span><br><span class="line">        <span class="comment">// 全局错误</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"全局错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"message"</span>, e.message);</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="comment">// 元素错误，比如引用资源报错</span></span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"元素错误"</span>);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"tagname"</span>, srcElement.tagName);</span><br><span class="line">        <span class="built_in">console</span>.log(<span class="string">"src"</span>, srcElement.src);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"error捕获网络请求错误"</span>); <span class="comment">// 捕获错误</span></span><br><span class="line">    <span class="built_in">console</span>.log(e)</span><br><span class="line">&#125;;</span><br><span class="line"><span class="built_in">window</span>.addEventListener(<span class="string">'error'</span>,resouceErrorHandle,<span class="literal">true</span>)</span><br></pre></td></tr></table></figure>
+
+<p><img src="/blog/2020/10/22/05错误处理/C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201020105424203.png" alt="image-20201020105424203"></p>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>firstblog</title>
+    <url>/blog/2019/07/10/firstblog/</url>
+    <content><![CDATA[<h1 id="Welcome-to-Hexo"><a href="#Welcome-to-Hexo" class="headerlink" title="Welcome to Hexo"></a>Welcome to Hexo</h1><p>##Wel come souhu</p>
+]]></content>
+  </entry>
+  <entry>
     <title>H5 API（重点）</title>
     <url>/blog/2020/10/22/emphasisAPI/</url>
     <content><![CDATA[<ol>
@@ -1225,12 +1104,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>firstblog</title>
-    <url>/blog/2019/07/10/firstblog/</url>
-    <content><![CDATA[<h1 id="Welcome-to-Hexo"><a href="#Welcome-to-Hexo" class="headerlink" title="Welcome to Hexo"></a>Welcome to Hexo</h1><p>##Wel come souhu</p>
-]]></content>
-  </entry>
-  <entry>
     <title>Hello World</title>
     <url>/blog/2019/07/10/hello-world/</url>
     <content><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p>
@@ -1249,6 +1122,283 @@
 ]]></content>
   </entry>
   <entry>
+    <title>darg</title>
+    <url>/blog/2020/10/23/darg/</url>
+    <content><![CDATA[<table>
+<thead>
+<tr>
+<th align="left">事件</th>
+<th align="left">On型事件处理程序</th>
+<th align="left">触发时刻</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><code>drag</code></td>
+<td align="left"><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalEventHandlers/ondrag" target="_blank" rel="noopener"><code>ondrag</code></a></td>
+<td align="left">当拖拽元素或选中的文本时触发。</td>
+</tr>
+<tr>
+<td align="left"><code>dragend</code></td>
+<td align="left"><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalEventHandlers/ondragend" target="_blank" rel="noopener"><code>ondragend</code></a></td>
+<td align="left">当拖拽操作结束时触发 (比如松开鼠标按键或敲“Esc”键). (见<a href="https://developer.mozilla.org/zh-CN/docs/DragDrop/Drag_Operations#dragend" target="_blank" rel="noopener">结束拖拽</a>)</td>
+</tr>
+<tr>
+<td align="left"><code>dragenter</code></td>
+<td align="left"><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalEventHandlers/ondragenter" target="_blank" rel="noopener"><code>ondragenter</code></a></td>
+<td align="left">当拖拽元素或选中的文本到一个可释放目标时触发（见 <a href="https://developer.mozilla.org/zh-CN/docs/DragDrop/Drag_Operations#droptargets" target="_blank" rel="noopener">指定释放目标</a>）。</td>
+</tr>
+<tr>
+<td align="left"><code>dragexit</code></td>
+<td align="left"><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalEventHandlers/ondragexit" target="_blank" rel="noopener"><code>ondragexit</code></a></td>
+<td align="left">当元素变得不再是拖拽操作的选中目标时触发。</td>
+</tr>
+<tr>
+<td align="left"><code>dragleave</code></td>
+<td align="left"><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalEventHandlers/ondragleave" target="_blank" rel="noopener"><code>ondragleave</code></a></td>
+<td align="left">当拖拽元素或选中的文本离开一个可释放目标时触发。</td>
+</tr>
+<tr>
+<td align="left"><code>dragover</code></td>
+<td align="left"><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalEventHandlers/ondragover" target="_blank" rel="noopener"><code>ondragover</code></a></td>
+<td align="left">当元素或选中的文本被拖到一个可释放目标上时触发（每100毫秒触发一次）。</td>
+</tr>
+<tr>
+<td align="left"><code>dragstart</code></td>
+<td align="left"><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalEventHandlers/ondragstart" target="_blank" rel="noopener"><code>ondragstart</code></a></td>
+<td align="left">当用户开始拖拽一个元素或选中的文本时触发（见<a href="https://developer.mozilla.org/zh-CN/docs/DragDrop/Drag_Operations#dragstart" target="_blank" rel="noopener">开始拖拽操作</a>）。</td>
+</tr>
+<tr>
+<td align="left"><code>drop</code></td>
+<td align="left"><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/GlobalEventHandlers/ondrop" target="_blank" rel="noopener"><code>ondrop</code></a></td>
+<td align="left">当元素或选中的文本在可释放目标上被释放时触发（见<a href="https://developer.mozilla.org/zh-CN/docs/DragDrop/Drag_Operations#drop" target="_blank" rel="noopener">执行释放</a>）。</td>
+</tr>
+</tbody></table>
+<p><img src="/blog/2020/10/23/darg/D:%5C%E6%A1%8C%E9%9D%A2%E6%96%87%E4%BB%B6%5Cweixin.jpg" alt="weixin"></p>
+<p><img src="/blog/2020/10/23/darg/C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201023135449155.png" alt="image-20201023135449155"></p>
+<p><img src="/blog/2020/10/23/darg/C:%5CUsers%5CTR%5CAppData%5CRoaming%5CTypora%5Ctypora-user-images%5Cimage-20201023135457588.png" alt="image-20201023135457588"></p>
+]]></content>
+  </entry>
+  <entry>
+    <title>正则表达式</title>
+    <url>/blog/2020/10/22/06%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</url>
+    <content><![CDATA[<blockquote>
+<p> 正则相关符号</p>
+</blockquote>
+<table>
+<thead>
+<tr>
+<th>\cx</th>
+<th>匹配由x指明的控制字符。例如， \cM 匹配一个 Control-M 或回车符。x 的值必须为 A-Z 或 a-z 之一。否则，将 c 视为一个原义的 ‘c’ 字符。</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>\f</td>
+<td>匹配一个换页符。等价于 \x0c 和 \cL。</td>
+</tr>
+<tr>
+<td>\n</td>
+<td>匹配一个换行符。等价于 \x0a 和 \cJ。</td>
+</tr>
+<tr>
+<td>\r</td>
+<td>匹配一个回车符。等价于 \x0d 和 \cM。</td>
+</tr>
+<tr>
+<td>\s</td>
+<td>匹配任何空白字符，包括空格、制表符、换页符等等。等价于 [ \f\n\r\t\v]。注意 Unicode 正则表达式会匹配全角空格符。</td>
+</tr>
+<tr>
+<td>\S</td>
+<td>匹配任何非空白字符。等价于 [^ \f\n\r\t\v]。</td>
+</tr>
+<tr>
+<td>\t</td>
+<td>匹配一个制表符。等价于 \x09 和 \cI。</td>
+</tr>
+<tr>
+<td>\v</td>
+<td>匹配一个垂直制表符。等价于 \x0b 和 \cK。</td>
+</tr>
+</tbody></table>
+<table>
+<thead>
+<tr>
+<th align="left">特别字符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">$</td>
+<td align="left">匹配输入字符串的结尾位置。如果设置了 RegExp 对象的 Multiline 属性，则 $ 也匹配 ‘\n’ 或 ‘\r’。要匹配 $ 字符本身，请使用 $。</td>
+</tr>
+<tr>
+<td align="left">( )</td>
+<td align="left">标记一个子表达式的开始和结束位置。子表达式可以获取供以后使用。要匹配这些字符，请使用 ( 和 )。</td>
+</tr>
+<tr>
+<td align="left">*</td>
+<td align="left">匹配前面的子表达式零次或多次。要匹配 * 字符，请使用 *。</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">匹配前面的子表达式一次或多次。要匹配 + 字符，请使用 +。</td>
+</tr>
+<tr>
+<td align="left">.</td>
+<td align="left">匹配除换行符 \n 之外的任何单字符。要匹配 . ，请使用 . 。</td>
+</tr>
+<tr>
+<td align="left">[</td>
+<td align="left">标记一个中括号表达式的开始。要匹配 [，请使用 [。</td>
+</tr>
+<tr>
+<td align="left">?</td>
+<td align="left">匹配前面的子表达式零次或一次，或指明一个非贪婪限定符。要匹配 ? 字符，请使用 ?。</td>
+</tr>
+<tr>
+<td align="left">\</td>
+<td align="left">将下一个字符标记为或特殊字符、或原义字符、或向后引用、或八进制转义符。例如， ‘n’ 匹配字符 ‘n’。’\n’ 匹配换行符。序列 ‘\‘ 匹配 “&quot;，而 ‘(‘ 则匹配 “(“。</td>
+</tr>
+<tr>
+<td align="left">^</td>
+<td align="left">匹配输入字符串的开始位置，除非在方括号表达式中使用，当该符号在方括号表达式中使用时，表示不接受该方括号表达式中的字符集合。要匹配 ^ 字符本身，请使用 ^。</td>
+</tr>
+<tr>
+<td align="left">{</td>
+<td align="left">标记限定符表达式的开始。要匹配 {，请使用 {。</td>
+</tr>
+<tr>
+<td align="left">|</td>
+<td align="left">指明两项之间的一个选择。要匹配 |，请使用 |。</td>
+</tr>
+</tbody></table>
+<h2 id="限定符"><a href="#限定符" class="headerlink" title="限定符"></a>限定符</h2><p>限定符用来指定正则表达式的一个给定组件必须要出现多少次才能满足匹配。有 <strong>*** 或 **+</strong> 或 <strong>?</strong> 或 <strong>{n}</strong> 或 <strong>{n,}</strong> 或 <strong>{n,m}</strong> 共6种。</p>
+<p>正则表达式的限定符有：</p>
+<table>
+<thead>
+<tr>
+<th align="left">字符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">*</td>
+<td align="left">匹配前面的子表达式零次或多次。例如，zo* 能匹配 “z” 以及 “zoo”。* 等价于{0,}。</td>
+</tr>
+<tr>
+<td align="left">+</td>
+<td align="left">匹配前面的子表达式一次或多次。例如，’zo+’ 能匹配 “zo” 以及 “zoo”，但不能匹配 “z”。+ 等价于 {1,}。</td>
+</tr>
+<tr>
+<td align="left">?</td>
+<td align="left">匹配前面的子表达式零次或一次。例如，”do(es)?” 可以匹配 “do” 、 “does” 中的 “does” 、 “doxy” 中的 “do” 。? 等价于 {0,1}。</td>
+</tr>
+<tr>
+<td align="left">{n}</td>
+<td align="left">n 是一个非负整数。匹配确定的 n 次。例如，’o{2}’ 不能匹配 “Bob” 中的 ‘o’，但是能匹配 “food” 中的两个 o。</td>
+</tr>
+<tr>
+<td align="left">{n,}</td>
+<td align="left">n 是一个非负整数。至少匹配n 次。例如，’o{2,}’ 不能匹配 “Bob” 中的 ‘o’，但能匹配 “foooood” 中的所有 o。’o{1,}’ 等价于 ‘o+’。’o{0,}’ 则等价于 ‘o*’。</td>
+</tr>
+<tr>
+<td align="left">{n,m}</td>
+<td align="left">m 和 n 均为非负整数，其中n &lt;= m。最少匹配 n 次且最多匹配 m 次。例如，”o{1,3}” 将匹配 “fooooood” 中的前三个 o。’o{0,1}’ 等价于 ‘o?’。请注意在逗号和两个数之间不能有空格。</td>
+</tr>
+</tbody></table>
+<p>以下正则表达式匹配一个正整数，<strong>[1-9]</strong>设置第一个数字不是 0，<strong>[0-9]*</strong> 表示任意多个数字：</p>
+<h2 id="定位符"><a href="#定位符" class="headerlink" title="定位符"></a>定位符</h2><p>定位符使您能够将正则表达式固定到行首或行尾。它们还使您能够创建这样的正则表达式，这些正则表达式出现在一个单词内、在一个单词的开头或者一个单词的结尾。</p>
+<p>定位符用来描述字符串或单词的边界，<strong>^</strong> 和 <strong>$</strong> 分别指字符串的开始与结束，<strong>\b</strong> 描述单词的前或后边界，<strong>\B</strong> 表示非单词边界。</p>
+<p>正则表达式的定位符有：</p>
+<table>
+<thead>
+<tr>
+<th align="left">字符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">^</td>
+<td align="left">匹配输入字符串开始的位置。如果设置了 RegExp 对象的 Multiline 属性，^ 还会与 \n 或 \r 之后的位置匹配。</td>
+</tr>
+<tr>
+<td align="left">$</td>
+<td align="left">匹配输入字符串结尾的位置。如果设置了 RegExp 对象的 Multiline 属性，$ 还会与 \n 或 \r 之前的位置匹配。</td>
+</tr>
+<tr>
+<td align="left">\b</td>
+<td align="left">匹配一个单词边界，即字与空格间的位置。</td>
+</tr>
+<tr>
+<td align="left">\B</td>
+<td align="left">非单词边界匹配。</td>
+</tr>
+</tbody></table>
+<h5 id="正向预查"><a href="#正向预查" class="headerlink" title="正向预查"></a>正向预查</h5><table>
+<thead>
+<tr>
+<th align="left">字符</th>
+<th align="left">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">(?=pattern)</td>
+<td align="left">后面跟着匹配的字符，但不包括</td>
+</tr>
+<tr>
+<td align="left">(?!pattern)</td>
+<td align="left">后面跟着不是匹配的字符</td>
+</tr>
+<tr>
+<td align="left">(?&lt;=pattern)</td>
+<td align="left">前面跟着匹配的字符，但不包括</td>
+</tr>
+<tr>
+<td align="left">(?&lt;!pattern)</td>
+<td align="left">前面跟着不是匹配的字符</td>
+</tr>
+</tbody></table>
+<h5 id="反向引用"><a href="#反向引用" class="headerlink" title="反向引用"></a>反向引用</h5><blockquote>
+<p> 引用子匹配串匹配的字符</p>
+</blockquote>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">"Is is the cost of of gasoline going up up"</span>;</span><br><span class="line"><span class="keyword">var</span> patt1 = <span class="regexp">/\b([a-z]+) \1\b/ig</span>;</span><br><span class="line"><span class="built_in">document</span>.write(str.match(patt1));</span><br></pre></td></tr></table></figure>
+
+<p><strong>创建一个正则表达式</strong></p>
+<ul>
+<li>第一种方法：var reg = /pattern/;</li>
+<li>第二种方法：var reg = RegExp(pattern [, flags]) || new RegExp(‘pattern’ [, flags]);</li>
+</ul>
+<h4 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h4><h5 id="静态方法"><a href="#静态方法" class="headerlink" title="静态方法"></a>静态方法</h5><ul>
+<li>RegExp.$1-$9</li>
+<li>RegExp.input ($_)</li>
+<li>RegExp.lastMatch ($&amp;)</li>
+<li>RegExp.lastParen ($+)</li>
+<li>。。。</li>
+</ul>
+<h5 id="实例方法"><a href="#实例方法" class="headerlink" title="实例方法"></a>实例方法</h5><ul>
+<li>exec()方法在一个指定字符串中执行一个搜索匹配。返回一个结果数组或 <a href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Global_Objects/null" target="_blank" rel="noopener"><code>null</code></a>。</li>
+<li>test() 方法执行一个检索，用来查看正则表达式与指定的字符串是否匹配。返回 <code>true</code> 或 <code>false</code>。</li>
+<li>[Symbol.match]</li>
+<li>[Symbol.replace]</li>
+<li>[Symbol.search]</li>
+<li>[Symbol.split]</li>
+</ul>
+<p>字符串相关的4个方法</p>
+<ul>
+<li>match          [Symbol.match]</li>
+<li>replace      [Symbol.replace]</li>
+<li>search        [Symbol.search]</li>
+<li>split          [Symbol.split]</li>
+</ul>
+]]></content>
+      <categories>
+        <category>web前端</category>
+      </categories>
+      <tags>
+        <tag>web前端</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>WebGL</title>
     <url>/blog/2020/10/22/webgl/</url>
     <content><![CDATA[<h3 id="Three四大组件"><a href="#Three四大组件" class="headerlink" title="Three四大组件"></a>Three四大组件</h3><ul>
@@ -1264,7 +1414,7 @@
 <li>计算的过程就是渲染</li>
 </ul>
 </li>
-<li>几何体 BoxGeometry</li>
+<li>几何体 Geometry</li>
 </ul>
 <h4 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系<img src="/blog/2020/10/22/webgl/image-20201021173413747.png" alt="image-20201021173413747"></h4><h3 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h3><ul>
 <li>围腰x、y、z轴旋转 </li>
@@ -1290,9 +1440,68 @@
 <li><p>相机</p>
 <ul>
 <li>正投影相机  &gt; 平行光<br> <img src="/blog/2020/10/22/webgl/image-20201022151724120.png" alt="image-20201022151724120"></li>
-<li>透视投影相机<br> <img src="/blog/2020/10/22/webgl/image-20201022153928651.png" alt="image-20201022153928651"></li>
+<li>透视投影相机<br> <img src="/blog/2020/10/22/webgl/image-20201022153928651.png" alt="image-20201022153928651"><ul>
+<li>视角大小影响绘制图形的大小</li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<h3 id="光的初体验"><a href="#光的初体验" class="headerlink" title="光的初体验"></a>光的初体验</h3><ul>
+<li>Light<ul>
+<li>没有任何光，所有物体都是黑色</li>
+<li>环境光，位置改变不影响</li>
+<li>方向光<ul>
+<li>平行光 又叫 方向光   直射光线</li>
+<li>PointLight点光源  类型于灯泡 ，向四周发散 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="纹理"><a href="#纹理" class="headerlink" title="纹理"></a>纹理</h3><ul>
+<li><p>纹理类 Texture</p>
+<ul>
+<li>Texture( image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy )</li>
+</ul>
+</li>
+<li><p>纹理加载类</p>
+<ul>
+<li>TextureLoading</li>
+</ul>
+</li>
+<li><p>纹理坐标</p>
+</li>
+<li><p>拉伸和压缩</p>
+</li>
+<li><p>填充纹理</p>
+</li>
+<li><p>纹理的重复  (repeat)与纹理的回环</p>
+</li>
+<li><p>绘制平面</p>
+<ul>
+<li><p>面索引</p>
+<ul>
+<li>0  1 </li>
+<li>2  3</li>
+<li>分成两个面    021     231   逆时针</li>
+</ul>
+</li>
+<li><p>创建Geometry基类,绘制三角形</p>
+<figure class="highlight js"><table><tr><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script src="../</span>js/three.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;style type="</span>text/css<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    div#canvas-frame &#123;</span></span><br><span class="line"><span class="string">        border: none;</span></span><br><span class="line"><span class="string">        cursor: pointer;</span></span><br><span class="line"><span class="string">        width: 100%;</span></span><br><span class="line"><span class="string">        height: 600px;</span></span><br><span class="line"><span class="string">        background-color: #EEEEEE;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/style&gt;</span></span><br><span class="line"><span class="string">&lt;body onload="</span>threeStart();<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;div id="</span>canvas-frame<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;script&gt;</span></span><br><span class="line"><span class="string">    var renderer;</span></span><br><span class="line"><span class="string">    let width, height</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function initThree() &#123;</span></span><br><span class="line"><span class="string">        renderer = new THREE.WebGLRenderer()</span></span><br><span class="line"><span class="string">        width = document.getElementById('canvas-frame').clientWidth;</span></span><br><span class="line"><span class="string">        height = document.getElementById('canvas-frame').clientHeight;</span></span><br><span class="line"><span class="string">        renderer = new THREE.WebGLRenderer(&#123;</span></span><br><span class="line"><span class="string">            antialias: true</span></span><br><span class="line"><span class="string">        &#125;);</span></span><br><span class="line"><span class="string">        renderer.setSize(width, height);</span></span><br><span class="line"><span class="string">        document.getElementById('canvas-frame').appendChild(renderer.domElement);</span></span><br><span class="line"><span class="string">        renderer.setClearColor(0xFFFFFF, 1.0);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    let camera;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function initCamera() &#123;</span></span><br><span class="line"><span class="string">        camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000)</span></span><br><span class="line"><span class="string">        camera.position.x = 0;</span></span><br><span class="line"><span class="string">        camera.position.y = 0;</span></span><br><span class="line"><span class="string">        camera.position.z = 600;</span></span><br><span class="line"><span class="string">        camera.up.x = 0;</span></span><br><span class="line"><span class="string">        camera.up.y = 1;</span></span><br><span class="line"><span class="string">        camera.up.z = 0;</span></span><br><span class="line"><span class="string">        camera.lookAt(&#123;</span></span><br><span class="line"><span class="string">            x: 0,</span></span><br><span class="line"><span class="string">            y: 0,</span></span><br><span class="line"><span class="string">            z: 0</span></span><br><span class="line"><span class="string">        &#125;);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    var scene;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function initScene() &#123;</span></span><br><span class="line"><span class="string">        scene = new THREE.Scene();</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    var light;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function initLight() &#123;</span></span><br><span class="line"><span class="string">        light = new THREE.AmbientLight(0xFFFFFF);</span></span><br><span class="line"><span class="string">        light.position.set(100, 100, 200);</span></span><br><span class="line"><span class="string">        scene.add(light);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        // light = new THREE.PointLight(0xFFFFFF);</span></span><br><span class="line"><span class="string">        // light.position.set(0, 0, 300);</span></span><br><span class="line"><span class="string">        // scene.add(light);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    var mesh;</span></span><br><span class="line"><span class="string">    var geometry</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function initObj() &#123;</span></span><br><span class="line"><span class="string">        geometry = new THREE.Geometry();</span></span><br><span class="line"><span class="string">        var material = new THREE.MeshLambertMaterial(</span></span><br><span class="line"><span class="string">            &#123;vertexColors: THREE.VertexColors, wireframe: false, color: 0xFFFFFF&#125;);</span></span><br><span class="line"><span class="string">        // mesh.position = new THREE.Vector3(0, 0, 0);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        let color1 = new THREE.Color(0xFF0000);</span></span><br><span class="line"><span class="string">        let color2 = new THREE.Color(0x00FF00);</span></span><br><span class="line"><span class="string">        let color3 = new THREE.Color(0x0000FF);</span></span><br><span class="line"><span class="string">        let p1 = new THREE.Vector3(100,0,0)</span></span><br><span class="line"><span class="string">        let p2 = new THREE.Vector3(0,100,0)</span></span><br><span class="line"><span class="string">        let p3 = new THREE.Vector3(-100,0,0)</span></span><br><span class="line"><span class="string">        geometry.vertices.push(p1,p2,p3)</span></span><br><span class="line"><span class="string">        var face = new THREE.Face3(0, 1, 2)</span></span><br><span class="line"><span class="string">        geometry.faces.push(face)</span></span><br><span class="line"><span class="string">        face.vertexColors[0] = color1</span></span><br><span class="line"><span class="string">        face.vertexColors[1] = color2</span></span><br><span class="line"><span class="string">        face.vertexColors[2] = color3</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        // // 颜色放到不同的点上去</span></span><br><span class="line"><span class="string">        mesh = new THREE.Mesh(geometry, material);</span></span><br><span class="line"><span class="string">        scene.add(mesh);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function threeStart() &#123;</span></span><br><span class="line"><span class="string">        initThree();</span></span><br><span class="line"><span class="string">        initCamera();</span></span><br><span class="line"><span class="string">        initScene();</span></span><br><span class="line"><span class="string">        initLight();</span></span><br><span class="line"><span class="string">        initObj();</span></span><br><span class="line"><span class="string">        animation();</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function animation() &#123;</span></span><br><span class="line"><span class="string">        renderer.render(scene, camera);</span></span><br><span class="line"><span class="string">        requestAnimationFrame(animation);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三维模型的加载和显示基础"><a href="#三维模型的加载和显示基础" class="headerlink" title="三维模型的加载和显示基础"></a>三维模型的加载和显示基础</h3><ul>
+<li>存放三维数据的文件，叫模型文件</li>
+<li>由点线面组成</li>
+<li>由若干平面组成一个复杂的模型</li>
+<li>每个面赋予不同的颜色和纹理</li>
+<li>每个面计算出不同的光照效果</li>
 </ul>
 ]]></content>
       <categories>

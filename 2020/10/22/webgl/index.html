@@ -7,21 +7,21 @@
   
   <title>WebGL | 爱华学习日记</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="Three四大组件 场景THREE.Scene 相机THREE.PerpectiveCamera(45,100/150,1,1000) 视角fov 纵横比aspect 近平面near 远平面far   渲染器 计算的过程就是渲染   几何体 BoxGeometry  坐标系旋转 围腰x、y、z轴旋转  特定向量旋转  世界坐标、本地坐标 AxisHelper 绘制本地坐标  让场景动起来 变换物体">
+  <meta name="description" content="Three四大组件 场景THREE.Scene 相机THREE.PerpectiveCamera(45,100/150,1,1000) 视角fov 纵横比aspect 近平面near 远平面far   渲染器 计算的过程就是渲染   几何体 Geometry  坐标系旋转 围腰x、y、z轴旋转  特定向量旋转  世界坐标、本地坐标 AxisHelper 绘制本地坐标  让场景动起来 变换物体的位置">
 <meta name="keywords" content="web前端,WebGL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="WebGL">
 <meta property="og:url" content="http://yoursite.com/2020/10/22/webgl/index.html">
 <meta property="og:site_name" content="爱华学习日记">
-<meta property="og:description" content="Three四大组件 场景THREE.Scene 相机THREE.PerpectiveCamera(45,100/150,1,1000) 视角fov 纵横比aspect 近平面near 远平面far   渲染器 计算的过程就是渲染   几何体 BoxGeometry  坐标系旋转 围腰x、y、z轴旋转  特定向量旋转  世界坐标、本地坐标 AxisHelper 绘制本地坐标  让场景动起来 变换物体">
+<meta property="og:description" content="Three四大组件 场景THREE.Scene 相机THREE.PerpectiveCamera(45,100/150,1,1000) 视角fov 纵横比aspect 近平面near 远平面far   渲染器 计算的过程就是渲染   几何体 Geometry  坐标系旋转 围腰x、y、z轴旋转  特定向量旋转  世界坐标、本地坐标 AxisHelper 绘制本地坐标  让场景动起来 变换物体的位置">
 <meta property="og:locale" content="default">
 <meta property="og:image" content="http://yoursite.com/blog/2020/10/22/webgl/image-20201021173413747.png">
 <meta property="og:image" content="http://yoursite.com/blog/2020/10/22/webgl/image-20201022151724120.png">
 <meta property="og:image" content="http://yoursite.com/blog/2020/10/22/webgl/image-20201022153928651.png">
-<meta property="og:updated_time" content="2020-10-22T09:49:54.458Z">
+<meta property="og:updated_time" content="2020-10-26T00:38:40.750Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="WebGL">
-<meta name="twitter:description" content="Three四大组件 场景THREE.Scene 相机THREE.PerpectiveCamera(45,100/150,1,1000) 视角fov 纵横比aspect 近平面near 远平面far   渲染器 计算的过程就是渲染   几何体 BoxGeometry  坐标系旋转 围腰x、y、z轴旋转  特定向量旋转  世界坐标、本地坐标 AxisHelper 绘制本地坐标  让场景动起来 变换物体">
+<meta name="twitter:description" content="Three四大组件 场景THREE.Scene 相机THREE.PerpectiveCamera(45,100/150,1,1000) 视角fov 纵横比aspect 近平面near 远平面far   渲染器 计算的过程就是渲染   几何体 Geometry  坐标系旋转 围腰x、y、z轴旋转  特定向量旋转  世界坐标、本地坐标 AxisHelper 绘制本地坐标  让场景动起来 变换物体的位置">
 <meta name="twitter:image" content="http://yoursite.com/blog/2020/10/22/webgl/image-20201021173413747.png">
   
     <link rel="alternate" href="https://github.com/CNLHB" title="爱华学习日记" type="application/atom+xml">
@@ -126,7 +126,7 @@
 <li>计算的过程就是渲染</li>
 </ul>
 </li>
-<li>几何体 BoxGeometry</li>
+<li>几何体 Geometry</li>
 </ul>
 <h4 id="坐标系"><a href="#坐标系" class="headerlink" title="坐标系"></a>坐标系<img src="/blog/2020/10/22/webgl/image-20201021173413747.png" alt="image-20201021173413747"></h4><h3 id="旋转"><a href="#旋转" class="headerlink" title="旋转"></a>旋转</h3><ul>
 <li>围腰x、y、z轴旋转 </li>
@@ -152,15 +152,74 @@
 <li><p>相机</p>
 <ul>
 <li>正投影相机  &gt; 平行光<br> <img src="/blog/2020/10/22/webgl/image-20201022151724120.png" alt="image-20201022151724120"></li>
-<li>透视投影相机<br> <img src="/blog/2020/10/22/webgl/image-20201022153928651.png" alt="image-20201022153928651"></li>
+<li>透视投影相机<br> <img src="/blog/2020/10/22/webgl/image-20201022153928651.png" alt="image-20201022153928651"><ul>
+<li>视角大小影响绘制图形的大小</li>
 </ul>
 </li>
+</ul>
+</li>
+</ul>
+<h3 id="光的初体验"><a href="#光的初体验" class="headerlink" title="光的初体验"></a>光的初体验</h3><ul>
+<li>Light<ul>
+<li>没有任何光，所有物体都是黑色</li>
+<li>环境光，位置改变不影响</li>
+<li>方向光<ul>
+<li>平行光 又叫 方向光   直射光线</li>
+<li>PointLight点光源  类型于灯泡 ，向四周发散 </li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="纹理"><a href="#纹理" class="headerlink" title="纹理"></a>纹理</h3><ul>
+<li><p>纹理类 Texture</p>
+<ul>
+<li>Texture( image, mapping, wrapS, wrapT, magFilter, minFilter, format, type, anisotropy )</li>
+</ul>
+</li>
+<li><p>纹理加载类</p>
+<ul>
+<li>TextureLoading</li>
+</ul>
+</li>
+<li><p>纹理坐标</p>
+</li>
+<li><p>拉伸和压缩</p>
+</li>
+<li><p>填充纹理</p>
+</li>
+<li><p>纹理的重复  (repeat)与纹理的回环</p>
+</li>
+<li><p>绘制平面</p>
+<ul>
+<li><p>面索引</p>
+<ul>
+<li>0  1 </li>
+<li>2  3</li>
+<li>分成两个面    021     231   逆时针</li>
+</ul>
+</li>
+<li><p>创建Geometry基类,绘制三角形</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html lang=<span class="string">"en"</span>&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">    &lt;meta charset=<span class="string">"UTF-8"</span>&gt;</span><br><span class="line">    &lt;title&gt;Title&lt;<span class="regexp">/title&gt;</span></span><br><span class="line"><span class="regexp">    &lt;script src="../</span>js/three.js<span class="string">"&gt;&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/head&gt;</span></span><br><span class="line"><span class="string">&lt;style type="</span>text/css<span class="string">"&gt;</span></span><br><span class="line"><span class="string">    div#canvas-frame &#123;</span></span><br><span class="line"><span class="string">        border: none;</span></span><br><span class="line"><span class="string">        cursor: pointer;</span></span><br><span class="line"><span class="string">        width: 100%;</span></span><br><span class="line"><span class="string">        height: 600px;</span></span><br><span class="line"><span class="string">        background-color: #EEEEEE;</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">&lt;/style&gt;</span></span><br><span class="line"><span class="string">&lt;body onload="</span>threeStart();<span class="string">"&gt;</span></span><br><span class="line"><span class="string">&lt;div id="</span>canvas-frame<span class="string">"&gt;&lt;/div&gt;</span></span><br><span class="line"><span class="string">&lt;script&gt;</span></span><br><span class="line"><span class="string">    var renderer;</span></span><br><span class="line"><span class="string">    let width, height</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function initThree() &#123;</span></span><br><span class="line"><span class="string">        renderer = new THREE.WebGLRenderer()</span></span><br><span class="line"><span class="string">        width = document.getElementById('canvas-frame').clientWidth;</span></span><br><span class="line"><span class="string">        height = document.getElementById('canvas-frame').clientHeight;</span></span><br><span class="line"><span class="string">        renderer = new THREE.WebGLRenderer(&#123;</span></span><br><span class="line"><span class="string">            antialias: true</span></span><br><span class="line"><span class="string">        &#125;);</span></span><br><span class="line"><span class="string">        renderer.setSize(width, height);</span></span><br><span class="line"><span class="string">        document.getElementById('canvas-frame').appendChild(renderer.domElement);</span></span><br><span class="line"><span class="string">        renderer.setClearColor(0xFFFFFF, 1.0);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    let camera;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function initCamera() &#123;</span></span><br><span class="line"><span class="string">        camera = new THREE.PerspectiveCamera(45, width / height, 1, 10000)</span></span><br><span class="line"><span class="string">        camera.position.x = 0;</span></span><br><span class="line"><span class="string">        camera.position.y = 0;</span></span><br><span class="line"><span class="string">        camera.position.z = 600;</span></span><br><span class="line"><span class="string">        camera.up.x = 0;</span></span><br><span class="line"><span class="string">        camera.up.y = 1;</span></span><br><span class="line"><span class="string">        camera.up.z = 0;</span></span><br><span class="line"><span class="string">        camera.lookAt(&#123;</span></span><br><span class="line"><span class="string">            x: 0,</span></span><br><span class="line"><span class="string">            y: 0,</span></span><br><span class="line"><span class="string">            z: 0</span></span><br><span class="line"><span class="string">        &#125;);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    var scene;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function initScene() &#123;</span></span><br><span class="line"><span class="string">        scene = new THREE.Scene();</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    var light;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function initLight() &#123;</span></span><br><span class="line"><span class="string">        light = new THREE.AmbientLight(0xFFFFFF);</span></span><br><span class="line"><span class="string">        light.position.set(100, 100, 200);</span></span><br><span class="line"><span class="string">        scene.add(light);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        // light = new THREE.PointLight(0xFFFFFF);</span></span><br><span class="line"><span class="string">        // light.position.set(0, 0, 300);</span></span><br><span class="line"><span class="string">        // scene.add(light);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    var mesh;</span></span><br><span class="line"><span class="string">    var geometry</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function initObj() &#123;</span></span><br><span class="line"><span class="string">        geometry = new THREE.Geometry();</span></span><br><span class="line"><span class="string">        var material = new THREE.MeshLambertMaterial(</span></span><br><span class="line"><span class="string">            &#123;vertexColors: THREE.VertexColors, wireframe: false, color: 0xFFFFFF&#125;);</span></span><br><span class="line"><span class="string">        // mesh.position = new THREE.Vector3(0, 0, 0);</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        let color1 = new THREE.Color(0xFF0000);</span></span><br><span class="line"><span class="string">        let color2 = new THREE.Color(0x00FF00);</span></span><br><span class="line"><span class="string">        let color3 = new THREE.Color(0x0000FF);</span></span><br><span class="line"><span class="string">        let p1 = new THREE.Vector3(100,0,0)</span></span><br><span class="line"><span class="string">        let p2 = new THREE.Vector3(0,100,0)</span></span><br><span class="line"><span class="string">        let p3 = new THREE.Vector3(-100,0,0)</span></span><br><span class="line"><span class="string">        geometry.vertices.push(p1,p2,p3)</span></span><br><span class="line"><span class="string">        var face = new THREE.Face3(0, 1, 2)</span></span><br><span class="line"><span class="string">        geometry.faces.push(face)</span></span><br><span class="line"><span class="string">        face.vertexColors[0] = color1</span></span><br><span class="line"><span class="string">        face.vertexColors[1] = color2</span></span><br><span class="line"><span class="string">        face.vertexColors[2] = color3</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">        // // 颜色放到不同的点上去</span></span><br><span class="line"><span class="string">        mesh = new THREE.Mesh(geometry, material);</span></span><br><span class="line"><span class="string">        scene.add(mesh);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function threeStart() &#123;</span></span><br><span class="line"><span class="string">        initThree();</span></span><br><span class="line"><span class="string">        initCamera();</span></span><br><span class="line"><span class="string">        initScene();</span></span><br><span class="line"><span class="string">        initLight();</span></span><br><span class="line"><span class="string">        initObj();</span></span><br><span class="line"><span class="string">        animation();</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    function animation() &#123;</span></span><br><span class="line"><span class="string">        renderer.render(scene, camera);</span></span><br><span class="line"><span class="string">        requestAnimationFrame(animation);</span></span><br><span class="line"><span class="string">    &#125;</span></span><br><span class="line"><span class="string">&lt;/script&gt;</span></span><br><span class="line"><span class="string">&lt;/body&gt;</span></span><br><span class="line"><span class="string">&lt;/html&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="三维模型的加载和显示基础"><a href="#三维模型的加载和显示基础" class="headerlink" title="三维模型的加载和显示基础"></a>三维模型的加载和显示基础</h3><ul>
+<li>存放三维数据的文件，叫模型文件</li>
+<li>由点线面组成</li>
+<li>由若干平面组成一个复杂的模型</li>
+<li>每个面赋予不同的颜色和纹理</li>
+<li>每个面计算出不同的光照效果</li>
 </ul>
 
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2020/10/22/webgl/" data-id="ckgkm3xpl00120kukaaqdhwys" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2020/10/22/webgl/" data-id="ckgulitbf001bfkukbd9pp88p" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/WebGL/">WebGL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/web前端/">web前端</a></li></ul>
@@ -199,7 +258,7 @@
   <div class="widget-wrap">
     <h3 class="widget-title">Categories</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/web前端/">web前端</a></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/web前端/">web前端</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/web前端/浏览器存储/">浏览器存储</a><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/web前端/浏览器存储/indexDB/">indexDB</a></li></ul></li></ul></li></ul>
     </div>
   </div>
 
@@ -241,6 +300,14 @@
       <ul>
         
           <li>
+            <a href="/blog/2020/10/29/12indexDB的使用/">indexDB的使用</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2020/10/23/darg/">darg</a>
+          </li>
+        
+          <li>
             <a href="/blog/2020/10/22/01Math对象/">Math对象</a>
           </li>
         
@@ -250,14 +317,6 @@
         
           <li>
             <a href="/blog/2020/10/22/emphasisAPI/">H5 API（重点）</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/10/22/webgl/">WebGL</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2020/10/22/ceshi/">ceshi</a>
           </li>
         
       </ul>
