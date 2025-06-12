@@ -1,0 +1,23 @@
+{
+  "name": "blog",
+  "version": "1.0.0",
+  "private": false,
+  "author": "爱华 <hstcssk@gmail.com>",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "docs:preview": "vitepress preview docs",
+    "format": "prettier --write docs/"
+  },
+  "devDependencies": {
+    "vitepress": "^1.6.3",
+    "husky": "^8.0.0",
+    "lint-staged": "^16.1.0",
+    "prettier": "^3.5.3"
+  },
+  "lint-staged": {
+    "docs/**/*.{js,vue,mjs,md}": [
+      "prettier --write docs/"
+    ]
+  }
+}
