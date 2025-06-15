@@ -33,7 +33,10 @@ const teekConfig = defineTeekConfig({
     sidebar: true, // 是否启用 sidebar 插件
     sidebarOption: {
       initItems: false,
-      ignoreList: ["images"]
+      ignoreList: ["images", "image"]
+    },
+    catalogueOption: {
+      ignoreList: [/image|images/]
     }
   },
   markdown: {
@@ -70,7 +73,7 @@ const teekConfig = defineTeekConfig({
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   outDir: "../dist",
-  base: "/blog",
+  base: "/blog/",
   srcExclude: ["**/README.md", "**/TODO.md"],
   extends: teekConfig,
   title: "爱华Fullstack",
@@ -129,8 +132,8 @@ export default defineConfig({
         text: "导航",
         activeMatch: "/nav",
         items: [
-          { text: "前端", link: "/front", activeMatch: "/front" },
-          { text: "后端", link: "/server/", activeMatch: "/server" },
+          { text: "前端", link: "/front/", activeMatch: "/front" },
+          { text: "后端", link: "/server", activeMatch: "/server" },
           { text: "算法", link: "/algorithm/", activeMatch: "/algorithm" },
           { text: "框架", link: "/frame/", activeMatch: "/frame" },
           { text: "面试", link: "/interview/", activeMatch: "/interview" },

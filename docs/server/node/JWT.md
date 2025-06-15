@@ -7,10 +7,9 @@ categories:
 tags: 
  - JWT
 ---
-
 ::: tip
 redux工作原理
-::: 
+:::
 
 ## 1.为什么需要会话管理
 
@@ -56,7 +55,7 @@ JWT 的原理是，服务器认证以后，生成一个 JSON 对象，发回给�
 
 ## 6.jwt的数据结构
 
-jwt包含了使用`.`风格的三个部分
+jwt包含了使用 `.`风格的三个部分
 
 ### Header头部
 
@@ -97,7 +96,7 @@ secret是一段字符串，后端保存，需要注意的是JWT 作为一个令�
 
 ## 7.jwt使用方式
 
-HTTP 请求的头信息`Authorization`字段里面, Bearer也是规定好的
+HTTP 请求的头信息 `Authorization`字段里面, Bearer也是规定好的
 
 ```js
 Authorization: Bearer <token>
@@ -168,14 +167,14 @@ app.use(router.routes());
 app.listen(4000);
 ```
 
-1. 实现两个接口 一个是`/login` 验证是否登录，一个是 `validate`,验证是否有权限
+1. 实现两个接口 一个是 `/login` 验证是否登录，一个是 `validate`,验证是否有权限
 2. 请求login接口的时候，客户端带username和password, 后端一般会查数据库，验证是否存在当前用户，如果存在则为username进行签名，千万不要给password这些敏感信息也带进来签名
-3. 客户端接收后端给的token令牌，再请求其他接口，比如这个例子的`/validate`的时候，ajax请求的时候，可以在header指定`authorization`字段，后端拿到token进行decode，然后将header和payload进行再一次的签名，如果前后的签名一致，说明没有被篡改过，则权限验证通过。因为是同步的过程，所以可以用try catch来捕捉错误
+3. 客户端接收后端给的token令牌，再请求其他接口，比如这个例子的 `/validate`的时候，ajax请求的时候，可以在header指定 `authorization`字段，后端拿到token进行decode，然后将header和payload进行再一次的签名，如果前后的签名一致，说明没有被篡改过，则权限验证通过。因为是同步的过程，所以可以用try catch来捕捉错误
 
 ## 9.原理的实现
 
 1. sha256哈希算法，可以用nodejs的内置加密模块crypto, 生成base64字符串，要注意的是生成base64需要为+ - = 做一下替换，=被省略、+替换成-，/替换成_ 。这就是 Base64URL 算法。
-2. token令牌的组成是header, payload和sigin的通过`.`来组成
+2. token令牌的组成是header, payload和sigin的通过 `.`来组成
 3. base64urlUnescape的解码是固定写法，decode出base64的内容
 
 ```js

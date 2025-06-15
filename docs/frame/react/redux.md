@@ -8,7 +8,7 @@ categories:
 tags: 
  - react
  - redux
-topic: t
+topic: true
 ---
 ::: tip
 redux 浅读
