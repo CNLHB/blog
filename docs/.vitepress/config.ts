@@ -134,6 +134,7 @@ export default defineConfig({
         items: [
           { text: "前端", link: "/front/", activeMatch: "/front" },
           { text: "后端", link: "/server", activeMatch: "/server" },
+          { text: "Bug", link: "/bug/", activeMatch: "/bug" },
           { text: "算法", link: "/algorithm/", activeMatch: "/algorithm" },
           { text: "框架", link: "/frame/", activeMatch: "/frame" },
           { text: "面试", link: "/interview/", activeMatch: "/interview" },
